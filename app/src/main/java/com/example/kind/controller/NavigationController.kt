@@ -5,9 +5,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.kind.view.HomeScreen
-import com.example.kind.view.LoginScreen
-import com.example.kind.view.SignupScreen
+import com.example.kind.view.*
 
 
 @Composable
@@ -17,5 +15,8 @@ import com.example.kind.view.SignupScreen
             composable("login") { LoginScreen(navController = navController) }
             composable("signup") { SignupScreen(navController = navController) }
             composable("home"){ HomeScreen(navController = navController)}
+            //composable("mypage") { MypageScreen(navController = navController) }
+            //composable("portfolio") { PortfolioScreen(navController = navController) }
+            //composable("settings") { SettingsScreen(navController = navController) }
         }
     }
