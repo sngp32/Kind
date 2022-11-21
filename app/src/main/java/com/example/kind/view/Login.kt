@@ -71,7 +71,7 @@ fun LoginScreen(navController: NavController) {
                     )
                 )
                 Button(
-                    onClick = { /*TODO*/ },
+                    onClick = { navController.navigate("home") },
                     colors = ButtonDefaults.buttonColors(
                         backgroundColor = Color(
                             0xFF454545
@@ -83,7 +83,7 @@ fun LoginScreen(navController: NavController) {
                 }
                 ClickableText(
                     text = AnnotatedString("Forgot your password?"),
-                    onClick = {navController.navigate("home")})
+                    onClick = {})
             }
 
         }
