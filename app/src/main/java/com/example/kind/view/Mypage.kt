@@ -2,18 +2,18 @@ package com.example.kind.view
 
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.kind.ui.theme.Shapes
 
 @Composable
 fun MypageScreen(/*navController: NavController*/) {
@@ -45,41 +45,32 @@ fun MypageScreen(/*navController: NavController*/) {
             }
         }
     ) {
-        //this box has to exist for some reason
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight()
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxWidth()
         ) {
-            Column(
+            Spacer(modifier = Modifier.size(60.dp))
+            PageButton(str = "Min Portefølje", icon = Icons.Filled.Person)
+            Spacer(modifier = Modifier.height(60.dp))
+            PageButton(str = "Indstillinger", icon = Icons.Filled.Settings)
+        }
+    }
+}
+
+@Composable
+fun PageButton(str: String, icon: ImageVector /*TODO missing onclick parameter?*/) {
+    Button(
+        onClick = {/*TODO*/},
+        colors = ButtonDefaults.buttonColors(backgroundColor = Color.LightGray)
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Icon(icon, contentDescription = null)
+            Text(
+                text = str,
+                fontSize = 20.sp,
                 modifier = Modifier
-                    .align(Alignment.TopCenter)
-            ) {
-                Spacer(modifier = Modifier.size(60.dp))
-                Surface(
-                    shape = Shapes.medium,
-                    elevation = 2.dp,
-                    modifier = Modifier.clickable { /* TODO navcontroller here?*/ }) {
-                    Text(
-                        text = "Min Portefølje",
-                        fontSize = 32.sp,
-                        modifier = Modifier
-                            .padding(all = 20.dp)
-                    )
-                }
-                Spacer(modifier = Modifier.size(60.dp))
-                Surface(
-                    shape = Shapes.medium,
-                    elevation = 2.dp,
-                    modifier = Modifier.clickable { /* TODO navcontroller here?*/ }) {
-                    Text(
-                        text = "Indstillinger",
-                        fontSize = 32.sp,
-                        modifier = Modifier
-                            .padding(all = 20.dp)
-                    )
-                }
-            }
+                    .padding(all = 10.dp)
+            )
         }
     }
 }
