@@ -1,15 +1,12 @@
 package com.example.kind.view
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.ClickableText
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,22 +22,13 @@ import kotlin.text.Typography.bullet
 
 @Composable
 fun HomeScreen(navController: NavController) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight()
-    ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-        ) {
-            // Title column
+    Scaffold(
+        topBar = {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(Color(0xFFB8E3AD))
-                    .height(350.dp),
-                verticalArrangement = Arrangement.Top
+                    .height(300.dp)
 
             ) {
                 Text(
@@ -56,10 +44,20 @@ fun HomeScreen(navController: NavController) {
                     modifier = Modifier.padding(start = 20.dp)
                 )
             }
-            // Content column
+        },
+        bottomBar = {
+            BottomAppBar(backgroundColor = Color.LightGray) { NavBar(navController) }
+        }
+    ) {
+        innerPadding->
+        Box(modifier = Modifier.padding(innerPadding)) {
+            val scrollState = rememberScrollState()
             Column(modifier = Modifier
-                .padding(top = 300.dp)
-                .align(Alignment.Center)) {
+                .padding(top = 20.dp)
+                .fillMaxWidth()
+                .verticalScroll(scrollState),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
                 Column(
                     modifier = Modifier
                         .width(280.dp)
@@ -115,8 +113,9 @@ fun HomeScreen(navController: NavController) {
                         color = Color(0xFFB8E3AD),
                         modifier = Modifier
                             .padding(start = 20.dp)
-                            .padding(top = 2.dp)
+                            .padding(top = 5.dp)
                     )
+                    Spacer(modifier = Modifier.height(5.dp))
                     val messages = listOf(
                         "Mødrehjælpen har i december måned...",
                         "Knæk cancer fonden har i November måned..."
@@ -137,40 +136,13 @@ fun HomeScreen(navController: NavController) {
                             .padding(top = 2.dp)
                     )
                 }
+
             }
         }
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(60.dp)
-                .background(Color.LightGray)
-                .align(Alignment.BottomCenter),horizontalArrangement = Arrangement.Center
-        ) {
-            val MyAppIcons = Icons.Rounded
-            Icon(
-                Icons.Filled.Home,
-                "home",
-                modifier = Modifier
-                    .size(50.dp)
-                    .align(Alignment.CenterVertically)
-            )
-            Spacer(modifier = Modifier.width(80.dp))
-            Icon(
-                Icons.Filled.Favorite,
-                "buildPortfolio",
-                modifier = Modifier
-                    .size(50.dp)
-                    .align(Alignment.CenterVertically)
-            )
-            Spacer(modifier = Modifier.width(80.dp))
-            Icon(
-                Icons.Filled.Person,
-                "myPage",
-                modifier = Modifier
-                    .size(50.dp)
-                    .align(Alignment.CenterVertically)
-            )
-
-        }
     }
+
 }
+
+
+
+
