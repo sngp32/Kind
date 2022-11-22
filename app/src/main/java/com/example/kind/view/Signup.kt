@@ -3,9 +3,7 @@ package com.example.kind.view
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,7 +25,6 @@ fun SignupScreen(navController: NavController) {
                 .fillMaxWidth()
                 .background(Color(0xFFB8E3AD)),
             verticalArrangement = Arrangement.Top
-
         ) {
             Text(
                 text = "SIGNUP",
@@ -41,44 +38,21 @@ fun SignupScreen(navController: NavController) {
                 modifier = Modifier.padding(start = 20.dp)
             )
             Spacer(modifier = Modifier.height(90.dp))
+
             Column(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 var textName = remember { mutableStateOf("") }
-                OutlinedTextField(
-                    value = textName.value,
-                    onValueChange = { input -> textName.value = input },
-                    label = { Text(text = "Name") },
-                    modifier = Modifier.width(300.dp),
-                    colors = TextFieldDefaults.textFieldColors(
-                        backgroundColor = Color.White
-                    )
-
-                )
-                Spacer(modifier = Modifier.height(10.dp))
                 var textEmail = remember { mutableStateOf("") }
-                OutlinedTextField(
-                    value = textEmail.value,
-                    onValueChange = { input -> textEmail.value = input },
-                    label = { Text(text = "Email") },
-                    modifier = Modifier.width(300.dp),
-                    colors = TextFieldDefaults.textFieldColors(
-                        backgroundColor = Color.White
-                    )
-
-                )
-                Spacer(modifier = Modifier.height(10.dp))
                 var textPassword = remember { mutableStateOf("") }
-                OutlinedTextField(
-                    value = textPassword.value,
-                    onValueChange = { input -> textPassword.value = input },
-                    label = { Text(text = "Password") },
-                    modifier = Modifier.width(300.dp),
-                    colors = TextFieldDefaults.textFieldColors(
-                        backgroundColor = Color.White
-                    )
-                )
+
+                inputField(inputText = textName, fieldText = "Name")
+                Spacer(modifier = Modifier.height(10.dp))
+                inputField(inputText = textEmail, fieldText = "E-mail")
+                Spacer(modifier = Modifier.height(10.dp))
+                inputField(inputText = textPassword, fieldText = "Password")
+
                 Button(
                     onClick = { /*TODO*/ },
                     colors = ButtonDefaults.buttonColors(
@@ -90,10 +64,9 @@ fun SignupScreen(navController: NavController) {
                 ) {
                     Text(text = "SIGNUP", color = Color.White)
                 }
-
             }
-
         }
+
         Column(
             modifier = Modifier
                 .fillMaxHeight()
@@ -102,10 +75,8 @@ fun SignupScreen(navController: NavController) {
                 .padding(bottom = 20.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Bottom
-
         ) {
             Text(text = "Already have an account?")
-
             Button(
                 onClick = { navController.navigate("login") },
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF454545)),
@@ -116,4 +87,17 @@ fun SignupScreen(navController: NavController) {
         }
 
     }
+}
+
+@Composable
+fun inputField(inputText: MutableState<String>, fieldText: String) {
+    OutlinedTextField(
+        value = inputText.value,
+        onValueChange = { input -> inputText.value = input },
+        label = { Text(text = fieldText) },
+        modifier = Modifier.width(300.dp),
+        colors = TextFieldDefaults.textFieldColors(
+            backgroundColor = Color.White
+        )
+    )
 }
