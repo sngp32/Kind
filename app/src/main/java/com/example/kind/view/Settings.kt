@@ -1,18 +1,15 @@
 package com.example.kind.view
 
-import android.graphics.Paint.Align
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Doorbell
 import androidx.compose.material.icons.filled.KeyboardBackspace
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -78,60 +75,42 @@ fun SettingsScreen() {
 
                         Divider(color = Color.Black, thickness = 2.dp)
 
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically
-                        )
-                        {
-                            Text(
-                                text = "Email-notifikationer", fontSize = 20.sp, modifier = Modifier
-                                    .padding(start = 5.dp)
-                            )
-
-                            Spacer(Modifier.weight(1f))
-
-                            //OFF COLOR = 0xfffd929b
-                            var selection by remember { mutableStateOf(false) }
-                            Switch(
-                                checked = selection,
-                                onCheckedChange = { selection = !selection },
-                            )
-                        }
-
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically
-                        )
-                        {
-                            Text(
-                                text = "Push-notifikationer", fontSize = 20.sp, modifier = Modifier
-                                    .padding(start = 5.dp)
-                            )
-
-                            Spacer(Modifier.weight(1f))
-
-                            var selection by remember { mutableStateOf(false) }
-                            Switch(
-                                checked = selection,
-                                onCheckedChange = { selection = !selection })
-                        }
+                        SwitchItem(text = "E-mail meddelelser")
+                        SwitchItem(text = "Push meddelelser")
 
                     }
-
                 }
-
                 Box() {
                     Text(text = "Kontoindstillinger")
                 }
-
                 Box() {
                     Text(text = "Sprog")
                 }
-
                 Box() {
                     Text(text = "Om")
                 }
-
             }
         }
     }
+}
 
+@Composable
+fun SwitchItem(text: String /*TODO onswitch parameter?*/) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    )
+    {
+        Text(
+            text = text, fontSize = 20.sp, modifier = Modifier
+                .padding(start = 5.dp)
+        )
+
+        Spacer(Modifier.weight(1f))
+
+        var selection by remember { mutableStateOf(false) }
+        //TODO switch functionality
+        Switch(
+            checked = selection,
+            onCheckedChange = { selection = !selection })
+    }
 }
