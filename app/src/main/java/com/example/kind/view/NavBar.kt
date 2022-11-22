@@ -31,7 +31,7 @@ fun NavBar(navController: NavController) {
             selected = selectedItem == 1,
             onClick = {
                 selectedItem = 1
-                /*navController.navigate("donate")*/ }
+                navController.navigate("set_up_portfolio") }
         )
         BottomNavigationItem(
             icon = { Icon(Icons.Filled.Person, contentDescription = null) },
