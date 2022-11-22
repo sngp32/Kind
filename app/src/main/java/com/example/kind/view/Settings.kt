@@ -46,14 +46,7 @@ fun SettingsScreen(navController: NavController) {
         },
         //TODO bottom navigation bar missing?
         bottomBar = {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(Color(0xFFB8E3AD))
-                    .padding(top = 50.dp, bottom = 50.dp)
-            ) {
-                //empty
-            }
+            BottomAppBar(backgroundColor = Color.LightGray) { NavBar(navController) }
         }
     )
     {
