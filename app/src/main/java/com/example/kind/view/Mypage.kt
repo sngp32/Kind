@@ -14,9 +14,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 @Composable
-fun MypageScreen(/*navController: NavController*/) {
+fun MypageScreen(navController: NavController) {
     Scaffold(
         topBar = {
             Box(
@@ -33,16 +34,8 @@ fun MypageScreen(/*navController: NavController*/) {
                 )
             }
         },
-        //TODO bottom navigation bar missing?
         bottomBar = {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(Color(0xFFB8E3AD))
-                    .padding(top = 50.dp, bottom = 50.dp)
-            ) {
-                //empty
-            }
+            BottomAppBar(backgroundColor = Color.LightGray) { NavBar(navController) }
         }
     ) {
         Column(

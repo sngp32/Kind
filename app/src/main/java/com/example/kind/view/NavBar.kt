@@ -39,7 +39,7 @@ fun NavBar(navController: NavController) {
             selected = selectedItem == 2,
             onClick = {
                 selectedItem = 2
-                /*navController.navigate("mypage")*/
+                navController.navigate("mypage")
             }
         )
     }
