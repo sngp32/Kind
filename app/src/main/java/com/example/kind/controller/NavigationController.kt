@@ -15,8 +15,9 @@ import com.example.kind.view.*
             composable("login") { LoginScreen(navController = navController) }
             composable("signup") { SignupScreen(navController = navController) }
             composable("home"){ HomeScreen(navController = navController)}
-            //composable("mypage") { MypageScreen(navController = navController) }
-            //composable("portfolio") { PortfolioScreen(navController = navController) }
-            //composable("settings") { SettingsScreen(navController = navController) }
+            composable("mypage") { MypageScreen(navController = navController) }
+            composable("set_up_portfolio") { SetUpPortfolioScreen(navController = navController) }
+            composable("portfolio") { PortfolioScreen(navController = navController) }
+            composable("settings") { SettingsScreen(navController = navController) }
         }
     }
