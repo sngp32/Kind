@@ -6,14 +6,19 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Accessibility
+import androidx.compose.material.icons.filled.Healing
+import androidx.compose.material.icons.filled.Nature
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-
 
 
 @Composable
@@ -46,21 +51,24 @@ fun SetUpPortfolioScreen(navController: NavController, modifier: Modifier = Modi
                     CharityElement(
                         modifier,
                         title = "SOCIALT UDSATTE",
-                        info = "Støt de hjemløse og bostederne i København"
+                        info = "Støt de hjemløse og bostederne i København",
+                        icon = Icons.Filled.Accessibility
                     )
                 }
                 item {
                     CharityElement(
                         modifier,
                         title = "SUNDHED",
-                        info = "Støt udsatte med sundheds problemer"
+                        info = "Støt udsatte med sundheds problemer",
+                        icon = Icons.Filled.Healing
                     )
                 }
                 item {
                     CharityElement(
                         modifier,
                         title = "MILJØ",
-                        info = "Støt udsatte med sundheds problemer"
+                        info = "Støt udsatte med sundheds problemer",
+                        icon = Icons.Filled.Nature
                     )
                 }
                 item {
@@ -84,12 +92,11 @@ private fun Header() {
         color = Color(0xff858585)
     )
     Spacer(modifier = Modifier.height(10.dp))
-
 }
 
 
 @Composable
-private fun CharityElement(modifier: Modifier, title: String, info: String) {
+private fun CharityElement(modifier: Modifier, title: String, info: String, icon: ImageVector) {
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -107,7 +114,8 @@ private fun CharityElement(modifier: Modifier, title: String, info: String) {
 
             Row(
                 modifier = modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
                     text = title,
@@ -115,7 +123,12 @@ private fun CharityElement(modifier: Modifier, title: String, info: String) {
                     fontWeight = FontWeight.Bold,
                     color = Color(0xff37A434)
                 )
-                Text(text = "ICON")
+                Icon(
+                    icon,
+                    contentDescription = null,
+                    tint = Color(0xff37A434),
+                    modifier = Modifier.size(35.dp)
+                )
             }
 
             Text(text = info, fontSize = 16.sp)
@@ -151,8 +164,8 @@ private fun CharityElement(modifier: Modifier, title: String, info: String) {
                     ),
                     shape = RoundedCornerShape(12.dp),
                     colors = ButtonDefaults.buttonColors(
-                        backgroundColor = Color(0xffC7FFC6),
-                        contentColor = Color.Black
+                        backgroundColor = Color(0xffffffff),
+                        contentColor = Color(0xff37A434)
                     )
                 ) {
                     Text(text = "Læs mere", fontSize = 14.sp)
