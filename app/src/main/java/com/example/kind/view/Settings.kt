@@ -1,18 +1,25 @@
 package com.example.kind.view
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.KeyboardBackspace
 import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.kind.ui.theme.Teal200
+
 
 @Composable
 fun SettingsScreen(navController: NavController) {
@@ -54,11 +61,11 @@ fun SettingsScreen(navController: NavController) {
             modifier = Modifier
                 .fillMaxHeight()
                 .fillMaxWidth()
+                .background(Teal200)
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Box(
                     modifier = Modifier
-                        .background(Color(0xFFB8E3AD))
                         .padding(all = 20.dp)
                 ) {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -74,18 +81,78 @@ fun SettingsScreen(navController: NavController) {
 
                     }
                 }
-                Box() {
-                    Text(text = "Kontoindstillinger")
+                Box(
+                    modifier = Modifier
+                        .padding(all = 20.dp)
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(Icons.Filled.Person, contentDescription = null)
+                            Text(text = "Kontoindstillinger", fontSize = 28.sp)
+                        }
+
+                        Divider(color = Color.Black, thickness = 2.dp)
+
+                        UserSettingElement(text = "Navn", text2 = "Mikkel Pedersen")
+                        UserSettingElement(text = "E-Mail", text2 = "MikkelPedersen1431@gmail.com")
+                        UserSettingElement(text = "Password", text2 = "Skift Password")
+                        UserSettingElement(text = "Sprog", text2 = "Dansk")
+                    }
                 }
-                Box() {
-                    Text(text = "Sprog")
+
+                Box(
+                    modifier = Modifier
+                        .padding(all = 20.dp)
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(Icons.Filled.Info, contentDescription = null)
+                            Text(text = "Om", fontSize = 28.sp)
+                        }
+
+                        Divider(color = Color.Black, thickness = 2.dp)
+
+                        var aboutField = remember { mutableStateOf("") }
+                        OutlinedTextField(
+                            value = aboutField.value,
+                            onValueChange = { input -> aboutField.value = input },
+                            label = { Text(text = "Om") },
+                            modifier = Modifier.fillMaxWidth(),
+                            colors = TextFieldDefaults.textFieldColors(
+                                backgroundColor = Color.White
+                            )
+                        )
+                    }
                 }
-                Box() {
-                    Text(text = "Om")
-                }
+
             }
         }
     }
+}
+
+/*TODO get text2 from stored data, and functionality to change the information */
+@Composable
+
+fun UserSettingElement(text: String, text2:String) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    )
+    {
+        Text(
+            text = text, fontSize = 20.sp, modifier = Modifier
+                .padding(start = 5.dp)
+        )
+
+        Spacer(Modifier.weight(1f))
+
+        Button(onClick = { /*TODO*/ }, modifier = Modifier.width(260.dp)) {
+            Text(
+                text = text2, fontSize = 12.sp
+            )
+        }
+
+    }
+
 }
 
 @Composable
