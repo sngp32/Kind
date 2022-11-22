@@ -1,9 +1,7 @@
 package com.example.kind.view
 
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -16,7 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -53,7 +50,7 @@ fun MypageScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(80.dp))
 
                 PageButton(
-                    str = "Min Portefølje",
+                    str = "Min Portfølje",
                     icon = Icons.Filled.Person,
                     onClick = {navController.navigate("portfolio")}
                 )
