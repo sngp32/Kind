@@ -1,6 +1,5 @@
 package com.example.kind.view
 
-import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -13,12 +12,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.kind.ui.theme.Teal200
+import com.example.kind.ui.theme.kindGreen
+import com.example.kind.ui.theme.kindGreenDark
 
 
 @Composable
@@ -28,7 +26,7 @@ fun SettingsScreen(navController: NavController) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(Color(0xFF5D8555)),
+                    .background(kindGreenDark),
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -61,7 +59,7 @@ fun SettingsScreen(navController: NavController) {
             modifier = Modifier
                 .fillMaxHeight()
                 .fillMaxWidth()
-                .background(Teal200)
+                .background(kindGreen)
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Box(

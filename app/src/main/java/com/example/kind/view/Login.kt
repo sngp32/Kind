@@ -14,6 +14,7 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.kind.ui.theme.kindGreen
 
 @Composable
 fun LoginScreen(navController: NavController) {
@@ -28,7 +29,7 @@ fun LoginScreen(navController: NavController) {
             modifier = Modifier
                 .height(500.dp)
                 .fillMaxWidth()
-                .background(Color(0xFFB8E3AD)),
+                .background(kindGreen),
             verticalArrangement = Arrangement.Top
 
         ) {

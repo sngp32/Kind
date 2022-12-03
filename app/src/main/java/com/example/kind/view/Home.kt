@@ -18,6 +18,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.kind.ui.theme.kindGreen
 import kotlin.text.Typography.bullet
 
 @Composable
@@ -27,7 +28,7 @@ fun HomeScreen(navController: NavController) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(Color(0xFFB8E3AD))
+                    .background(kindGreen)
                     .height(300.dp)
 
             ) {
@@ -110,7 +111,7 @@ fun HomeScreen(navController: NavController) {
                     Text(
                         text = "CHARITY UPDATE",
                         fontSize = 22.sp,
-                        color = Color(0xFFB8E3AD),
+                        color = kindGreen,
                         modifier = Modifier
                             .padding(start = 20.dp)
                             .padding(top = 5.dp)

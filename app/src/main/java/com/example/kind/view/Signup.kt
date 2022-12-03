@@ -10,6 +10,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.kind.ui.theme.kindGreen
 
 @Composable
 fun SignupScreen(navController: NavController) {
@@ -23,7 +24,7 @@ fun SignupScreen(navController: NavController) {
             modifier = Modifier
                 .height(600.dp)
                 .fillMaxWidth()
-                .background(Color(0xFFB8E3AD)),
+                .background(kindGreen),
             verticalArrangement = Arrangement.Top
         ) {
             Text(
