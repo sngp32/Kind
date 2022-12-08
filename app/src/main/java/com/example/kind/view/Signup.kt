@@ -18,7 +18,6 @@ fun SignupScreen(navController: NavController) {
             .fillMaxWidth()
             .fillMaxHeight()
     ) {
-
         Column(
             modifier = Modifier
                 .height(600.dp)
@@ -47,11 +46,11 @@ fun SignupScreen(navController: NavController) {
                 var textEmail = remember { mutableStateOf("") }
                 var textPassword = remember { mutableStateOf("") }
 
-                inputField(inputText = textName, fieldText = "Name")
+                InputField(inputText = textName, fieldText = "Name")
                 Spacer(modifier = Modifier.height(10.dp))
-                inputField(inputText = textEmail, fieldText = "E-mail")
+                InputField(inputText = textEmail, fieldText = "E-mail")
                 Spacer(modifier = Modifier.height(10.dp))
-                inputField(inputText = textPassword, fieldText = "Password")
+                InputField(inputText = textPassword, fieldText = "Password")
 
                 Button(
                     onClick = { /*TODO*/ },
@@ -66,7 +65,6 @@ fun SignupScreen(navController: NavController) {
                 }
             }
         }
-
         Column(
             modifier = Modifier
                 .fillMaxHeight()
@@ -90,7 +88,7 @@ fun SignupScreen(navController: NavController) {
 }
 
 @Composable
-fun inputField(inputText: MutableState<String>, fieldText: String) {
+private fun InputField(inputText: MutableState<String>, fieldText: String) {
     OutlinedTextField(
         value = inputText.value,
         onValueChange = { input -> inputText.value = input },
