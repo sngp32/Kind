@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -22,15 +23,12 @@ fun LoginScreen(navController: NavController) {
             .fillMaxWidth()
             .fillMaxHeight()
     ) {
-
-
         Column(
             modifier = Modifier
                 .height(500.dp)
                 .fillMaxWidth()
                 .background(Color(0xFFB8E3AD)),
             verticalArrangement = Arrangement.Top
-
         ) {
             Text(
                 text = "LOGIN",
@@ -49,43 +47,17 @@ fun LoginScreen(navController: NavController) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 var textEmail = remember { mutableStateOf("") }
-                OutlinedTextField(
-                    value = textEmail.value,
-                    onValueChange = { input -> textEmail.value = input },
-                    label = { Text(text = "Email") },
-                    modifier = Modifier.width(300.dp),
-                    colors = TextFieldDefaults.textFieldColors(
-                        backgroundColor = Color.White
-                    )
-
-                )
+                TextField(text = textEmail, string = "E-mail")
                 Spacer(modifier = Modifier.height(10.dp))
                 var textPassword = remember { mutableStateOf("") }
-                OutlinedTextField(
-                    value = textPassword.value,
-                    onValueChange = { input -> textPassword.value = input },
-                    label = { Text(text = "Password") },
-                    modifier = Modifier.width(300.dp),
-                    colors = TextFieldDefaults.textFieldColors(
-                        backgroundColor = Color.White
-                    )
-                )
-                Button(
-                    onClick = { navController.navigate("home") },
-                    colors = ButtonDefaults.buttonColors(
-                        backgroundColor = Color(
-                            0xFF454545
-                        )
-                    ),
-                    modifier = Modifier.width(300.dp)
-                ) {
-                    Text(text = "LOGIN", color = Color.White)
-                }
+                TextField(text = textPassword, string = "Password")
+
+                Button({ navController.navigate("home") }, "LOGIN")
                 ClickableText(
                     text = AnnotatedString("Forgot your password?"),
-                    onClick = {})
+                    onClick = {}
+                )
             }
-
         }
         Column(
             modifier = Modifier
@@ -95,18 +67,39 @@ fun LoginScreen(navController: NavController) {
                 .padding(bottom = 20.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Bottom
-
         ) {
             Text(text = "Don't have an account?")
-
-            Button(
-                onClick = { navController.navigate("signup") },
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF454545)),
-                modifier = Modifier.width(300.dp)
-            ) {
-                Text(text = "SIGN UP", color = Color.White)
-            }
+            Button({ navController.navigate("signup") }, "SIGN UP")
         }
+    }
+}
 
+/**
+ * Stateless text field for input with [text] as the input and [string] to be displayed
+ */
+@Composable
+fun TextField(text: MutableState<String>, string: String ) {
+    OutlinedTextField(
+        value = text.value,
+        onValueChange = { input -> text.value = input },
+        label = { Text(text = string) },
+        modifier = Modifier.width(300.dp),
+        colors = TextFieldDefaults.textFieldColors(
+            backgroundColor = Color.White
+        )
+    )
+}
+
+/**
+ * Stateless button with [text] to be displayed and [navigation] for rerouting
+ */
+@Composable
+fun Button(navigation: () -> Unit, text: String) {
+    Button(
+        onClick = navigation,
+        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF454545)),
+        modifier = Modifier.width(300.dp)
+    ) {
+        Text(text = text, color = Color.White)
     }
 }
