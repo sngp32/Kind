@@ -135,42 +135,43 @@ private fun CharityElement(modifier: Modifier, title: String, info: String, icon
 
             Row(
                 modifier = modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 10.dp),
+                    .fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Button(
-                    onClick = {},
-                    elevation = ButtonDefaults.elevation(
-                        defaultElevation = 3.dp,
-                        pressedElevation = 5.dp,
-                        disabledElevation = 0.dp
-                    ),
-                    shape = RoundedCornerShape(12.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        backgroundColor = Color(0xffC7FFC6),
-                        contentColor = Color.Black
-                    )
-                ) {
-                    Text(text = "Tilføj tema", fontSize = 14.sp)
-                }
-
+                    text = "Tilføj tema",
+                    onClick = { /*TODO*/ },
+                    backgroundColor = Color(0xffC7FFC6),
+                    contentColor = Color.Black
+                )
+                Spacer(modifier = modifier.weight(1f))
                 Button(
+                    text = "Læs mere",
                     onClick = {},
-                    elevation = ButtonDefaults.elevation(
-                        defaultElevation = 3.dp,
-                        pressedElevation = 5.dp,
-                        disabledElevation = 0.dp
-                    ),
-                    shape = RoundedCornerShape(12.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        backgroundColor = Color(0xffffffff),
-                        contentColor = Color(0xff37A434)
-                    )
-                ) {
-                    Text(text = "Læs mere", fontSize = 14.sp)
-                }
+                    backgroundColor = Color(0xffffffff),
+                    contentColor = Color(0xff37A434)
+                )
+
             }
         }
+    }
+}
+
+@Composable
+private fun Button(text: String, onClick: () -> Unit, backgroundColor: Color, contentColor: Color) {
+    Button(
+        onClick = onClick,
+        elevation = ButtonDefaults.elevation(
+            defaultElevation = 3.dp,
+            pressedElevation = 5.dp,
+            disabledElevation = 0.dp
+        ),
+        shape = RoundedCornerShape(12.dp),
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = backgroundColor,
+            contentColor = contentColor
+        )
+    ) {
+        Text(text = text, fontSize = 14.sp)
     }
 }
