@@ -52,17 +52,7 @@ fun SignupScreen(navController: NavController) {
                 Spacer(modifier = Modifier.height(10.dp))
                 InputField(inputText = textPassword, fieldText = "Password")
 
-                Button(
-                    onClick = { /*TODO*/ },
-                    colors = ButtonDefaults.buttonColors(
-                        backgroundColor = Color(
-                            0xFF454545
-                        )
-                    ),
-                    modifier = Modifier.width(300.dp)
-                ) {
-                    Text(text = "SIGNUP", color = Color.White)
-                }
+                Button(navigation = {/* TODO */}, text = "SIGNUP")
             }
         }
         Column(
@@ -75,15 +65,8 @@ fun SignupScreen(navController: NavController) {
             verticalArrangement = Arrangement.Bottom
         ) {
             Text(text = "Already have an account?")
-            Button(
-                onClick = { navController.navigate("login") },
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF454545)),
-                modifier = Modifier.width(300.dp)
-            ) {
-                Text(text = "LOGIN", color = Color.White)
-            }
+            Button(navigation = {navController.navigate("login")}, text = "LOGIN")
         }
-
     }
 }
 
@@ -98,4 +81,15 @@ private fun InputField(inputText: MutableState<String>, fieldText: String) {
             backgroundColor = Color.White
         )
     )
+}
+
+@Composable
+private fun Button(navigation: () -> Unit, text: String) {
+    Button(
+        onClick = navigation,
+        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF454545)),
+        modifier = Modifier.width(300.dp)
+    ) {
+        Text(text = text, color = Color.White)
+    }
 }
