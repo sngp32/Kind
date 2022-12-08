@@ -47,10 +47,10 @@ fun LoginScreen(navController: NavController) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 var textEmail = remember { mutableStateOf("") }
-                TextField(text = textEmail, string = "E-mail")
+                InputField(text = textEmail, string = "E-mail")
                 Spacer(modifier = Modifier.height(10.dp))
                 var textPassword = remember { mutableStateOf("") }
-                TextField(text = textPassword, string = "Password")
+                InputField(text = textPassword, string = "Password")
 
                 Button({ navController.navigate("home") }, "LOGIN")
                 ClickableText(
@@ -78,7 +78,7 @@ fun LoginScreen(navController: NavController) {
  * Stateless text field for input with [text] as the input and [string] to be displayed
  */
 @Composable
-fun TextField(text: MutableState<String>, string: String ) {
+private fun InputField(text: MutableState<String>, string: String ) {
     OutlinedTextField(
         value = text.value,
         onValueChange = { input -> text.value = input },
@@ -94,7 +94,7 @@ fun TextField(text: MutableState<String>, string: String ) {
  * Stateless button with [text] to be displayed and [navigation] for rerouting
  */
 @Composable
-fun Button(navigation: () -> Unit, text: String) {
+private fun Button(navigation: () -> Unit, text: String) {
     Button(
         onClick = navigation,
         colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF454545)),
