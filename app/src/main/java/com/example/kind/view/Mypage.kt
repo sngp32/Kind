@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.kind.ui.theme.kindGreen
 
 @Composable
 fun MypageScreen(navController: NavController) {
@@ -26,7 +27,7 @@ fun MypageScreen(navController: NavController) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(bottomStart = 10.dp, bottomEnd = 10.dp))
-                    .background(Color(0xFFB8E3AD))
+                    .background(kindGreen)
             ) {
                 Text(
                     text = "Min side",
@@ -49,26 +50,31 @@ fun MypageScreen(navController: NavController) {
         ) {
             Spacer(modifier = Modifier.height(80.dp))
 
-                PageButton(
-                    str = "Min Portfølje",
-                    icon = Icons.Filled.Person,
-                    onClick = {navController.navigate("portfolio")}
-                )
+            PageButton(
+                str = "Min Portfølje",
+                icon = Icons.Filled.Person,
+                onClick = { navController.navigate("portfolio") }
+            )
 
             Spacer(modifier = Modifier.height(60.dp))
 
-                PageButton(
-                    str = "Indstillinger",
-                    icon = Icons.Filled.Settings,
-                    onClick = {navController.navigate("settings")}
-                )
+            PageButton(
+                str = "Indstillinger",
+                icon = Icons.Filled.Settings,
+                onClick = { navController.navigate("settings") }
+            )
 
             Spacer(modifier = Modifier.weight(1.0f))
-            Box(modifier = Modifier.fillMaxWidth().height(140.dp).clip(RoundedCornerShape(topStart = 10.dp, topEnd = 10.dp)).background(Color(0xFFB8E3AD)))
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(140.dp)
+                    .clip(RoundedCornerShape(topStart = 10.dp, topEnd = 10.dp))
+                    .background(
+                        kindGreen
+                    )
+            )
         }
-
-
-
     }
 }
 

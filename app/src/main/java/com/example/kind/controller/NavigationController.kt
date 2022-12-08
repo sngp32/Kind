@@ -11,7 +11,7 @@ import com.example.kind.view.*
 @Composable
     fun Navigation() {
         val navController = rememberNavController()
-        NavHost(navController = navController, startDestination = "portfolio") {
+        NavHost(navController = navController, startDestination = "login") {
             composable("login") { LoginScreen(navController = navController) }
             composable("signup") { SignupScreen(navController = navController) }
             composable("home"){ HomeScreen(navController = navController)}
