@@ -3,7 +3,7 @@ package com.example.kind.view
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.ClickableText
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -78,15 +78,16 @@ fun LoginScreen(navController: NavController) {
 /**
  * Stateless text field for input with [text] as the input and [string] to be displayed
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun InputField(text: MutableState<String>, string: String ) {
+private fun InputField(text: MutableState<String>, string: String) {
     OutlinedTextField(
         value = text.value,
         onValueChange = { input -> text.value = input },
         label = { Text(text = string) },
         modifier = Modifier.width(300.dp),
         colors = TextFieldDefaults.textFieldColors(
-            backgroundColor = Color.White
+            containerColor = Color.White
         )
     )
 }
@@ -98,7 +99,7 @@ private fun InputField(text: MutableState<String>, string: String ) {
 private fun Button(navigation: () -> Unit, text: String) {
     Button(
         onClick = navigation,
-        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF454545)),
+        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF454545)),
         modifier = Modifier.width(300.dp)
     ) {
         Text(text = text, color = Color.White)

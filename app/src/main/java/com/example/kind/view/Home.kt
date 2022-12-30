@@ -3,9 +3,7 @@ package com.example.kind.view
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.ClickableText
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,6 +19,7 @@ import androidx.navigation.NavController
 import com.example.kind.ui.theme.kindGreen
 import kotlin.text.Typography.bullet
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavController) {
     Scaffold(
@@ -47,7 +46,7 @@ fun HomeScreen(navController: NavController) {
             }
         },
         bottomBar = {
-            BottomAppBar(backgroundColor = Color.LightGray) { NavBar(navController) }
+            BottomAppBar(containerColor = Color.LightGray) { NavBar(navController) }
         }
     ) {
         innerPadding->

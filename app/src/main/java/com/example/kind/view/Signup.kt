@@ -2,7 +2,7 @@ package com.example.kind.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -71,6 +71,7 @@ fun SignupScreen(navController: NavController) {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun InputField(inputText: MutableState<String>, fieldText: String) {
     OutlinedTextField(
@@ -79,7 +80,7 @@ private fun InputField(inputText: MutableState<String>, fieldText: String) {
         label = { Text(text = fieldText) },
         modifier = Modifier.width(300.dp),
         colors = TextFieldDefaults.textFieldColors(
-            backgroundColor = Color.White
+            containerColor = Color.White
         )
     )
 }
@@ -88,7 +89,7 @@ private fun InputField(inputText: MutableState<String>, fieldText: String) {
 private fun Button(navigation: () -> Unit, text: String) {
     Button(
         onClick = navigation,
-        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF454545)),
+        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF454545)),
         modifier = Modifier.width(300.dp)
     ) {
         Text(text = text, color = Color.White)

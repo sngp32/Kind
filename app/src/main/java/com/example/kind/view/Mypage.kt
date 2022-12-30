@@ -1,10 +1,11 @@
 package com.example.kind.view
 
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
@@ -19,6 +20,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.kind.ui.theme.kindGreen
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MypageScreen(navController: NavController) {
     Scaffold(
@@ -40,15 +43,16 @@ fun MypageScreen(navController: NavController) {
         },
 
         bottomBar = {
-            BottomAppBar(backgroundColor = Color.LightGray) { NavBar(navController) }
+            BottomAppBar(containerColor = Color.LightGray) { NavBar(navController) }
         }
 
-    ) {
+    ) { _ -> //TODO utilize padding. Currently suppressed up top
+
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxSize()
         ) {
-            Spacer(modifier = Modifier.height(80.dp))
+            Spacer(modifier = Modifier.weight(1.0f))
 
             PageButton(
                 str = "Min Portfølje",
@@ -83,7 +87,7 @@ fun PageButton(str: String, icon: ImageVector, onClick: () -> Unit, modifier: Mo
     Button(
         modifier = modifier.width(250.dp),
         onClick = onClick,
-        colors = ButtonDefaults.buttonColors(backgroundColor = Color.LightGray),
+        colors = ButtonDefaults.buttonColors(containerColor = Color.LightGray),
         shape = RoundedCornerShape(10.dp)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {

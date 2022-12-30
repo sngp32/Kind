@@ -1,8 +1,9 @@
 package com.example.kind.view
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.KeyboardBackspace
@@ -19,6 +20,8 @@ import com.example.kind.ui.theme.kindGreen
 import com.example.kind.ui.theme.kindGreenDark
 
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(navController: NavController) {
     Scaffold(
@@ -49,12 +52,11 @@ fun SettingsScreen(navController: NavController) {
                 }
             }
         },
-        //TODO bottom navigation bar missing?
         bottomBar = {
-            BottomAppBar(backgroundColor = Color.LightGray) { NavBar(navController) }
+            BottomAppBar(containerColor = Color.LightGray) { NavBar(navController) }
         }
     )
-    {
+    {_ -> //TODO utilize padding, suppressed up top
         Box(
             modifier = Modifier
                 .fillMaxHeight()
@@ -117,7 +119,7 @@ fun SettingsScreen(navController: NavController) {
                             label = { Text(text = "Om") },
                             modifier = Modifier.fillMaxWidth(),
                             colors = TextFieldDefaults.textFieldColors(
-                                backgroundColor = Color.White
+                                containerColor = Color.White
                             )
                         )
                     }

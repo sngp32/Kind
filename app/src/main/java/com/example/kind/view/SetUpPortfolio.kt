@@ -5,7 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Accessibility
 import androidx.compose.material.icons.filled.Healing
@@ -21,11 +21,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SetUpPortfolioScreen(navController: NavController, modifier: Modifier = Modifier) {
     Scaffold(
         bottomBar = {
-            BottomAppBar(backgroundColor = Color.LightGray) { NavBar(navController) }
+            BottomAppBar(containerColor = Color.LightGray) { NavBar(navController) }
         }
     ) {
         Box(
@@ -103,7 +104,6 @@ private fun CharityElement(modifier: Modifier, title: String, info: String, icon
             .height(260.dp)
             .padding(horizontal = 15.dp)
             .clickable { },
-        elevation = 4.dp,
         shape = RoundedCornerShape(30.dp)
     ) {
 
@@ -161,14 +161,14 @@ private fun CharityElement(modifier: Modifier, title: String, info: String, icon
 private fun Button(text: String, onClick: () -> Unit, backgroundColor: Color, contentColor: Color) {
     Button(
         onClick = onClick,
-        elevation = ButtonDefaults.elevation(
+        elevation = ButtonDefaults.buttonElevation(
             defaultElevation = 3.dp,
             pressedElevation = 5.dp,
             disabledElevation = 0.dp
         ),
         shape = RoundedCornerShape(12.dp),
         colors = ButtonDefaults.buttonColors(
-            backgroundColor = backgroundColor,
+            containerColor = backgroundColor,
             contentColor = contentColor
         )
     ) {
