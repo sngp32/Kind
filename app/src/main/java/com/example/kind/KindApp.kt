@@ -69,6 +69,12 @@ fun KindNavHost(
             MyPageScreen(onPortfolioClick = {navController.navigateSingleTopTo(MyPortfolio.route)},
             onSettingsClick = {navController.navigateSingleTopTo(Settings.route)})
         }
+        composable(route = Settings.route) {
+            SettingsScreen()
+        }
+        composable(route = MyPortfolio.route) {
+            PortfolioScreen(onSetPortfolioClick = {navController.navigateSingleTopTo(SetPortfolio.route)})
+        }
     }
 }
 
