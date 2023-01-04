@@ -18,16 +18,12 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SetUpPortfolioScreen(navController: NavController, modifier: Modifier = Modifier) {
+fun SetUpPortfolioScreen(modifier: Modifier = Modifier) {
     Scaffold(
-        bottomBar = {
-            BottomAppBar(containerColor = Color.LightGray) { NavBar(navController) }
-        }
+        bottomBar = { }
     ) {
         Box(
             modifier = Modifier
