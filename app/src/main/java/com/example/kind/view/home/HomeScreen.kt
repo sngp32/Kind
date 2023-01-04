@@ -15,13 +15,12 @@ import androidx.compose.ui.text.style.TextIndent
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.example.kind.ui.theme.kindGreen
 import kotlin.text.Typography.bullet
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen() {
     Scaffold(
         topBar = {
             Column(
@@ -46,7 +45,6 @@ fun HomeScreen(navController: NavController) {
             }
         },
         bottomBar = {
-            BottomAppBar(containerColor = Color.LightGray) { NavBar(navController) }
         }
     ) {
         innerPadding->
