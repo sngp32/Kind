@@ -44,7 +44,6 @@ fun KindApp() {
         ) { innerPadding ->
             KindNavHost(navController = navController, modifier = Modifier.padding(innerPadding))
         }
-        KindNavGraph(navController = navController)
     }
 }
 
