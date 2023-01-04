@@ -2,119 +2,101 @@ package com.example.kind.ui.screens.home
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.text.ClickableText
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.ParagraphStyle
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.style.TextIndent
-import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+
 import com.example.kind.ui.theme.kindGreen
-import kotlin.text.Typography.bullet
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(modifier: Modifier = Modifier) {
     Scaffold(
         topBar = {
             HomeTopAppBar()
         },
         bottomBar = { }
-    ) { innerPadding ->
-        Box(modifier = Modifier.padding(innerPadding)) {
-            val scrollState = rememberScrollState()
-            Column(
-                modifier = Modifier
-                    .padding(top = 20.dp)
-                    .fillMaxWidth()
-                    .verticalScroll(scrollState),
-                horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(it)
+        ) {
+
+            LazyColumn(
+                modifier = modifier
+                    .fillMaxSize()
+                    .background(color = Color(0xffebebeb))
+                    .padding(start = 25.dp, end = 25.dp, top = 40.dp),
+                verticalArrangement = Arrangement.spacedBy(20.dp)
             ) {
-                Column(
-                    modifier = Modifier
-                        .width(280.dp)
-                        .height(220.dp)
-                        .background(Color.White)
-                        .border(
-                            BorderStroke(1.dp, Color.Black)
-                        )
-                        .align(
-                            Alignment.CenterHorizontally
-                        )
-                ) {
-                    Text(
-                        text = "Hver måned støtter du 2 temaer og 6 velgørenhedsorganisationer",
-                        fontSize = 22.sp,
-                        color = Color.Black,
-                        modifier = Modifier
-                            .padding(start = 20.dp)
-                            .padding(top = 5.dp)
-                    )
-                    ClickableText(
-                        text = buildAnnotatedString {
-                            withStyle(
-                                style = SpanStyle(
-                                    color = Color.Green,
-                                )
-                            ) {
-                                append("Din portefølje ->")
-                            }
-                        },
-                        onClick = {},
-                        modifier = Modifier
-                            .padding(start = 20.dp)
-                            .padding(top = 10.dp)
+
+                //Hardcoded, since we do not have data for these charities yet
+                item {
+                    ListElement(
+                        modifier,
+                        title = "Din støtte",
+                        text = "Hver måned støtter du 2 temaer og 6 velgørenhedsorganisationer"
                     )
                 }
-                Spacer(modifier = Modifier.height(20.dp))
-                Column(
-                    modifier = Modifier
-                        .width(280.dp)
-                        .height(150.dp)
-                        .background(Color.White)
-                        .border(
-                            BorderStroke(1.dp, Color.Black)
-                        )
-                        .align(
-                            Alignment.CenterHorizontally
-                        )
-                ) {
-                    Text(
-                        text = "CHARITY UPDATE",
-                        fontSize = 22.sp,
-                        color = kindGreen,
-                        modifier = Modifier
-                            .padding(start = 20.dp)
-                            .padding(top = 5.dp)
+                item {
+                    ListElement(
+                        modifier,
+                        title = "CHARITY UPDATE",
+                        text = "Mødrehjælpen har i december måned..."
                     )
-                    Spacer(modifier = Modifier.height(5.dp))
-                    val messages = listOf(
-                        "Mødrehjælpen har i december måned...",
-                        "Knæk cancer fonden har i November måned..."
-                    )
-                    val paragraphStyle = ParagraphStyle(textIndent = TextIndent(restLine = 15.sp))
-                    Text(
-                        buildAnnotatedString {
-                            messages.forEach {
-                                withStyle(style = paragraphStyle) {
-                                    append(bullet)
-                                    append("\t\t")
-                                    append(it)
-                                }
-                            }
-                        },
-                        Modifier
-                            .padding(start = 20.dp)
-                            .padding(top = 2.dp)
+                }
+                item {
+                    ListElement(
+                        modifier,
+                        title = "CHARITY UPDATE",
+                        text = "Knæk cancer fonden har i November måned..."
                     )
                 }
             }
+        }
+    }
+}
+
+
+@Composable
+private fun ListElement(modifier: Modifier, title: String, text: String) {
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 15.dp)
+            .clickable { },
+        shape = RoundedCornerShape(30.dp)
+    ) {
+
+        Column(
+            modifier = modifier.padding(30.dp),
+            verticalArrangement = Arrangement.SpaceBetween
+        ) {
+
+            Row(
+                modifier = modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = title,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color(0xff37A434)
+                )
+
+            }
+
+            Text(text = text, fontSize = 16.sp)
+
         }
     }
 }
@@ -125,13 +107,13 @@ private fun HomeTopAppBar() {
         modifier = Modifier
             .fillMaxWidth()
             .background(kindGreen)
-            .height(300.dp)
+            .height(250.dp)
 
     ) {
         Text(
             text = "Dit abonnement er på plads og du er on track til at donere 100 kr.",
             fontSize = 32.sp,
-            modifier = Modifier.padding(start = 20.dp, top = 50.dp)
+            modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 30.dp)
         )
         Spacer(modifier = Modifier.height(20.dp))
         Text(
