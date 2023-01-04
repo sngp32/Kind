@@ -1,4 +1,4 @@
-package com.example.kind.view
+package com.example.kind.ui.screens.settings
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
