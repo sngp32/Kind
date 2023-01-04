@@ -19,9 +19,7 @@ import androidx.navigation.NavController
 @Composable
 fun PortfolioScreen(navController: NavController, modifier: Modifier = Modifier) {
     Scaffold(
-        bottomBar = {
-            BottomAppBar(containerColor = Color.LightGray) { NavBar(navController) }
-        }
+        bottomBar = { }
     ) {
         Box(
             modifier = Modifier
