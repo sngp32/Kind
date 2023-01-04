@@ -16,12 +16,12 @@ import com.example.kind.ui.theme.KindTheme
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun SettingsScreen(modifier: Modifier = Modifier, onBackClick: () -> Unit) {
-    Column() {
+    Column {
         //TODO perhaps move to component package for general usage
         // or place in higher caller
         SettingsTopAppBar(onBackClick)
 
-        Column() {
+        Column {
             SectionTextTitle(text = "Notifications")
             SwitchButton(headlineText = "Email notifications", onSwitchButtonClick = { /* TODO */ })
             SwitchButton(headlineText = "Push notifications", onSwitchButtonClick = { /* TODO */ })
@@ -203,8 +203,8 @@ private fun RadioButtonPreviewLight() {
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun PageSettingsPreviewDark() {
-    KindTheme() {
-        Column() {
+    KindTheme {
+        Column {
             SettingsTopAppBar(onBackClick = { })
 
             SectionTextTitle(text = "Section Text Title Preview")
@@ -221,11 +221,11 @@ private fun PageSettingsPreviewDark() {
     }
 }
 
-@Preview()
+@Preview
 @Composable
 private fun PageSettingsPreviewLight() {
-    KindTheme() {
-        Column() {
+    KindTheme {
+        Column {
             SettingsTopAppBar(onBackClick = { })
 
             SectionTextTitle(text = "Section Text Title Preview")
