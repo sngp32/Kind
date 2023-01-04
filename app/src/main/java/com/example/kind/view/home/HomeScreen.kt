@@ -23,37 +23,18 @@ import kotlin.text.Typography.bullet
 fun HomeScreen() {
     Scaffold(
         topBar = {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(kindGreen)
-                    .height(300.dp)
-
-            ) {
-                Text(
-                    text = "Dit abonnement er på plads og du er on track til at donere 100 kr.",
-                    fontSize = 32.sp,
-                    modifier = Modifier.padding(start = 20.dp, top = 50.dp)
-                )
-                Spacer(modifier = Modifier.height(20.dp))
-                Text(
-                    text = "Du er blandt top 1% af donorer denne måned. Godt gået!",
-                    fontSize = 22.sp,
-                    color = Color.White,
-                    modifier = Modifier.padding(start = 20.dp)
-                )
-            }
+            HomeTopAppBar()
         },
         bottomBar = {
         }
-    ) {
-        innerPadding->
+    ) { innerPadding ->
         Box(modifier = Modifier.padding(innerPadding)) {
             val scrollState = rememberScrollState()
-            Column(modifier = Modifier
-                .padding(top = 20.dp)
-                .fillMaxWidth()
-                .verticalScroll(scrollState),
+            Column(
+                modifier = Modifier
+                    .padding(top = 20.dp)
+                    .fillMaxWidth()
+                    .verticalScroll(scrollState),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Column(
@@ -138,7 +119,30 @@ fun HomeScreen() {
             }
         }
     }
+}
 
+@Composable
+private fun HomeTopAppBar() {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(kindGreen)
+            .height(300.dp)
+
+    ) {
+        Text(
+            text = "Dit abonnement er på plads og du er on track til at donere 100 kr.",
+            fontSize = 32.sp,
+            modifier = Modifier.padding(start = 20.dp, top = 50.dp)
+        )
+        Spacer(modifier = Modifier.height(20.dp))
+        Text(
+            text = "Du er blandt top 1% af donorer denne måned. Godt gået!",
+            fontSize = 22.sp,
+            color = Color.White,
+            modifier = Modifier.padding(start = 20.dp)
+        )
+    }
 }
 
 
