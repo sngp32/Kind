@@ -23,7 +23,7 @@ import com.example.kind.ui.theme.kindGreenDark
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsScreen(navController: NavController) {
+fun SettingsScreen() {
     Scaffold(
         topBar = {
             Box(
@@ -52,9 +52,7 @@ fun SettingsScreen(navController: NavController) {
                 }
             }
         },
-        bottomBar = {
-            BottomAppBar(containerColor = Color.LightGray) { NavBar(navController) }
-        }
+        bottomBar = { }
     )
     {_ -> //TODO utilize padding, suppressed up top
         Box(
