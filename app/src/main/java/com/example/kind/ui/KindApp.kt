@@ -70,7 +70,7 @@ private fun KindNavHost(
             onSettingsClick = {navController.navigateSingleTopTo(Settings.route)})
         }
         composable(route = Settings.route) {
-            SettingsScreen()
+            SettingsScreen(modifier = modifier, onBackClick = { navController.popBackStack() })
         }
         composable(route = MyPortfolio.route) {
             PortfolioScreen(onSetPortfolioClick = {navController.navigateSingleTopTo(SetPortfolio.route)})
