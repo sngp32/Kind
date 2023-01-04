@@ -11,14 +11,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.kind.navigation.*
+import com.example.kind.ui.components.navigation.*
 import com.example.kind.ui.theme.KindTheme
 import com.example.kind.view.AppNavBar
-import com.example.kind.view.HomeScreen
-import com.example.kind.view.PortfolioScreen
+import com.example.kind.ui.screens.home.HomeScreen
+import com.example.kind.ui.screens.portfolio.PortfolioScreen
 import com.example.kind.view.SettingsScreen
-import com.example.kind.view.myPage.MyPageScreen
-import com.example.kind.view.setPortfolio.SetPortfolioScreen
+import com.example.kind.ui.screens.myPage.MyPageScreen
+import com.example.kind.ui.screens.setPortfolio.SetPortfolioScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

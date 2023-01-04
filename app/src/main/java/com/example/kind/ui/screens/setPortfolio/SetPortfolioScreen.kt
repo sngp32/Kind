@@ -1,4 +1,4 @@
-package com.example.kind.view.setPortfolio
+package com.example.kind.ui.screens.setPortfolio
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

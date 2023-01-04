@@ -1,4 +1,4 @@
-package com.example.kind.view
+package com.example.kind.ui.screens.portfolio
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*

@@ -1,4 +1,4 @@
-package com.example.kind.view.myPage
+package com.example.kind.ui.screens.myPage
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
@@ -13,8 +13,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.kind.navigation.MyPortfolio
-import com.example.kind.navigation.Settings
+import com.example.kind.ui.components.navigation.MyPortfolio
+import com.example.kind.ui.components.navigation.Settings
 import com.example.kind.ui.theme.kindGreen
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")

@@ -1,4 +1,4 @@
-package com.example.kind.navigation
+package com.example.kind.ui.components.navigation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Favorite

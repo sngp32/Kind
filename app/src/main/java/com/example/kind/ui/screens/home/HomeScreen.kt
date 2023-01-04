@@ -1,4 +1,4 @@
-package com.example.kind.view
+package com.example.kind.ui.screens.home
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -25,8 +25,7 @@ fun HomeScreen() {
         topBar = {
             HomeTopAppBar()
         },
-        bottomBar = {
-        }
+        bottomBar = { }
     ) { innerPadding ->
         Box(modifier = Modifier.padding(innerPadding)) {
             val scrollState = rememberScrollState()
@@ -115,7 +114,6 @@ fun HomeScreen() {
                             .padding(top = 2.dp)
                     )
                 }
-
             }
         }
     }
