@@ -42,9 +42,7 @@ fun MypageScreen(navController: NavController) {
             }
         },
 
-        bottomBar = {
-            BottomAppBar(containerColor = Color.LightGray) { NavBar(navController) }
-        }
+        bottomBar = { }
 
     ) { _ -> //TODO utilize padding. Currently suppressed up top
 
