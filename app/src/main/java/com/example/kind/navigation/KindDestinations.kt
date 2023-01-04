@@ -4,33 +4,32 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.Home
 import androidx.compose.material.icons.rounded.Person
+import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
 
 interface KindDestination {
     val icon: ImageVector
     val route: String
-}
-
-interface KindBottomBarDestination : KindDestination {
     val label: String
 }
+
 
 /**
  * Kind app navigation destinations
  */
-object Home : KindBottomBarDestination {
+object Home : KindDestination {
     override val icon = Icons.Rounded.Home
     override val route = "home"
     override val label = "Home"
 }
 
-object SetPortfolio : KindBottomBarDestination {
+object SetPortfolio : KindDestination {
     override val icon = Icons.Rounded.Favorite
     override val route = "set_portFolio"
     override val label = "Set Portfolio"
 }
 
-object MyPage : KindBottomBarDestination {
+object MyPage : KindDestination {
     override val icon = Icons.Rounded.Person
     override val route = "my_page"
     override val label = "My Page"

@@ -5,14 +5,13 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.kind.navigation.Home
-import com.example.kind.navigation.KindBottomBarDestination
 import com.example.kind.navigation.KindDestination
 import com.example.kind.navigation.kindBottomBarScreens
 import com.example.kind.ui.theme.KindTheme
 
 @Composable
 fun AppNavBar(
-    allScreens: List<KindBottomBarDestination>,
+    allScreens: List<KindDestination>,
     onTabSelected: (KindDestination) -> Unit,
     currentScreen: KindDestination
 ) {
