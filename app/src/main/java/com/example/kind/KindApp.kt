@@ -15,6 +15,8 @@ import com.example.kind.navigation.*
 import com.example.kind.ui.theme.KindTheme
 import com.example.kind.view.AppNavBar
 import com.example.kind.view.HomeScreen
+import com.example.kind.view.PortfolioScreen
+import com.example.kind.view.SettingsScreen
 import com.example.kind.view.myPage.MyPageScreen
 import com.example.kind.view.setPortfolio.SetPortfolioScreen
 
@@ -64,7 +66,8 @@ fun KindNavHost(
             SetPortfolioScreen()
         }
         composable(route = MyPage.route) {
-            MyPageScreen()
+            MyPageScreen(onPortfolioClick = {navController.navigateSingleTopTo(MyPortfolio.route)},
+            onSettingsClick = {navController.navigateSingleTopTo(Settings.route)})
         }
     }
 }
