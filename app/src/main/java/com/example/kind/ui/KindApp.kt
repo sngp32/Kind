@@ -50,7 +50,7 @@ fun KindApp() {
 }
 
 @Composable
-fun KindNavHost(
+private fun KindNavHost(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
