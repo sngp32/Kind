@@ -1,174 +1,120 @@
 package com.example.kind.view
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.KeyboardBackspace
-import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
-import com.example.kind.ui.theme.kindGreen
-import com.example.kind.ui.theme.kindGreenDark
+import com.example.kind.ui.theme.KindTheme
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen() {
-    Scaffold(
-        topBar = {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(kindGreenDark),
-            ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.padding(top = 5.dp, start = 5.dp, bottom = 5.dp)
-                ) {
-                    Icon(
-                        Icons.Filled.KeyboardBackspace,
-                        contentDescription = null,
-                        modifier = Modifier
-                            .size(50.dp)
-                            .padding(end = 5.dp)
-                    )
+    Column() {
+        SettingsTopAppBar()
 
-                    //Spacer(Modifier.width(5.dp))
+        Column() {
+            Text(text = "Notifications", fontSize = 11.sp)
 
-                    Text(
-                        text = "Indstillinger",
-                        fontSize = 36.sp,
-                    )
-                }
+            Box(modifier = Modifier.selectable(
+                selected = false,
+                onClick = { /*TODO*/ }
+            )) {
+                ListItem(
+                    headlineText = { Text(text = "Email notifications") },
+                    trailingContent = { Switch(checked = false, onCheckedChange = {/*TODO*/}) }
+                )
+            }
+
+            Box(modifier = Modifier.selectable(
+                selected = false,
+                onClick = { /*TODO*/ }
+            )) {
+                ListItem(
+                    headlineText = { Text(text = "Push notifications") },
+                    trailingContent = { Switch(checked = false, onCheckedChange = {/*TODO*/}) }
+                )
+            }
+
+            Text(text = "Account Settings", fontSize = 11.sp)
+            Box(modifier = Modifier.selectable(
+                selected = false,
+                onClick = { /*TODO*/ }
+            )) {
+                ListItem(headlineText = { Text(text = "Name") })
+            }
+            Box(modifier = Modifier.selectable(
+                selected = false,
+                onClick = { /*TODO*/ }
+            )) {
+                ListItem(headlineText = { Text(text = "Email") })
+            }
+            Box(modifier = Modifier.selectable(
+                selected = false,
+                onClick = { /*TODO*/ }
+            )) {
+                ListItem(headlineText = { Text(text = "Password") })
+            }
+
+
+            Text(text = "Language", fontSize = 11.sp)
+
+
+            Box(modifier = Modifier.selectable(
+                selected = false,
+                onClick = { /*TODO*/ }
+            )) {
+                ListItem(headlineText = { Text(text = "English") }, leadingContent = {
+                    RadioButton(
+                        selected = true,
+                        onClick = { /*TODO*/ })
+                })
+            }
+
+            Box(modifier = Modifier.selectable(
+                selected = false,
+                onClick = { /*TODO*/ }
+            )) {
+                ListItem(headlineText = { Text(text = "Dansk") }, leadingContent = {
+                    RadioButton(
+                        selected = true,
+                        onClick = { /*TODO*/ })
+                })
+            }
+
+        }
+
+
+    }
+
+}
+
+
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+private fun SettingsTopAppBar() {
+    TopAppBar(
+        title = { Text(text = "Settings") },
+        navigationIcon = {
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(Icons.Filled.ArrowBack, contentDescription = null)
             }
         },
-        bottomBar = { }
+        colors = TopAppBarDefaults.topAppBarColors(),
     )
-    {_ -> //TODO utilize padding, suppressed up top
-        Box(
-            modifier = Modifier
-                .fillMaxHeight()
-                .fillMaxWidth()
-                .background(kindGreen)
-        ) {
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Box(
-                    modifier = Modifier
-                        .padding(all = 20.dp)
-                ) {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(Icons.Filled.Notifications, contentDescription = null)
-                            Text(text = "Notifikationer", fontSize = 28.sp)
-                        }
-
-                        Divider(color = Color.Black, thickness = 2.dp)
-
-                        SwitchItem(text = "E-mail meddelelser")
-                        SwitchItem(text = "Push meddelelser")
-
-                    }
-                }
-                Box(
-                    modifier = Modifier
-                        .padding(all = 20.dp)
-                ) {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(Icons.Filled.Person, contentDescription = null)
-                            Text(text = "Kontoindstillinger", fontSize = 28.sp)
-                        }
-
-                        Divider(color = Color.Black, thickness = 2.dp)
-
-                        UserSettingElement(text = "Navn", text2 = "Mikkel Pedersen")
-                        UserSettingElement(text = "E-Mail", text2 = "MikkelPedersen1431@gmail.com")
-                        UserSettingElement(text = "Password", text2 = "Skift Password")
-                        UserSettingElement(text = "Sprog", text2 = "Dansk")
-                    }
-                }
-
-                Box(
-                    modifier = Modifier
-                        .padding(all = 20.dp)
-                ) {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(Icons.Filled.Info, contentDescription = null)
-                            Text(text = "Om", fontSize = 28.sp)
-                        }
-
-                        Divider(color = Color.Black, thickness = 2.dp)
-
-                        var aboutField = remember { mutableStateOf("") }
-                        OutlinedTextField(
-                            value = aboutField.value,
-                            onValueChange = { input -> aboutField.value = input },
-                            label = { Text(text = "Om") },
-                            modifier = Modifier.fillMaxWidth(),
-                            colors = TextFieldDefaults.textFieldColors(
-                                containerColor = Color.White
-                            )
-                        )
-                    }
-                }
-
-            }
-        }
-    }
 }
 
-/*TODO get text2 from stored data, and functionality to change the information */
+@Preview
 @Composable
-
-fun UserSettingElement(text: String, text2:String) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically
-    )
-    {
-        Text(
-            text = text, fontSize = 20.sp, modifier = Modifier
-                .padding(start = 5.dp)
-        )
-
-        Spacer(Modifier.weight(1f))
-
-        Button(onClick = { /*TODO*/ }, modifier = Modifier.width(260.dp)) {
-            Text(
-                text = text2, fontSize = 12.sp
-            )
-        }
-
-    }
-
-}
-
-@Composable
-fun SwitchItem(text: String /*TODO onswitch parameter?*/) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically
-    )
-    {
-        Text(
-            text = text, fontSize = 20.sp, modifier = Modifier
-                .padding(start = 5.dp)
-        )
-
-        Spacer(Modifier.weight(1f))
-
-        var selection by remember { mutableStateOf(false) }
-        //TODO switch functionality
-        Switch(
-            checked = selection,
-            onCheckedChange = { selection = !selection })
+fun SettingsPreview() {
+    KindTheme {
+        SettingsScreen()
     }
 }
