@@ -78,5 +78,5 @@ fun KindNavHost(
     }
 }
 
-fun NavHostController.navigateSingleTopTo(route: String) =
+private fun NavHostController.navigateSingleTopTo(route: String) =
     this.navigate(route) { launchSingleTop = true }
