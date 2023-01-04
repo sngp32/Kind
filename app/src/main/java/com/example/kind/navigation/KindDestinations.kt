@@ -35,6 +35,18 @@ object MyPage : KindDestination {
     override val label = "My Page"
 }
 
+object MyPortfolio : KindDestination {
+    override val icon = Icons.Rounded.Person
+    override val route = "my_portfolio"
+    override val label = "My Portfolio"
+}
+
+object Settings : KindDestination {
+    override val icon = Icons.Rounded.Settings
+    override val route = "settings"
+    override val label = "Settings"
+}
+
 /**
  * Screens to be displayed in the bottom navigation bar
  */
