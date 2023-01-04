@@ -4,9 +4,6 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -16,12 +13,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.kind.navigation.MyPortfolio
+import com.example.kind.navigation.Settings
 import com.example.kind.ui.theme.kindGreen
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MyPageScreen() {
+fun MyPageScreen(
+    onPortfolioClick: () -> Unit = {},
+    onSettingsClick: () -> Unit = {}
+) {
     Scaffold(
         topBar = {
             Box(
@@ -50,18 +52,24 @@ fun MyPageScreen() {
         ) {
             Spacer(modifier = Modifier.weight(1.0f))
 
+            //TODO this data should maybe be injected into the method
+            // to avoid dependency on KindDestinations
+            val myPortfolioButton = MyPortfolio
             PageButton(
-                str = "Min Portfølje",
-                icon = Icons.Filled.Person,
-                onClick = { /* TODO portfolio nav */ }
+                str = myPortfolioButton.label,
+                icon = myPortfolioButton.icon,
+                onClick = onPortfolioClick
             )
 
             Spacer(modifier = Modifier.height(60.dp))
 
+            //TODO this data should maybe be injected into the method
+            // to avoid dependency on KindDestinations
+            val settingsButton = Settings
             PageButton(
-                str = "Indstillinger",
-                icon = Icons.Filled.Settings,
-                onClick = { /* TODO settings nav */ }
+                str = settingsButton.label,
+                icon = settingsButton.icon,
+                onClick = onSettingsClick
             )
 
             Spacer(modifier = Modifier.weight(1.0f))
