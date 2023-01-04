@@ -13,11 +13,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PortfolioScreen(navController: NavController, modifier: Modifier = Modifier) {
+fun PortfolioScreen(modifier: Modifier = Modifier, onSetPortfolioClick: () -> Unit) {
     Scaffold(
         bottomBar = { }
     ) {
@@ -77,7 +76,7 @@ fun PortfolioScreen(navController: NavController, modifier: Modifier = Modifier)
                             containerColor = Color(0xffC7FFC6),
                             contentColor = Color.Black
                         ),
-                        onClick = { navController.navigate("set_up_portfolio") }
+                        onClick = onSetPortfolioClick
                     ) {
                         Text(text = "Redigér portfølje")
                     }
