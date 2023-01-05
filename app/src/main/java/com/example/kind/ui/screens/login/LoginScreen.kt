@@ -15,10 +15,15 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.kind.ui.LoginActivity
 import com.example.kind.ui.theme.kindGreen
 
+val loginTest = LoginActivity
+
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(navController: NavController) {
+fun LoginScreen() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -53,7 +58,7 @@ fun LoginScreen(navController: NavController) {
                 var textPassword = remember { mutableStateOf("") }
                 InputField(text = textPassword, string = "Password")
 
-                Button({ navController.navigate("home") }, "LOGIN")
+                Button({}, "LOGIN")
                 ClickableText(
                     text = AnnotatedString("Forgot your password?"),
                     onClick = {}
@@ -70,7 +75,7 @@ fun LoginScreen(navController: NavController) {
             verticalArrangement = Arrangement.Bottom
         ) {
             Text(text = "Don't have an account?")
-            Button({ navController.navigate("signup") }, "SIGN UP")
+            Button({ loginTest}, "SIGN UP")
         }
     }
 }
