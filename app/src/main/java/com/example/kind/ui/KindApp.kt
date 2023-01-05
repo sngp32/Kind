@@ -19,6 +19,7 @@ import com.example.kind.ui.screens.portfolio.PortfolioScreen
 import com.example.kind.view.SettingsScreen
 import com.example.kind.ui.screens.myPage.MyPageScreen
 import com.example.kind.ui.screens.setPortfolio.SetPortfolioScreen
+import com.example.kind.view.LoginScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -56,9 +57,12 @@ fun KindNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Home.route,
+        startDestination = Login.route,
         modifier = modifier
     ) {
+        composable(route = Login.route) {
+            LoginScreen()
+        }
         composable(route = Home.route) {
             HomeScreen()
         }

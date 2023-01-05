@@ -1,10 +1,7 @@
 package com.example.kind.ui.components.navigation
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Favorite
-import androidx.compose.material.icons.rounded.Home
-import androidx.compose.material.icons.rounded.Person
-import androidx.compose.material.icons.rounded.Settings
+import androidx.compose.material.icons.rounded.*
 import androidx.compose.ui.graphics.vector.ImageVector
 
 interface KindDestination {
@@ -21,6 +18,12 @@ object Home : KindDestination {
     override val icon = Icons.Rounded.Home
     override val route = "home"
     override val label = "Home"
+}
+
+object Login : KindDestination {
+    override val icon = Icons.Rounded.Login
+    override val route = "login"
+    override val label = "Login"
 }
 
 object SetPortfolio : KindDestination {

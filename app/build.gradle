@@ -51,9 +51,9 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:31.1.1')
 
     // Firebase products
+    implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-firestore-ktx'
-    implementation 'com.google.firebase:firebase-analytics-ktx'
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation "androidx.compose.ui:ui:$compose_version"
@@ -72,6 +72,7 @@ dependencies {
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
+    implementation 'androidx.appcompat:appcompat:1.5.1'
 
     //i love gradle
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20"
