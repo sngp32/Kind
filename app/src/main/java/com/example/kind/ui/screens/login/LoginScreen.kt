@@ -15,13 +15,16 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.kind.ui.FirebaseSource
+import com.example.kind.ui.components.navigation.Signup
 import com.example.kind.ui.theme.kindGreen
 
 val db = FirebaseSource()
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen() {
+fun LoginScreen(
+    onSignUpClick: () -> Unit = {}
+) {
     var textEmail = remember { mutableStateOf("") }
     var textPassword = remember { mutableStateOf("") }
     Column(
@@ -73,7 +76,8 @@ fun LoginScreen() {
             verticalArrangement = Arrangement.Bottom
         ) {
             Text(text = "Don't have an account?")
-            Button({db.userSignup(textEmail.value, textPassword.value)}, "SIGN UP")
+            val signUpButton = Signup
+            Button(navigation = onSignUpClick, text = signUpButton.label)
         }
     }
 }
