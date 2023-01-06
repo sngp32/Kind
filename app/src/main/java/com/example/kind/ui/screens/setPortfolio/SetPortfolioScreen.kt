@@ -7,8 +7,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Accessibility
-import androidx.compose.material.icons.filled.Healing
-import androidx.compose.material.icons.filled.Nature
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -54,14 +52,6 @@ fun SetPortfolioScreen(modifier: Modifier = Modifier, charities: List<Charity>, 
                             onAddCharityClick = { onAddCharityClick(charity.id) }
                         )
                     }
-                }
-                item {
-                    CharityElement(
-                        modifier,
-                        title = "MILJØ",
-                        info = "Støt udsatte med sundheds problemer",
-                        icon = Icons.Filled.Nature
-                    )
                 }
                 item {
                     Spacer(modifier = Modifier.height(20.dp))
