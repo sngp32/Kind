@@ -22,7 +22,7 @@ import com.example.kind.ui.screens.settings.SettingsScreen
 import com.example.kind.ui.screens.myPage.MyPageScreen
 import com.example.kind.ui.screens.setPortfolio.SetPortfolioScreen
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.kind.ui.screens.signup.SignupScreen
+import com.example.kind.ui.screens.signUp.SignUpScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -44,7 +44,8 @@ fun KindApp(viewModel: MainViewModel = viewModel()) {
                     onTabSelected = { newScreen ->
                         navController.navigateSingleTopTo(newScreen.route)
                     },
-                    currentScreen = currentScreen
+                    currentScreen = currentScreen,
+                    isSignedIn = viewModel.isSignedIn.value
                 )
             }
         ) { innerPadding ->
@@ -64,10 +65,15 @@ private fun KindNavHost(
     viewModel: MainViewModel
 ) {
     val charities by viewModel.charities
+    val startDestination: String = if (viewModel.isSignedIn.value) {
+        Home.route
+    } else {
+        Login.route
+    }
 
     NavHost(
         navController = navController,
-        startDestination = Login.route,
+        startDestination = startDestination,
         modifier = modifier
     ) {
         composable(route = Login.route) {
@@ -79,7 +85,8 @@ private fun KindNavHost(
         composable(route = SetPortfolio.route) {
             SetPortfolioScreen(
                 charities = charities,
-                onAddCharityClick = { charityId -> viewModel.subscribeToCharity(charityId) })
+                onAddCharityClick = { charityId -> viewModel.subscribeToCharity(charityId) }
+            )
         }
         composable(route = MyPage.route) {
             MyPageScreen(onPortfolioClick = { navController.navigateSingleTopTo(MyPortfolio.route) },
@@ -92,7 +99,7 @@ private fun KindNavHost(
             PortfolioScreen(onSetPortfolioClick = { navController.navigateSingleTopTo(SetPortfolio.route) })
         }
         composable(route = Signup.route) {
-            SignupScreen(onSignUpClick = { signUpData -> viewModel.signUp(signUpData) },
+            SignUpScreen(onSignUpClick = { signUpData -> viewModel.signUp(signUpData) },
             onLoginClick = { navController.navigateSingleTopTo(Login.route)})
         }
     }

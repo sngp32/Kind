@@ -21,6 +21,17 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _charities = mutableStateOf(emptyList<Charity>())
     val charities: State<List<Charity>> = _charities
 
+    private var _isSignedIn = mutableStateOf(false)
+    val isSignedIn: State<Boolean> = _isSignedIn
+
+    fun signIn() {
+        _isSignedIn.value = false
+    }
+
+    fun signOut() {
+
+    }
+
     fun subscribeToCharity(charityId: Long) {
         val charity = getCharityById(charityId)
         charity?.let { kindRepository.subscribeToCharity(it) } //TODO idk if let is appropriate here

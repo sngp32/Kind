@@ -1,4 +1,4 @@
-package com.example.kind.ui.screens.signup
+package com.example.kind.ui.screens.signUp
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.sp
 import com.example.kind.ui.theme.kindGreen
 
 @Composable
-fun SignupScreen(
+fun SignUpScreen(
     onSignUpClick: (List<String>) -> Unit,
     onLoginClick: () -> Unit
 ) {
@@ -29,7 +29,7 @@ fun SignupScreen(
             verticalArrangement = Arrangement.Top
         ) {
             Text(
-                text = "SIGNUP",
+                text = "SIGN UP",
                 fontSize = 48.sp,
                 modifier = Modifier.padding(start = 20.dp, top = 50.dp)
             )

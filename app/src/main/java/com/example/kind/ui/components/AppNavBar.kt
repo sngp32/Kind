@@ -13,8 +13,11 @@ import com.example.kind.ui.theme.KindTheme
 fun AppNavBar(
     allScreens: List<KindDestination>,
     onTabSelected: (KindDestination) -> Unit,
-    currentScreen: KindDestination
+    currentScreen: KindDestination,
+    isSignedIn: Boolean,
 ) {
+    if (!isSignedIn) return
+
     NavigationBar(
         containerColor = BottomAppBarDefaults.containerColor, //TODO MaterialTheme
         contentColor = contentColorFor(BottomAppBarDefaults.containerColor), //TODO MaterialTheme
