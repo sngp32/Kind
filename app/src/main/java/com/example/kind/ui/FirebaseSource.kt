@@ -8,7 +8,7 @@ class FirebaseSource {
     }
 
     fun userSignup(){
-        AuthHandler.newSignup("BigChunk@gmail.com", "1234567890")
+        AuthHandler.newSignup("BigChunk2@gmail.com", "1234567890")
     }
 
 }

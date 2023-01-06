@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class LoginActivity : Activity() {
@@ -29,6 +30,15 @@ class LoginActivity : Activity() {
         }
     }
 
+    private fun addNewUserData(email: String, user: FirebaseUser){
+        auth = Firebase.auth
+        val db = Firebase.firestore
+
+        val charities = ""
+
+        db.collection("users").document(user.uid).set(charities)
+    }
+
     fun newSignup(email: String, password: String) {
         auth = Firebase.auth
         print("wtf")
@@ -38,6 +48,10 @@ class LoginActivity : Activity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "createUserWithEmail:success")
                     val user = auth.currentUser
+
+                    if(user != null){
+                        addNewUserData(email, user)
+                    }
 
                     // Update UI State
                     // updateUI(user)
