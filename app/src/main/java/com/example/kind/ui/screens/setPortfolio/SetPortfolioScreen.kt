@@ -1,5 +1,6 @@
 package com.example.kind.ui.screens.setPortfolio
 
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -7,6 +8,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Accessibility
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -14,13 +16,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.kind.data.Charity
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SetPortfolioScreen(modifier: Modifier = Modifier, charities: List<Charity>, onAddCharityClick: (Long) -> Unit) {
+fun SetPortfolioScreen(
+    modifier: Modifier = Modifier,
+    charities: List<Charity>,
+    onAddCharityClick: (Long) -> Unit
+) {
     Scaffold(
         bottomBar = { }
     ) {
@@ -64,21 +71,29 @@ fun SetPortfolioScreen(modifier: Modifier = Modifier, charities: List<Charity>, 
 
 @Composable
 private fun Header() {
-    Text(text = "Byg din portfølje", fontSize = 24.sp)
+    Column {
+        Text(text = "Byg din portfølje", fontSize = 24.sp)
 
-    Spacer(modifier = Modifier.height(14.dp))
+        Spacer(modifier = Modifier.height(14.dp))
 
-    Text(
-        text = "Vælg så mange temaer som du har lyst til.",
-        fontSize = 16.sp,
-        color = Color(0xff858585)
-    )
-    Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Vælg så mange temaer som du har lyst til.",
+            fontSize = 16.sp,
+            color = Color(0xff858585)
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+    }
 }
 
 
 @Composable
-private fun CharityElement(modifier: Modifier, title: String, info: String, icon: ImageVector, onAddCharityClick: () -> Unit) {
+private fun CharityElement(
+    modifier: Modifier = Modifier,
+    title: String,
+    info: String,
+    icon: ImageVector,
+    onAddCharityClick: () -> Unit
+) {
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -121,7 +136,7 @@ private fun CharityElement(modifier: Modifier, title: String, info: String, icon
             ) {
                 Button(
                     text = "Tilføj tema",
-                    onClick = onAddCharityClick ,
+                    onClick = onAddCharityClick,
                     backgroundColor = Color(0xffC7FFC6),
                     contentColor = Color.Black
                 )
@@ -155,4 +170,61 @@ private fun Button(text: String, onClick: () -> Unit, backgroundColor: Color, co
     ) {
         Text(text = text, fontSize = 14.sp)
     }
+}
+
+
+
+@Preview
+@Composable
+private fun HeaderLightPreview() {
+    Header()
+}
+
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun HeaderDarkPreview() {
+    Header()
+}
+
+@Preview
+@Composable
+private fun CharityCardLightPreview() {
+    CharityElement(
+        title = "CharityCardPreviewLight",
+        info = "Charity card preview light info",
+        icon = Icons.Filled.Favorite
+    ) { }
+}
+
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun CharityCardDarkPreview() {
+    CharityElement(
+        title = "CharityCardPreviewDark",
+        info = "Charity card preview Dark info",
+        icon = Icons.Filled.Favorite
+    ) { }
+}
+
+@Preview
+@Composable
+private fun ButtonPreviewLight() {
+    Button(
+        text = "ButtonPreviewLight",
+        onClick = {},
+        backgroundColor = Color(0xffffffff),
+        contentColor = Color(0xff37A434)
+    )
+}
+
+
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun ButtonPreviewDark() {
+    Button(
+        text = "ButtonPreviewDark",
+        onClick = {},
+        backgroundColor = Color(0xffffffff),
+        contentColor = Color(0xff37A434)
+    )
 }
