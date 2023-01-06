@@ -12,6 +12,10 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.sql.Timestamp
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class LoginActivity : Activity() {
     private lateinit var auth: FirebaseAuth
@@ -30,13 +34,26 @@ class LoginActivity : Activity() {
         }
     }
 
+    data class newUserData(
+        val email: String? = null,
+        val registrationDate: String? = null,
+        val subbedCharities: List<String>? = null,
+        val totalDonations: Int? = null
+    )
+
+
     private fun addNewUserData(email: String, user: FirebaseUser){
         auth = Firebase.auth
         val db = Firebase.firestore
 
-        val charities = ""
+        val userData = newUserData(
+            email,
+            DateTimeFormatter.ISO_INSTANT.format(Instant.now()),
+            null,
+            0
+        )
 
-        db.collection("users").document(user.uid).set(charities)
+        db.collection("users").document(user.uid).set(userData)
     }
 
     fun newSignup(email: String, password: String) {
