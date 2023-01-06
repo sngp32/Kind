@@ -1,4 +1,4 @@
-package com.example.kind
+package com.example.kind.ui
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -13,10 +13,10 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.kind.ui.components.navigation.*
 import com.example.kind.ui.theme.KindTheme
-import com.example.kind.view.AppNavBar
+import com.example.kind.ui.components.AppNavBar
 import com.example.kind.ui.screens.home.HomeScreen
 import com.example.kind.ui.screens.portfolio.PortfolioScreen
-import com.example.kind.view.SettingsScreen
+import com.example.kind.ui.screens.settings.SettingsScreen
 import com.example.kind.ui.screens.myPage.MyPageScreen
 import com.example.kind.ui.screens.setPortfolio.SetPortfolioScreen
 import com.example.kind.view.LoginScreen
@@ -51,7 +51,7 @@ fun KindApp() {
 }
 
 @Composable
-fun KindNavHost(
+private fun KindNavHost(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -74,7 +74,7 @@ fun KindNavHost(
             onSettingsClick = {navController.navigateSingleTopTo(Settings.route)})
         }
         composable(route = Settings.route) {
-            SettingsScreen()
+            SettingsScreen(modifier = modifier, onBackClick = { navController.popBackStack() })
         }
         composable(route = MyPortfolio.route) {
             PortfolioScreen(onSetPortfolioClick = {navController.navigateSingleTopTo(SetPortfolio.route)})
@@ -82,5 +82,5 @@ fun KindNavHost(
     }
 }
 
-fun NavHostController.navigateSingleTopTo(route: String) =
+private fun NavHostController.navigateSingleTopTo(route: String) =
     this.navigate(route) { launchSingleTop = true }

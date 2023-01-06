@@ -1,4 +1,4 @@
-package com.example.kind.view
+package com.example.kind.ui.components
 
 import android.content.res.Configuration
 import androidx.compose.material3.*
