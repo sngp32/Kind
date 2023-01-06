@@ -35,6 +35,7 @@ class LoginActivity : Activity() {
     }
 
     data class newUserData(
+        val name: String? = null,
         val email: String? = null,
         val registrationDate: String? = null,
         val subbedCharities: List<String>? = null,
@@ -47,6 +48,7 @@ class LoginActivity : Activity() {
         val db = Firebase.firestore
 
         val userData = newUserData(
+            "TEST",
             email,
             DateTimeFormatter.ISO_INSTANT.format(Instant.now()),
             null,
