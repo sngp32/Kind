@@ -26,6 +26,12 @@ object Login : KindDestination {
     override val label = "Login"
 }
 
+object Signup : KindDestination {
+    override val icon = Icons.Rounded.NoAccounts
+    override val route = "signup"
+    override val label = "Signup"
+}
+
 object SetPortfolio : KindDestination {
     override val icon = Icons.Rounded.Favorite
     override val route = "set_portFolio"
