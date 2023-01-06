@@ -56,7 +56,7 @@ fun LoginScreen() {
                 Spacer(modifier = Modifier.height(10.dp))
                 InputField(text = textPassword, string = "Password")
 
-                Button({db.userLogin()}, "LOGIN")
+                Button({db.userLogin(textEmail.toString(), textPassword.toString())}, "LOGIN")
                 ClickableText(
                     text = AnnotatedString("Forgot your password?"),
                     onClick = {}
@@ -73,7 +73,7 @@ fun LoginScreen() {
             verticalArrangement = Arrangement.Bottom
         ) {
             Text(text = "Don't have an account?")
-            Button({db.userSignup()}, "SIGN UP")
+            Button({db.userSignup(textEmail.toString(), textPassword.toString())}, "SIGN UP")
         }
     }
 }
