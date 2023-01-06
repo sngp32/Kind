@@ -73,12 +73,15 @@ class LoginActivity : Activity() {
                     // Update UI State
                     // updateUI(user)
                 } else {
+                    /*
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
                     Toast.makeText(
                         baseContext, "Authentication failed.",
                         Toast.LENGTH_SHORT
                     ).show()
+
+                     */
 
                     // Update UI State
                     // updateUI(null)
@@ -98,12 +101,15 @@ class LoginActivity : Activity() {
                     // Update UI State
                     // updateUI(user)
                 } else {
+                    /*
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithEmail:failure", task.exception)
                     Toast.makeText(
                         baseContext, "Authentication failed.",
                         Toast.LENGTH_SHORT
                     ).show()
+
+                     */
 
                     // Update UI State
                     // updateUI(null)

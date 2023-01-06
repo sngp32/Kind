@@ -4,11 +4,11 @@ class FirebaseSource {
     val AuthHandler = LoginActivity()
 
     fun userLogin(email: String, password: String){
-        AuthHandler.signIn("BigChunk@gmail.com", "1234567890")
+        AuthHandler.signIn(email, password)
     }
 
     fun userSignup(email: String, password: String){
-        AuthHandler.newSignup("BigChunk3@gmail.com", "1234567890")
+        AuthHandler.newSignup(email, password)
     }
 
 }
