@@ -31,6 +31,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         return _charities.value.find { it.id == charityId }
     }
 
+    fun signUp(data: List<String>) {
+        //TODO data validation
+        println(data)
+    }
+
     fun load() = effect {
         _charities.value = kindRepository.allCharities()
     }
