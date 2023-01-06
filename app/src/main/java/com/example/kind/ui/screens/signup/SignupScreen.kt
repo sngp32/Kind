@@ -1,7 +1,5 @@
 package com.example.kind.ui.screens.signup
 
-import android.content.ContentValues.TAG
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -11,15 +9,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.example.kind.ui.theme.kindGreen
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
 @Composable
-fun SignupScreen(navController: NavController) {
+fun SignupScreen(
+    onSignUpClick: (List<String>) -> Unit,
+    onLoginClick: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -59,20 +55,17 @@ fun SignupScreen(navController: NavController) {
                 Spacer(modifier = Modifier.height(10.dp))
                 InputField(inputText = textPassword, fieldText = "Password")
 
-                Button(navigation = {/* TODO */}, text = "SIGNUP")
+                Button(navigation = {
+                    onSignUpClick(
+                        listOf(
+                            textName.value,
+                            textEmail.value,
+                            textPassword.value
+                        )
+                    )
+                }, text = "SIGNUP")
+                Button(navigation = onLoginClick, text = "LOGIN")
             }
-        }
-        Column(
-            modifier = Modifier
-                .fillMaxHeight()
-                .fillMaxWidth()
-                .background(Color.White)
-                .padding(bottom = 20.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Bottom
-        ) {
-            Text(text = "Already have an account?")
-            Button(navigation = {navController.navigate("login")}, text = "LOGIN")
         }
     }
 }

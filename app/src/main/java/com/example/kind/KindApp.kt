@@ -22,6 +22,7 @@ import com.example.kind.ui.screens.settings.SettingsScreen
 import com.example.kind.ui.screens.myPage.MyPageScreen
 import com.example.kind.ui.screens.setPortfolio.SetPortfolioScreen
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.kind.ui.screens.signup.SignupScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -76,7 +77,9 @@ private fun KindNavHost(
             HomeScreen()
         }
         composable(route = SetPortfolio.route) {
-            SetPortfolioScreen(charities = charities, onAddCharityClick = {charityId -> viewModel.subscribeToCharity(charityId)})
+            SetPortfolioScreen(
+                charities = charities,
+                onAddCharityClick = { charityId -> viewModel.subscribeToCharity(charityId) })
         }
         composable(route = MyPage.route) {
             MyPageScreen(onPortfolioClick = { navController.navigateSingleTopTo(MyPortfolio.route) },
@@ -86,7 +89,11 @@ private fun KindNavHost(
             SettingsScreen(modifier = modifier, onBackClick = { navController.popBackStack() })
         }
         composable(route = MyPortfolio.route) {
-            PortfolioScreen(onSetPortfolioClick = { navController.navigateSingleTopTo(SetPortfolio.route) }, )
+            PortfolioScreen(onSetPortfolioClick = { navController.navigateSingleTopTo(SetPortfolio.route) })
+        }
+        composable(route = Signup.route) {
+            SignupScreen(onSignUpClick = { signUpData -> viewModel.signUp(signUpData) },
+            onLoginClick = { navController.navigateSingleTopTo(Login.route)})
         }
     }
 }
