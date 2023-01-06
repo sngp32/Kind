@@ -45,7 +45,7 @@ fun SettingsScreen(modifier: Modifier = Modifier, onBackClick: () -> Unit) {
 @Composable
 private fun RadioButton(headlineText: String, onRadioButtonClick: () -> Unit) {
     Box(modifier = Modifier.selectable(
-        selected = false,
+        selected = false, //TODO should be switched whenever another radio button is selected
         onClick = { onRadioButtonClick() }
     )) {
         ListItem(headlineText = { Text(text = headlineText) }, leadingContent = {
@@ -112,7 +112,7 @@ private fun SettingsTopAppBar(onBackClick: () -> Unit) {
         //TODO Move title out of function so it becomes stateless
         title = { Text(text = "Settings") },
         navigationIcon = {
-            IconButton(onClick = { onBackClick() }) {
+            IconButton(onClick = onBackClick) {
                 Icon(Icons.Filled.ArrowBack, contentDescription = null)
             }
         },

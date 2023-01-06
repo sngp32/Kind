@@ -1,4 +1,4 @@
-package com.example.kind.ui
+package com.example.kind
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -11,7 +11,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.kind.MainViewModel
 import com.example.kind.ui.components.navigation.*
 import com.example.kind.ui.theme.KindTheme
 import com.example.kind.ui.components.AppNavBar
@@ -37,7 +36,7 @@ fun KindApp(viewModel: MainViewModel = viewModel()) {
             kindBottomBarScreens.find { it.route == currentDestination?.route } ?: Home
 
         Scaffold(
-            topBar = {},
+            topBar = { },
             bottomBar = {
                 AppNavBar(
                     allScreens = kindBottomBarScreens,
