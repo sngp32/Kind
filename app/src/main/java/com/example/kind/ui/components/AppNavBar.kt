@@ -33,11 +33,28 @@ fun AppNavBar(
     }
 }
 
-@Preview("Bar contents")
-@Preview("Bar contents (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview
 @Composable
-fun PreviewAppNavBar() {
+fun PreviewAppNavBarLight() {
     KindTheme {
-        AppNavBar(allScreens = kindBottomBarScreens, onTabSelected = {}, currentScreen = Home)
+        AppNavBar(
+            allScreens = kindBottomBarScreens,
+            onTabSelected = { },
+            currentScreen = Home,
+            isSignedIn = true
+        )
+    }
+}
+
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun PreviewAppNavBarDark() {
+    KindTheme {
+        AppNavBar(
+            allScreens = kindBottomBarScreens,
+            onTabSelected = { },
+            currentScreen = Home,
+            isSignedIn = true
+        )
     }
 }
