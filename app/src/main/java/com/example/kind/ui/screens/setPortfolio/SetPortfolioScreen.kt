@@ -18,10 +18,11 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.kind.data.Charity
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SetPortfolioScreen(modifier: Modifier = Modifier) {
+fun SetPortfolioScreen(modifier: Modifier = Modifier, charities: List<Charity>, onAddCharityClick: (Long) -> Unit) {
     Scaffold(
         bottomBar = { }
     ) {
@@ -43,22 +44,16 @@ fun SetPortfolioScreen(modifier: Modifier = Modifier) {
                     Header()
                 }
 
-                //Hardcoded, since we do not have data for these charities yet
-                item {
-                    CharityElement(
-                        modifier,
-                        title = "SOCIALT UDSATTE",
-                        info = "Støt de hjemløse og bostederne i København",
-                        icon = Icons.Filled.Accessibility
-                    )
-                }
-                item {
-                    CharityElement(
-                        modifier,
-                        title = "SUNDHED",
-                        info = "Støt udsatte med sundheds problemer",
-                        icon = Icons.Filled.Healing
-                    )
+                charities.forEach { charity ->
+                    item {
+                        CharityElement(
+                            modifier,
+                            title = charity.name,
+                            info = charity.description,
+                            icon = Icons.Filled.Accessibility,
+                            onAddCharityClick = { onAddCharityClick(charity.id) }
+                        )
+                    }
                 }
                 item {
                     CharityElement(
@@ -93,7 +88,7 @@ private fun Header() {
 
 
 @Composable
-private fun CharityElement(modifier: Modifier, title: String, info: String, icon: ImageVector) {
+private fun CharityElement(modifier: Modifier, title: String, info: String, icon: ImageVector, onAddCharityClick: () -> Unit) {
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -136,7 +131,7 @@ private fun CharityElement(modifier: Modifier, title: String, info: String, icon
             ) {
                 Button(
                     text = "Tilføj tema",
-                    onClick = { /*TODO*/ },
+                    onClick = onAddCharityClick ,
                     backgroundColor = Color(0xffC7FFC6),
                     contentColor = Color.Black
                 )

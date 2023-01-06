@@ -62,6 +62,8 @@ private fun KindNavHost(
     modifier: Modifier = Modifier,
     viewModel: MainViewModel
 ) {
+    val charities by viewModel.charities
+
     NavHost(
         navController = navController,
         startDestination = Login.route,
@@ -74,7 +76,7 @@ private fun KindNavHost(
             HomeScreen()
         }
         composable(route = SetPortfolio.route) {
-            SetPortfolioScreen()
+            SetPortfolioScreen(charities = charities, onAddCharityClick = {charityId -> viewModel.subscribeToCharity(charityId)})
         }
         composable(route = MyPage.route) {
             MyPageScreen(onPortfolioClick = { navController.navigateSingleTopTo(MyPortfolio.route) },
