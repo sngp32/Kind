@@ -15,11 +15,11 @@ import com.example.kind.ui.components.navigation.*
 import com.example.kind.ui.theme.KindTheme
 import com.example.kind.ui.components.AppNavBar
 import com.example.kind.ui.screens.home.HomeScreen
+import com.example.kind.ui.screens.login.LoginScreen
 import com.example.kind.ui.screens.portfolio.PortfolioScreen
 import com.example.kind.ui.screens.settings.SettingsScreen
 import com.example.kind.ui.screens.myPage.MyPageScreen
 import com.example.kind.ui.screens.setPortfolio.SetPortfolioScreen
-import com.example.kind.view.LoginScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
