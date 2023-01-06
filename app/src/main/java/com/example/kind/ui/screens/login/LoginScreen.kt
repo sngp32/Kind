@@ -14,16 +14,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import com.example.kind.ui.LoginActivity
+import com.example.kind.ui.FirebaseSource
 import com.example.kind.ui.theme.kindGreen
 
-val loginTest = LoginActivity
-
+val db = FirebaseSource()
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen() {
+    var textEmail = remember { mutableStateOf("") }
+    var textPassword = remember { mutableStateOf("") }
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -52,13 +52,11 @@ fun LoginScreen() {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                var textEmail = remember { mutableStateOf("") }
                 InputField(text = textEmail, string = "E-mail")
                 Spacer(modifier = Modifier.height(10.dp))
-                var textPassword = remember { mutableStateOf("") }
                 InputField(text = textPassword, string = "Password")
 
-                Button({}, "LOGIN")
+                Button({db.userLogin()}, "LOGIN")
                 ClickableText(
                     text = AnnotatedString("Forgot your password?"),
                     onClick = {}
@@ -75,7 +73,7 @@ fun LoginScreen() {
             verticalArrangement = Arrangement.Bottom
         ) {
             Text(text = "Don't have an account?")
-            Button({ loginTest}, "SIGN UP")
+            Button({db.userSignup()}, "SIGN UP")
         }
     }
 }

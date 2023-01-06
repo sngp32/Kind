@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.fragment.app.FragmentActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -28,7 +29,9 @@ class LoginActivity : Activity() {
         }
     }
 
-    private fun newSignup(email: String, password: String) {
+    fun newSignup(email: String, password: String) {
+        auth = Firebase.auth
+        print("wtf")
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -52,7 +55,8 @@ class LoginActivity : Activity() {
             }
     }
 
-    private fun signIn(email: String, password: String) {
+    fun signIn(email: String, password: String) {
+        auth = Firebase.auth
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -76,7 +80,7 @@ class LoginActivity : Activity() {
             }
     }
 
-    private fun sendEmailVerifification(){
+    fun sendEmailVerifification(){
         val user = auth.currentUser!!
         user.sendEmailVerification()
             .addOnCompleteListener(this) { task ->
@@ -84,7 +88,7 @@ class LoginActivity : Activity() {
             }
     }
 
-    private fun updateUI(user: FirebaseUser?){
+    fun updateUI(user: FirebaseUser?){
 
     }
 
