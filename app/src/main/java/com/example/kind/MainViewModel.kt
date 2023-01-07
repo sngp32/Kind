@@ -29,7 +29,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun signOut() {
-
+        _isSignedIn.value = false
     }
 
     fun subscribeToCharity(charityId: Long) {
