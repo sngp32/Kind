@@ -20,6 +20,7 @@ fun SignUpScreen(
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
+            .background(kindGreen)
     ) {
         Column(
             modifier = Modifier
