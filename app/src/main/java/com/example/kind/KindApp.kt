@@ -76,7 +76,10 @@ private fun KindNavHost(
         modifier = modifier
     ) {
         composable(route = Login.route) {
-            LoginScreen(onSignUpClick = { navController.navigateSingleTopTo(Signup.route) })
+            LoginScreen(onLoginClick = {
+                navController.navigateSingleTopTo(Home.route)
+                viewModel.signIn()
+            }, onSignUpClick = { navController.navigateSingleTopTo(Signup.route) })
         }
         composable(route = Home.route) {
             HomeScreen()

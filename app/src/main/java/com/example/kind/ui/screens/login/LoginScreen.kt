@@ -13,16 +13,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.kind.ui.FirebaseSource
 import com.example.kind.ui.components.navigation.Signup
 import com.example.kind.ui.theme.kindGreen
 
-val db = FirebaseSource()
-
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
-    onSignUpClick: () -> Unit = {}
+    onLoginClick: () -> Unit,
+    onSignUpClick: () -> Unit
 ) {
     var textEmail = remember { mutableStateOf("") }
     var textPassword = remember { mutableStateOf("") }
@@ -64,7 +61,7 @@ fun LoginScreen(
                     label = "Password",
                     onValueChange = { input -> textPassword.value = input })
 
-                Button({db.userLogin(textEmail.value, textPassword.value)}, "LOGIN")
+                Button(onLoginClick, "LOGIN")
                 ClickableText(
                     text = AnnotatedString("Forgot your password?"),
                     onClick = {}
