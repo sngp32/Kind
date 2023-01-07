@@ -25,7 +25,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val isSignedIn: State<Boolean> = _isSignedIn
 
     fun signIn() {
-        _isSignedIn.value = false
+        _isSignedIn.value = true
     }
 
     fun signOut() {
