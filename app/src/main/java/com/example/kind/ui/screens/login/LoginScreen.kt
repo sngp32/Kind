@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -55,9 +54,15 @@ fun LoginScreen(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                InputField(text = textEmail, string = "E-mail")
+                InputField(
+                    value = textEmail.value,
+                    label = "E-mail",
+                    onValueChange = { input -> textEmail.value = input })
                 Spacer(modifier = Modifier.height(10.dp))
-                InputField(text = textPassword, string = "Password")
+                InputField(
+                    value = textPassword.value,
+                    label = "Password",
+                    onValueChange = { input -> textPassword.value = input })
 
                 Button({db.userLogin(textEmail.value, textPassword.value)}, "LOGIN")
                 ClickableText(
@@ -83,15 +88,19 @@ fun LoginScreen(
 }
 
 /**
- * Stateless text field for input with [text] as the input and [string] to be displayed
+ * Stateless text field for input with [value] as the input and [label] to be displayed
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun InputField(text: MutableState<String>, string: String) {
+private fun InputField(
+    value: String,
+    label: String,
+    onValueChange: (String) -> Unit
+) {
     OutlinedTextField(
-        value = text.value,
-        onValueChange = { input -> text.value = input },
-        label = { Text(text = string) },
+        value = value,
+        onValueChange = onValueChange,
+        label = { Text(text = label) },
         modifier = Modifier.width(300.dp),
         colors = TextFieldDefaults.textFieldColors(
             containerColor = Color.White
