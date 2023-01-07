@@ -23,7 +23,7 @@ fun AppNavBar(
     currentScreen: KindDestination,
     isSignedIn: Boolean,
 ) {
-    if (!isSignedIn) return
+    // if (!isSignedIn) return
 
     NavigationBar(
         containerColor = BottomAppBarDefaults.containerColor, //TODO MaterialTheme
