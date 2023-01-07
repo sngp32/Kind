@@ -76,7 +76,10 @@ private fun KindNavHost(
         modifier = modifier
     ) {
         composable(route = Login.route) {
-            LoginScreen(onSignUpClick = { navController.navigateSingleTopTo(Signup.route) })
+            LoginScreen(onLoginClick = {
+                navController.navigateSingleTopTo(Home.route)
+                viewModel.signIn()
+            }, onSignUpClick = { navController.navigateSingleTopTo(Signup.route) })
         }
         composable(route = Home.route) {
             HomeScreen()
@@ -98,8 +101,10 @@ private fun KindNavHost(
             PortfolioScreen(onSetPortfolioClick = { navController.navigateSingleTopTo(SetPortfolio.route) })
         }
         composable(route = Signup.route) {
-            SignUpScreen(onSignUpClick = { signUpData -> viewModel.signUp(signUpData) },
-            onLoginClick = { navController.navigateSingleTopTo(Login.route)})
+            SignUpScreen(
+                onSignUpClick = { signUpData -> viewModel.signUp(signUpData) },
+                onLoginClick = { navController.navigateSingleTopTo(Login.route) }
+            )
         }
     }
 }

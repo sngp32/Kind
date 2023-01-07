@@ -1,29 +1,28 @@
 package com.example.kind.ui.screens.login
 
+import android.annotation.SuppressLint
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.kind.ui.FirebaseSource
 import com.example.kind.ui.components.navigation.Signup
 import com.example.kind.ui.theme.kindGreen
 
-val db = FirebaseSource()
-
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
-    onSignUpClick: () -> Unit = {}
+    onLoginClick: () -> Unit,
+    onSignUpClick: () -> Unit
 ) {
     var textEmail = remember { mutableStateOf("") }
     var textPassword = remember { mutableStateOf("") }
@@ -55,14 +54,20 @@ fun LoginScreen(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                InputField(text = textEmail, string = "E-mail")
+                InputField(
+                    value = textEmail.value,
+                    label = "E-mail",
+                    onValueChange = { input -> textEmail.value = input })
                 Spacer(modifier = Modifier.height(10.dp))
-                InputField(text = textPassword, string = "Password")
+                InputField(
+                    value = textPassword.value,
+                    label = "Password",
+                    onValueChange = { input -> textPassword.value = input })
 
-                Button({db.userLogin(textEmail.value, textPassword.value)}, "LOGIN")
+                Button(onLoginClick, "LOGIN")
                 ClickableText(
                     text = AnnotatedString("Forgot your password?"),
-                    onClick = {}
+                    onClick = { }
                 )
             }
         }
@@ -83,15 +88,19 @@ fun LoginScreen(
 }
 
 /**
- * Stateless text field for input with [text] as the input and [string] to be displayed
+ * Stateless text field for input with [value] as the input and [label] to be displayed
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun InputField(text: MutableState<String>, string: String) {
+private fun InputField(
+    value: String,
+    label: String,
+    onValueChange: (String) -> Unit
+) {
     OutlinedTextField(
-        value = text.value,
-        onValueChange = { input -> text.value = input },
-        label = { Text(text = string) },
+        value = value,
+        onValueChange = onValueChange,
+        label = { Text(text = label) },
         modifier = Modifier.width(300.dp),
         colors = TextFieldDefaults.textFieldColors(
             containerColor = Color.White
@@ -111,4 +120,30 @@ private fun Button(navigation: () -> Unit, text: String) {
     ) {
         Text(text = text, color = Color.White)
     }
+}
+
+@SuppressLint("UnrememberedMutableState")
+@Preview
+@Composable
+private fun PreviewInputFieldLight() {
+    InputField(value = "", label = "Preview Input Field", onValueChange = { })
+}
+
+@SuppressLint("UnrememberedMutableState")
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun PreviewInputFieldDark() {
+    InputField(value = "", label = "Preview Input Field", onValueChange = { })
+}
+
+@Preview
+@Composable
+private fun PreviewButtonLight() {
+    Button(navigation = { }, text = "Preview Button")
+}
+
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun PreviewButtonDark() {
+    Button(navigation = { }, text = "Preview Button")
 }
