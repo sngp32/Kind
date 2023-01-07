@@ -101,8 +101,10 @@ private fun KindNavHost(
             PortfolioScreen(onSetPortfolioClick = { navController.navigateSingleTopTo(SetPortfolio.route) })
         }
         composable(route = Signup.route) {
-            SignUpScreen(onSignUpClick = { signUpData -> viewModel.signUp(signUpData) },
-            onLoginClick = { navController.navigateSingleTopTo(Login.route)})
+            SignUpScreen(
+                onSignUpClick = { signUpData -> viewModel.signUp(signUpData) },
+                onLoginClick = { navController.navigateSingleTopTo(Login.route) }
+            )
         }
     }
 }

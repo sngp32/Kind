@@ -67,7 +67,7 @@ fun LoginScreen(
                 Button(onLoginClick, "LOGIN")
                 ClickableText(
                     text = AnnotatedString("Forgot your password?"),
-                    onClick = {}
+                    onClick = { }
                 )
             }
         }
