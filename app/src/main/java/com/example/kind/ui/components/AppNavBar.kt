@@ -9,6 +9,13 @@ import com.example.kind.ui.components.navigation.KindDestination
 import com.example.kind.ui.components.navigation.kindBottomBarScreens
 import com.example.kind.ui.theme.KindTheme
 
+/**
+ * The app bottom navigation bar which is only visible when logged in
+ *
+ * @param allScreens the screen icons to be displayed in the
+ * [NavigationBar] as a [NavigationBarItem].
+ * @param onTabSelected called when a specific [KindDestination] is selected.
+ */
 @Composable
 fun AppNavBar(
     allScreens: List<KindDestination>,
