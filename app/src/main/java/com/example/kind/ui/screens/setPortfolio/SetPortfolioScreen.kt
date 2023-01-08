@@ -201,7 +201,9 @@ private fun CardButtons(
 @Composable
 private fun PreviewHeaderLight() {
     KindTheme {
-        Header()
+        Box(Modifier.background(MaterialTheme.colorScheme.background)) {
+            Header()
+        }
     }
 }
 
@@ -209,7 +211,9 @@ private fun PreviewHeaderLight() {
 @Composable
 private fun PreviewHeaderDark() {
     KindTheme {
-        Header()
+        Box(Modifier.background(MaterialTheme.colorScheme.background)) {
+            Header()
+        }
     }
 }
 
