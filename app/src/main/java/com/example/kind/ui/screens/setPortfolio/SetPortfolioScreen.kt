@@ -239,26 +239,3 @@ private fun PreviewCharityCardDark() {
         ) { }
     }
 }
-
-@Preview
-@Composable
-private fun ButtonPreviewLight() {
-    Button(
-        text = "ButtonPreviewLight",
-        onClick = {},
-        backgroundColor = Color(0xffffffff),
-        contentColor = Color(0xff37A434)
-    )
-}
-
-
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-private fun ButtonPreviewDark() {
-    Button(
-        text = "ButtonPreviewDark",
-        onClick = {},
-        backgroundColor = Color(0xffffffff),
-        contentColor = Color(0xff37A434)
-    )
-}
