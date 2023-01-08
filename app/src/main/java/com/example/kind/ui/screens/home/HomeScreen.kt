@@ -13,8 +13,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-import com.example.kind.ui.theme.kindGreen
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier) {
@@ -106,9 +104,7 @@ private fun HomeTopAppBar() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .background(kindGreen)
             .height(250.dp)
-
     ) {
         Text(
             text = "Dit abonnement er på plads og du er on track til at donere 100 kr.",

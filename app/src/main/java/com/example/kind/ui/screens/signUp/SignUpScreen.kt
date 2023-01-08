@@ -1,6 +1,5 @@
 package com.example.kind.ui.screens.signUp
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -9,7 +8,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.kind.ui.theme.kindGreen
 
 @Composable
 fun SignUpScreen(
@@ -20,13 +18,11 @@ fun SignUpScreen(
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
-            .background(kindGreen)
     ) {
         Column(
             modifier = Modifier
                 .height(600.dp)
-                .fillMaxWidth()
-                .background(kindGreen),
+                .fillMaxWidth(),
             verticalArrangement = Arrangement.Top
         ) {
             Text(

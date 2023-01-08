@@ -2,7 +2,6 @@ package com.example.kind.ui.screens.login
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.*
@@ -17,7 +16,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.kind.ui.components.navigation.Signup
-import com.example.kind.ui.theme.kindGreen
 
 @Composable
 fun LoginScreen(
@@ -34,8 +32,7 @@ fun LoginScreen(
         Column(
             modifier = Modifier
                 .height(500.dp)
-                .fillMaxWidth()
-                .background(kindGreen),
+                .fillMaxWidth(),
             verticalArrangement = Arrangement.Top
         ) {
             Text(
@@ -75,7 +72,6 @@ fun LoginScreen(
             modifier = Modifier
                 .fillMaxHeight()
                 .fillMaxWidth()
-                .background(kindGreen)
                 .padding(bottom = 20.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Bottom
