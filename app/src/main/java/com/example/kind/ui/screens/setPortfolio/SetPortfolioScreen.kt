@@ -159,7 +159,7 @@ private fun CardIcon(icon: ImageVector, iconSize: Dp) {
     Icon(
         imageVector = icon,
         contentDescription = null,
-        tint = MaterialTheme.colorScheme.inverseSurface, //TODO not sure which one is best here
+        tint = MaterialTheme.colorScheme.primary, //TODO not sure which one is best here
         modifier = Modifier.size(iconSize)
     )
 }
