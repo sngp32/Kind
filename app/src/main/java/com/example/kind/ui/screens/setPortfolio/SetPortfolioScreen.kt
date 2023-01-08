@@ -74,14 +74,18 @@ fun SetPortfolioScreen(
 @Composable
 private fun Header() {
     Column {
-        Text(text = "Byg din portfølje", fontSize = 24.sp)
+        Text(
+            text = "Byg din portfølje",
+            fontSize = 24.sp,
+            color = MaterialTheme.colorScheme.onSurface
+        )
 
         Spacer(modifier = Modifier.height(14.dp))
 
         Text(
             text = "Vælg så mange temaer som du har lyst til.",
             fontSize = 16.sp,
-            color = Color(0xff858585)
+            color = MaterialTheme.colorScheme.onSurfaceVariant
         )
         Spacer(modifier = Modifier.height(10.dp))
     }
