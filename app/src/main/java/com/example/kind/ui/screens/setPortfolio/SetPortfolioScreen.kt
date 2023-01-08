@@ -2,24 +2,29 @@ package com.example.kind.ui.screens.setPortfolio
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Accessibility
-import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.DarkMode
+import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.kind.data.Charity
+import com.example.kind.ui.theme.KindTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -36,7 +41,6 @@ fun SetPortfolioScreen(
                 .fillMaxSize()
                 .padding(it)
         ) {
-
             LazyColumn(
                 modifier = modifier
                     .fillMaxSize()
@@ -44,7 +48,6 @@ fun SetPortfolioScreen(
                     .padding(start = 25.dp, end = 25.dp, top = 30.dp),
                 verticalArrangement = Arrangement.spacedBy(20.dp)
             ) {
-
                 item {
                     Header()
                 }
@@ -54,7 +57,7 @@ fun SetPortfolioScreen(
                         CharityElement(
                             modifier,
                             title = charity.name,
-                            info = charity.description,
+                            description = charity.description,
                             icon = Icons.Filled.Accessibility,
                             onAddCharityClick = { onAddCharityClick(charity.id) }
                         )
@@ -67,7 +70,6 @@ fun SetPortfolioScreen(
         }
     }
 }
-
 
 @Composable
 private fun Header() {
@@ -85,125 +87,157 @@ private fun Header() {
     }
 }
 
-
 @Composable
 private fun CharityElement(
     modifier: Modifier = Modifier,
     title: String,
-    info: String,
+    description: String,
     icon: ImageVector,
     onAddCharityClick: () -> Unit
 ) {
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .height(260.dp)
-            .padding(horizontal = 15.dp)
-            .clickable { },
+            .height(260.dp),
         shape = RoundedCornerShape(30.dp)
     ) {
 
         Column(
-            modifier = modifier.padding(30.dp),
-            verticalArrangement = Arrangement.SpaceBetween
+            modifier = Modifier.padding(30.dp),
         ) {
 
-            Row(
-                modifier = modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = title,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color(0xff37A434)
-                )
-                Icon(
-                    icon,
-                    contentDescription = null,
-                    tint = Color(0xff37A434),
-                    modifier = Modifier.size(35.dp)
-                )
-            }
-
-            Text(text = info, fontSize = 16.sp)
-
-            Row(
-                modifier = modifier
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Button(
-                    text = "Tilføj tema",
-                    onClick = onAddCharityClick,
-                    backgroundColor = Color(0xffC7FFC6),
-                    contentColor = Color.Black
-                )
-                Spacer(modifier = modifier.weight(1f))
-                Button(
-                    text = "Læs mere",
-                    onClick = {},
-                    backgroundColor = Color(0xffffffff),
-                    contentColor = Color(0xff37A434)
-                )
-
-            }
+            CardHeader(
+                modifier = Modifier.weight(1f),
+                title = title,
+                icon = icon,
+            )
+            Spacer(modifier = Modifier.height(5.dp))
+            CardDescription(description)
+            Spacer(modifier = Modifier.weight(1f))
+            CardButtons(modifier, onAddCharityClick)
         }
     }
 }
 
+
+
 @Composable
-private fun Button(text: String, onClick: () -> Unit, backgroundColor: Color, contentColor: Color) {
-    Button(
-        onClick = onClick,
-        elevation = ButtonDefaults.buttonElevation(
-            defaultElevation = 3.dp,
-            pressedElevation = 5.dp,
-            disabledElevation = 0.dp
-        ),
-        shape = RoundedCornerShape(12.dp),
-        colors = ButtonDefaults.buttonColors(
-            containerColor = backgroundColor,
-            contentColor = contentColor
-        )
-    ) {
-        Text(text = text, fontSize = 14.sp)
+private fun CardHeader(
+    modifier: Modifier,
+    title: String,
+    icon: ImageVector,
+) {
+    val titleSize = 18.sp
+    val iconSize = with(LocalDensity.current) { titleSize.toDp()*2 }
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        CardTitle(title = title, fontSize = titleSize, modifier = modifier)
+        Spacer(modifier = Modifier.width(5.dp))
+
+        CardIcon(icon = icon, iconSize = iconSize)
     }
 }
 
+@Composable
+private fun CardTitle(title: String, fontSize: TextUnit, modifier: Modifier) {
+    Text(
+        text = title,
+        fontSize = fontSize,
+        fontWeight = FontWeight.Bold,
+        color = MaterialTheme.colorScheme.onSurface,
+        overflow = TextOverflow.Ellipsis,
+        maxLines = 2,
+        modifier = modifier
+    )
+}
 
+@Composable
+private fun CardIcon(icon: ImageVector, iconSize: Dp) {
+    Icon(
+        imageVector = icon,
+        contentDescription = null,
+        tint = MaterialTheme.colorScheme.inverseSurface, //TODO not sure which one is best here
+        modifier = Modifier.size(iconSize)
+    )
+}
+
+@Composable
+private fun CardDescription(text: String) {
+    Text(
+        text = text,
+        fontSize = 16.sp,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+        maxLines = 4,
+        overflow = TextOverflow.Ellipsis
+    )
+}
+
+@Composable
+private fun CardButtons(
+    modifier: Modifier,
+    onAddCharityClick: () -> Unit
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Button(onClick = onAddCharityClick) {
+            Text(text = "Add theme")
+        }
+
+        Spacer(modifier = modifier.weight(1f))
+
+        OutlinedButton(onClick = { /*TODO*/ }) {
+            Text(text = "Read more")
+        }
+    }
+}
 
 @Preview
 @Composable
-private fun HeaderLightPreview() {
-    Header()
+private fun PreviewHeaderLight() {
+    KindTheme {
+        Header()
+    }
 }
 
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-private fun HeaderDarkPreview() {
-    Header()
+private fun PreviewHeaderDark() {
+    KindTheme {
+        Header()
+    }
 }
 
 @Preview
 @Composable
-private fun CharityCardLightPreview() {
-    CharityElement(
-        title = "CharityCardPreviewLight",
-        info = "Charity card preview light info",
-        icon = Icons.Filled.Favorite
-    ) { }
+private fun PreviewCharityCardLight() {
+    KindTheme {
+        CharityElement(
+            title = "Charity Card Preview Light. Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+            description = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia," +
+                    "molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum" +
+                    "numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium" +
+                    "optio, eaque rerum!",
+            icon = Icons.Filled.LightMode
+        ) { }
+    }
+
 }
 
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-private fun CharityCardDarkPreview() {
-    CharityElement(
-        title = "CharityCardPreviewDark",
-        info = "Charity card preview Dark info",
-        icon = Icons.Filled.Favorite
-    ) { }
+private fun PreviewCharityCardDark() {
+    KindTheme {
+        CharityElement(
+            title = "Charity Card Preview Dark. Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+            description = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia," +
+                    "molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum" +
+                    "numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium" +
+                    "optio, eaque rerum!",
+            icon = Icons.Filled.DarkMode
+        ) { }
+    }
 }
 
 @Preview
