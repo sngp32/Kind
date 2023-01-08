@@ -73,12 +73,10 @@ private fun ListElement(modifier: Modifier, title: String, text: String) {
             .clickable { },
         shape = RoundedCornerShape(30.dp)
     ) {
-
         Column(
             modifier = modifier.padding(30.dp),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-
             Row(
                 modifier = modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -88,13 +86,10 @@ private fun ListElement(modifier: Modifier, title: String, text: String) {
                     text = title,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color(0xff37A434)
+                    color = MaterialTheme.colorScheme.onSurface
                 )
-
             }
-
-            Text(text = text, fontSize = 16.sp)
-
+            Text(text = text, fontSize = 16.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }
 }
@@ -109,13 +104,14 @@ private fun HomeTopAppBar() {
         Text(
             text = "Dit abonnement er på plads og du er on track til at donere 100 kr.",
             fontSize = 32.sp,
+            color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 30.dp)
         )
         Spacer(modifier = Modifier.height(20.dp))
         Text(
             text = "Du er blandt top 1% af donorer denne måned. Godt gået!",
             fontSize = 22.sp,
-            color = Color.White,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(start = 20.dp)
         )
     }
