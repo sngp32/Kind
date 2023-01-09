@@ -1,13 +1,18 @@
 package com.example.kind.ui.screens.signUp
 
+import android.annotation.SuppressLint
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.kind.ui.theme.KindTheme
 
 @Composable
 fun SignUpScreen(
@@ -98,5 +103,51 @@ private fun PrimaryButton(navigation: () -> Unit, text: String, colors: ButtonCo
         modifier = Modifier.width(300.dp)
     ) {
         Text(text = text, color = Color.White)
+    }
+}
+
+@SuppressLint("UnrememberedMutableState")
+@Preview
+@Composable
+private fun PreviewInputFieldLight() {
+    KindTheme {
+        Box(Modifier.background(MaterialTheme.colorScheme.background)) {
+            InputField(inputText = mutableStateOf(""), fieldText = "Preview Input Field Light")
+        }
+    }
+}
+
+@SuppressLint("UnrememberedMutableState")
+@Preview(uiMode = UI_MODE_NIGHT_YES)
+@Composable
+private fun PreviewInputFieldDark() {
+    KindTheme {
+        Box(Modifier.background(MaterialTheme.colorScheme.background)) {
+            InputField(inputText = mutableStateOf(""), fieldText = "Preview Input Field Dark")
+        }
+    }
+}
+
+@Preview
+@Composable
+private fun PreviewButtonLight() {
+    KindTheme {
+        PrimaryButton(
+            navigation = { /*TODO*/ },
+            text = "Preview Button Light",
+            colors = ButtonDefaults.buttonColors()
+        )
+    }
+}
+
+@Preview(uiMode = UI_MODE_NIGHT_YES)
+@Composable
+private fun PreviewButtonDark() {
+    KindTheme {
+        PrimaryButton(
+            navigation = { /*TODO*/ },
+            text = "Preview Button Dark",
+            colors = ButtonDefaults.buttonColors()
+        )
     }
 }
