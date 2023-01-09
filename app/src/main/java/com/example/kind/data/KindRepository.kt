@@ -8,7 +8,7 @@ class KindRepository(
 ) {
     suspend fun allCharities(): List<Charity> = kindSource.loadCharities()
 
-    fun subscribeToCharity(charity: Charity) {
+    fun subscribeToCharity(charity: Charity, subscriptionAmount: Int) {
         //should request source to subscribe to charity
     }
 
