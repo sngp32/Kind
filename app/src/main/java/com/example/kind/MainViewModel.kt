@@ -7,8 +7,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kind.data.Charity
 import com.example.kind.data.KindRepository
-import com.example.kind.data.KindSource
-import com.google.firebase.auth.FirebaseUser
+import com.example.kind.data.KindUserData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -17,7 +16,6 @@ import kotlinx.coroutines.launch
  */
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
-    private val kindSource: KindSource = KindSource()
     private val kindRepository: KindRepository = KindRepository()
 
     private val _charities = mutableStateOf(emptyList<Charity>())
@@ -26,6 +24,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private var _isSignedIn = mutableStateOf(false)
     val isSignedIn: State<Boolean> = _isSignedIn
 
+    private var _userData = mutableStateOf(KindUserData())
+    val userData: State<KindUserData> = _userData
+
     fun signIn() {
         _isSignedIn.value = true
         // TODO:
@@ -33,7 +34,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     suspend fun getUserData(){
-
+        _userData = mutableStateOf(kindRepository.getUserData())
     }
 
     fun trySignIn(email: String, password: String) = effect{
@@ -68,10 +69,22 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         println(data)
     }
 
+    fun persistenceLogin() = effect{
+        if(kindRepository.persistenceLoginCheck()){
+            signIn()
+            getUserData()
+        }
+    }
+
     fun load() = effect {
+        persistenceLogin()
+
+        // TODO: Don't load before user is logged in. It needs a valid auth
         _charities.value = kindRepository.allCharities()
 
-        trySignIn("jackig5000@gmail.com", "123456")
+
+        //trySignUp("Pissed","testerboy17@gmail.com", "123456")
+        //trySignIn("testerboy16@gmail.com", "123456")
     }
 
     private fun effect(block: suspend () -> Unit) {

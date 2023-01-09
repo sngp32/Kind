@@ -1,11 +1,11 @@
 package com.example.kind.data
 
 data class KindUserData(
-    val name: String? = null,
+    val name: String = "Invalid Account",
     val email: String? = null,
     val registrationDate: String? = null,
     val subbedCharities: List<Charity>? = null,
-    val totalDonated: Int = 0,
+    val totalDonated: Long = 0,
     val areEmailNotificationEnabled: Boolean = true,
     val arePushNotificationEnabled: Boolean = true,
 )

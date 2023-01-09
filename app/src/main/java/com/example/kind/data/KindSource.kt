@@ -2,18 +2,11 @@ package com.example.kind.data
 
 import android.app.Activity
 import android.util.Log
-import androidx.compose.runtime.traceEventStart
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
-import java.io.IOException
-import java.nio.file.WatchEvent.Kind
 import java.time.Instant
 import java.time.format.DateTimeFormatter
 
@@ -39,67 +32,80 @@ class KindSource(
             Log.d(TAG, "${document.id} => ${document.data}")
         }
 
-
-                /*
-
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-                    val newCharity = Charity(
-                        document.id.toLong(),
-                        document.data["Name"].toString(),
-                        document.data["Description"].toString()
-                    )
-                    charityData.add(newCharity)
-                    Log.d(TAG, "${document.id} => ${document.data}")
-                }
-            }.addOnFailureListener { exception ->
-                Log.w(TAG, "Error getting charity types: ", exception)
-            }
-
-                 */
-
-
-        // TODO:
-        // This returns nothing because above function is asynchronous
         return@withContext charityData
     }
 
-    private fun addNewUserData(name: String, email: String) {
-        val db = Firebase.firestore
-
+    suspend private fun addNewUserData(name: String, email: String) {
         val userData = KindUserData(
             name,
             email,
             DateTimeFormatter.ISO_INSTANT.format(Instant.now()),
         )
 
-        db.collection("users").document(auth.currentUser!!.uid).set(userData)
+        val user = auth.currentUser
+        if(user != null){
+            db.collection("users").document(user.uid).set(userData)
+        }
     }
 
     suspend fun newSignup(name: String, email: String, password: String) {
         // TODO: Might change to require email verification before auto login
 
-        auth.createUserWithEmailAndPassword(email, password)
+        if(auth.currentUser != null){
+            // Cant create new account because user is already logged in.
+        }
+        else{
+            auth.createUserWithEmailAndPassword(email, password).await()
 
-        if (auth.currentUser != null) {
-            sendEmailVerifification()
-            addNewUserData(name, email)
+            if (auth.currentUser != null) {
+                sendEmailVerifification()
+                addNewUserData(name, email)
+            }
+        }
+    }
+
+    suspend fun persistenceLoginCheck(): Boolean {
+        if(auth.currentUser != null){
+            return true
+        }
+        else{
+            return false
         }
     }
 
     suspend fun signIn(email: String, password: String): String {
         auth.signInWithEmailAndPassword(email, password)
 
-        if(auth.currentUser != null){
+        if (auth.currentUser != null) {
             return "SUCCESS"
-        }
-        else{
+        } else {
             return "LOGINFAILED"
         }
     }
 
-    suspend fun getUserData(){
+    suspend fun getUserData(): KindUserData {
+        val user = auth.currentUser
 
+        if (user != null) {
+            val data = db.collection("users").document(user.uid).get().await()
+
+            Log.d(TAG, "${data.id} => ${data.data}")
+
+            val userData = KindUserData(
+                data["name"].toString(),
+                data["email"].toString(),
+                data["registrationDate"].toString(),
+                data["subbedCharities"] as List<Charity>?,
+                data["totalDonated"] as Long,
+                data["areEmailNotificationEnabled"] as Boolean,
+                data["arePushNotificationEnabled"] as Boolean
+            )
+
+            return userData
+        }
+        else{
+            return KindUserData()
+        }
     }
 
     fun sendEmailVerifification() {

@@ -12,9 +12,11 @@ class KindRepository(
         //should request source to subscribe to charity
     }
 
-    suspend fun signIn(email: String, password: String): String { return kindSource.signIn(email, password)}
+    suspend fun signIn(email: String, password: String): String = kindSource.signIn(email, password)
 
-    suspend fun signUp(name: String, email: String, password: String) { return kindSource.newSignup(name, email, password)}
+    suspend fun signUp(name: String, email: String, password: String) = kindSource.newSignup(name, email, password)
 
-    suspend fun getuserData()
+    suspend fun getUserData(): KindUserData = kindSource.getUserData()
+
+    suspend fun persistenceLoginCheck(): Boolean = kindSource.persistenceLoginCheck()
 }
