@@ -62,11 +62,14 @@ fun KindApp(viewModel: MainViewModel = viewModel()) {
 private fun KindNavHost(
     navController: NavHostController,
     modifier: Modifier = Modifier,
-    viewModel: MainViewModel
+    viewModel: MainViewModel,
 ) {
     val charities by viewModel.charities
     val news by viewModel.news
     val userData by viewModel.userData
+    val userTotalSub by viewModel.userTotalSub
+
+    // val isIncorrectLogin by viewModel.
 
     val startDestination: String = if (viewModel.isSignedIn.value) {
         Home.route
@@ -82,10 +85,13 @@ private fun KindNavHost(
         composable(route = Login.route) {
             LoginScreen(
                 onLoginClick = { signInData -> viewModel.trySignIn(signInData) },
-                onSignUpClick = { navController.navigateSingleTopTo(Signup.route) })
+                onSignUpClick = { navController.navigateSingleTopTo(Signup.route)},
+                onIncorrectLogin = {}
+
+            )
         }
         composable(route = Home.route) {
-            HomeScreen(news = news, userData = userData)
+            HomeScreen(news = news, userData = userData, userTotalSub = userTotalSub)
         }
         composable(route = SetPortfolio.route) {
             SetPortfolioScreen(

@@ -23,11 +23,12 @@ import com.example.kind.ui.theme.KindTheme
 fun HomeScreen(
     modifier: Modifier = Modifier,
     news: List<News>,
-    userData: KindUserData
+    userData: KindUserData,
+    userTotalSub: Long
 ) {
     Scaffold(
         topBar = {
-            HomeTopAppBar(username = userData.name)
+            HomeTopAppBar(username = userData.name, userTotalSub)
         },
         bottomBar = { }
     ) {
@@ -88,14 +89,14 @@ private fun ListElement(modifier: Modifier, title: String, text: String) {
 }
 
 @Composable
-private fun HomeTopAppBar(username: String) {
+private fun HomeTopAppBar(username: String, totalSub: Long) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .height(200.dp)
     ) {
         Text(
-            text = "Hey $username\nYour subscription of 100 DKK is active",
+            text = "Hey $username\nYour subscription of $totalSub DKK is active",
             fontSize = 32.sp,
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 30.dp)
@@ -145,7 +146,7 @@ private fun PreviewListElementDark() {
 private fun PreviewHomeTopAppBarLight() {
     KindTheme {
         Box(Modifier.background(MaterialTheme.colorScheme.background)) {
-            HomeTopAppBar(username = "Light Preview")
+            HomeTopAppBar(username = "Light Preview", 500)
         }
     }
 }
@@ -155,7 +156,7 @@ private fun PreviewHomeTopAppBarLight() {
 private fun PreviewHomeTopAppBarDark() {
     KindTheme {
         Box(Modifier.background(MaterialTheme.colorScheme.background)) {
-            HomeTopAppBar(username = "Dark Preview")
+            HomeTopAppBar(username = "Dark Preview", 500)
         }
     }
 }
