@@ -25,10 +25,7 @@ fun AppNavBar(
 ) {
     if (!isSignedIn) return
 
-    NavigationBar(
-        containerColor = BottomAppBarDefaults.containerColor, //TODO MaterialTheme
-        contentColor = contentColorFor(BottomAppBarDefaults.containerColor), //TODO MaterialTheme
-    ) {
+    NavigationBar {
         allScreens.forEach { screen ->
             NavigationBarItem(
                 selected = currentScreen == screen,
