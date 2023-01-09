@@ -34,8 +34,8 @@ fun SettingsScreen(
 
         Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
             SectionTextTitle(text = "Notifications")
-            SwitchButton(headlineText = "Email notifications", onSwitchButtonClick = { /* TODO */ })
-            SwitchButton(headlineText = "Push notifications", onSwitchButtonClick = { /* TODO */ })
+            SwitchButton(headlineText = "Email notifications", state = userData.areEmailNotificationEnabled, onSwitchButtonClick = { /* TODO */ })
+            SwitchButton(headlineText = "Push notifications", state= userData.arePushNotificationEnabled, onSwitchButtonClick = { /* TODO */ })
 
             SectionTextTitle(text = "Account Settings")
             ClickableListItem(headlineText = "Name", supportingText = userData.name, onListItemClick = { /* TODO */ })
@@ -100,7 +100,7 @@ private fun ClickableListItem(headlineText: String, supportingText: String, onLi
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun SwitchButton(headlineText: String, onSwitchButtonClick: () -> Unit) {
+private fun SwitchButton(headlineText: String, state: Boolean, onSwitchButtonClick: () -> Unit) {
     var isSwitched = false
     Box(modifier = Modifier.selectable(
         selected = false,
@@ -110,7 +110,7 @@ private fun SwitchButton(headlineText: String, onSwitchButtonClick: () -> Unit) 
             headlineText = { Text(text = headlineText) },
             trailingContent = {
                 Switch(
-                    checked = false,
+                    checked = state,
                     onCheckedChange = { onSwitchButtonClick() })
             }
         )
