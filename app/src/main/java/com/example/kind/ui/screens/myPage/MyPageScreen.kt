@@ -31,8 +31,9 @@ fun MyPageScreen(
                     .clip(RoundedCornerShape(bottomStart = 10.dp, bottomEnd = 10.dp))
             ) {
                 Text(
-                    text = "Min side",
+                    text = "My page",
                     fontSize = 32.sp,
+                    color = MaterialTheme.colorScheme.onBackground,
                     modifier = Modifier
                         .align(Alignment.Center)
                         .padding(top = 30.dp, bottom = 30.dp)
