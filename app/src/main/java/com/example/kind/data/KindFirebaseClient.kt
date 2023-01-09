@@ -13,8 +13,5 @@ import kotlinx.coroutines.withContext
 import java.time.Instant
 import java.time.format.DateTimeFormatter
 
-
-//TODO create connection to firebase
-
 val firebaseAuth: FirebaseAuth by lazy { Firebase.auth }
 val firebaseDB: FirebaseFirestore by lazy { Firebase.firestore }

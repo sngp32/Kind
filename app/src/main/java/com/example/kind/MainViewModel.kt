@@ -45,7 +45,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun trySignUp(name: String, email: String, password: String) = effect{
-
+        kindRepository.signUp(name, email, password)
     }
 
     fun signOut() {

@@ -70,50 +70,32 @@ class KindSource(
         val email: String? = null,
         val registrationDate: String? = null,
         val subbedCharities: List<String>? = null,
-        val totalDonations: Int? = null
+        val totalDonations: Int = 0,
+        val emailNotifications: Boolean = true,
+        val phoneNotifications: Boolean = true,
     )
 
-    private fun addNewUserData(email: String, user: FirebaseUser) {
+    private fun addNewUserData(name: String, email: String) {
         val db = Firebase.firestore
 
         val userData = newUserData(
-            "TEST",
+            name,
             email,
             DateTimeFormatter.ISO_INSTANT.format(Instant.now()),
-            null,
-            0
         )
 
-        db.collection("users").document(user.uid).set(userData)
+        db.collection("users").document(auth.currentUser!!.uid).set(userData)
     }
 
-    suspend fun newSignup(email: String, password: String) {
-        print("wtf")
+    suspend fun newSignup(name: String, email: String, password: String) {
+        // TODO: Might change to require email verification before auto login
+
         auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "createUserWithEmail:success")
-                    val user = auth.currentUser
 
-                    if (user != null) {
-                        addNewUserData(email, user)
-                    }
-
-                    // Update UI State
-                    // updateUI(user)
-                } else {
-                    // Debug message
-                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                    /*
-                    // Add ui fail
-
-                     */
-
-                    // Update UI State
-                    // updateUI(null)
-                }
-            }
+        if (auth.currentUser != null) {
+            sendEmailVerifification()
+            addNewUserData(name, email)
+        }
     }
 
     suspend fun signIn(email: String, password: String): String {
@@ -127,16 +109,16 @@ class KindSource(
         }
     }
 
+    suspend fun getUserData(){
+
+    }
+
     fun sendEmailVerifification() {
         val user = auth.currentUser!!
         user.sendEmailVerification()
             .addOnCompleteListener(this) { task ->
                 // Email Verification sent
             }
-    }
-
-    fun updateUI(user: FirebaseUser?) {
-
     }
 
     companion object {
