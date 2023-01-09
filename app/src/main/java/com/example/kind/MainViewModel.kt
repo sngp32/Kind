@@ -38,7 +38,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     suspend fun getUserData(){
-        _userData = mutableStateOf(kindRepository.getUserData())
+        _userData.value = kindRepository.getUserData()
     }
 
     fun trySignIn(email: String, password: String) = effect{
