@@ -117,8 +117,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun load() = effect {
-        //persistenceLogin()
-        authLogout()
+        persistenceLogin()
     }
 
     private fun effect(block: suspend () -> Unit) {
