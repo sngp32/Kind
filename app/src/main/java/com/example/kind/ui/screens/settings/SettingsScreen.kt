@@ -5,7 +5,11 @@ import android.content.res.Configuration
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.magnifier
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
@@ -28,7 +32,7 @@ fun SettingsScreen(
         // or place in higher caller
         SettingsTopAppBar(onBackClick)
 
-        Column {
+        Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
             SectionTextTitle(text = "Notifications")
             SwitchButton(headlineText = "Email notifications", onSwitchButtonClick = { /* TODO */ })
             SwitchButton(headlineText = "Push notifications", onSwitchButtonClick = { /* TODO */ })
