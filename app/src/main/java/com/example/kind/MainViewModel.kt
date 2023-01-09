@@ -33,8 +33,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun signIn() {
         _isSignedIn.value = true
-        // TODO:
-        // UI stuff here or?
+        // TODO: UI stuff here or?
     }
 
     suspend fun getUserData(){
@@ -84,13 +83,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         persistenceLogin()
 
         // TODO: Don't load before user is logged in. It needs a valid auth. Can be changed if we
-        // TODO: want no valid auth
+        //       want no valid auth
         _charities.value = kindRepository.allCharities()
         _news.value = kindRepository.allNews()
 
-
-        //trySignUp("Pissed","testerboy17@gmail.com", "123456")
-        //trySignIn("testerboy16@gmail.com", "123456")
+        // TODO: Calculate themes and charities supported somewhere
+        //       for news element with ID 9999999
     }
 
     private fun effect(block: suspend () -> Unit) {
