@@ -34,6 +34,10 @@ class KindSource(
         return newsData
     }
 
+    suspend fun logout(){
+        auth.signOut()
+    }
+
     suspend fun subscribeToCharity(charityID: Long, subscriptionAmount: Long): KindUserData {
         val user = auth.currentUser
 

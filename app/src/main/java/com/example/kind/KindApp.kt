@@ -22,6 +22,7 @@ import com.example.kind.ui.screens.myPage.MyPageScreen
 import com.example.kind.ui.screens.setPortfolio.SetPortfolioScreen
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.kind.ui.screens.signUp.SignUpScreen
+import kotlin.math.sign
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -79,10 +80,9 @@ private fun KindNavHost(
         modifier = modifier
     ) {
         composable(route = Login.route) {
-            LoginScreen(onLoginClick = {
-                navController.navigateSingleTopTo(Home.route)
-                viewModel.signIn()
-            }, onSignUpClick = { navController.navigateSingleTopTo(Signup.route) })
+            LoginScreen(
+                onLoginClick = { signInData -> viewModel.trySignIn(signInData) },
+                onSignUpClick = { navController.navigateSingleTopTo(Signup.route) })
         }
         composable(route = Home.route) {
             HomeScreen(news = news, userData = userData)
@@ -94,8 +94,13 @@ private fun KindNavHost(
             )
         }
         composable(route = MyPage.route) {
-            MyPageScreen(onPortfolioClick = { navController.navigateSingleTopTo(MyPortfolio.route) },
-                onSettingsClick = { navController.navigateSingleTopTo(Settings.route) })
+            MyPageScreen(
+                onPortfolioClick = { navController.navigateSingleTopTo(MyPortfolio.route) },
+                onSettingsClick = { navController.navigateSingleTopTo(Settings.route) },
+                onLogoutClick = {
+                    // Handle this differently
+                    viewModel.authLogout()
+                    navController.navigateSingleTopTo(Login.route)})
         }
         composable(route = Settings.route) {
             SettingsScreen(
@@ -108,7 +113,7 @@ private fun KindNavHost(
         }
         composable(route = Signup.route) {
             SignUpScreen(
-                onSignUpClick = { signUpData -> viewModel.signUp(signUpData) },
+                onSignUpClick = { signUpData -> viewModel.trySignUp(signUpData) },
                 onLoginClick = { navController.navigateSingleTopTo(Login.route) }
             )
         }

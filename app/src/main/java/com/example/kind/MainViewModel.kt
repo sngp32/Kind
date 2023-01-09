@@ -38,10 +38,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     suspend fun getUserData(){
         _userData.value = kindRepository.getUserData()
+
+        _charities.value = kindRepository.allCharities()
+        _news.value = kindRepository.allNews()
     }
 
-    fun trySignIn(email: String, password: String) = effect{
-        val result = kindRepository.signIn(email, password)
+    fun trySignIn(signInData: List<String>) = effect{
+        val result = kindRepository.signIn(signInData[0], signInData[1])
 
         if(result.equals("SUCCESS")){
             signIn()
@@ -49,8 +52,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun trySignUp(name: String, email: String, password: String) = effect{
-        kindRepository.signUp(name, email, password)
+    fun trySignUp(signUpData: List<String>) = effect{
+        kindRepository.signUp(signUpData[0], signUpData[1], signUpData[2])
     }
 
     fun signOut() {
@@ -64,6 +67,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private fun getCharityById(charityId: Long): Charity? {
         return _charities.value.find { it.id == charityId }
+    }
+
+    fun authLogout() = effect {
+        kindRepository.logout()
+        signOut()
     }
 
     fun signUp(data: List<String>) {
@@ -80,14 +88,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun load() = effect {
         persistenceLogin()
-
-        // TODO: Don't load before user is logged in. It needs a valid auth. Can be changed if we
-        //       want no valid auth
-        _charities.value = kindRepository.allCharities()
-        _news.value = kindRepository.allNews()
-
-        // TODO: Calculate themes and charities supported somewhere
-        //       for news element with ID 9999999
     }
 
     private fun effect(block: suspend () -> Unit) {
