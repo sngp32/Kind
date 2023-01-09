@@ -28,12 +28,13 @@ fun SignUpScreen(
             Text(
                 text = "SIGN UP",
                 fontSize = 48.sp,
+                color = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.padding(start = 20.dp, top = 50.dp)
             )
             Text(
                 text = "Start your journey of giving",
                 fontSize = 28.sp,
-                color = Color.White,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(start = 20.dp)
             )
             Spacer(modifier = Modifier.height(90.dp))
@@ -51,18 +52,29 @@ fun SignUpScreen(
                 InputField(inputText = textEmail, fieldText = "E-mail")
                 Spacer(modifier = Modifier.height(10.dp))
                 InputField(inputText = textPassword, fieldText = "Password")
-
-                Button(navigation = {
-                    onSignUpClick(
-                        listOf(
-                            textName.value,
-                            textEmail.value,
-                            textPassword.value
+                Spacer(modifier = Modifier.height(10.dp))
+                PrimaryButton(
+                    navigation = {
+                        onSignUpClick(
+                            listOf(
+                                textName.value,
+                                textEmail.value,
+                                textPassword.value
+                            )
                         )
-                    )
-                }, text = "SIGNUP")
-                Button(navigation = onLoginClick, text = "LOGIN")
+                    },
+                    text = "SIGNUP", colors = ButtonDefaults.buttonColors()
+                )
+                Spacer(Modifier.weight(1f))
+                OutlinedButton(
+                    onClick = onLoginClick,
+                    modifier = Modifier.width(300.dp)
+                ) {
+                    Text("LOGIN")
+                }
+                Spacer(modifier = Modifier.height(10.dp))
             }
+
         }
     }
 }
@@ -75,17 +87,14 @@ private fun InputField(inputText: MutableState<String>, fieldText: String) {
         onValueChange = { input -> inputText.value = input },
         label = { Text(text = fieldText) },
         modifier = Modifier.width(300.dp),
-        colors = TextFieldDefaults.textFieldColors(
-            containerColor = Color.White
-        )
     )
 }
 
 @Composable
-private fun Button(navigation: () -> Unit, text: String) {
+private fun PrimaryButton(navigation: () -> Unit, text: String, colors: ButtonColors) {
     Button(
         onClick = navigation,
-        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF454545)),
+        colors = colors,
         modifier = Modifier.width(300.dp)
     ) {
         Text(text = text, color = Color.White)
