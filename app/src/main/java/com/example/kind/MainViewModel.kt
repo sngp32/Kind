@@ -38,6 +38,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     suspend fun getUserData(){
         _userData.value = kindRepository.getUserData()
+
+        _charities.value = kindRepository.allCharities()
+        _news.value = kindRepository.allNews()
     }
 
     fun trySignIn(email: String, password: String) = effect{
@@ -66,6 +69,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         return _charities.value.find { it.id == charityId }
     }
 
+    fun authLogout() = effect {
+        kindRepository.logout()
+        signOut()
+    }
+
     fun signUp(data: List<String>) {
         //TODO data validation
         println(data)
@@ -80,14 +88,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun load() = effect {
         persistenceLogin()
-
-        // TODO: Don't load before user is logged in. It needs a valid auth. Can be changed if we
-        //       want no valid auth
-        _charities.value = kindRepository.allCharities()
-        _news.value = kindRepository.allNews()
-
-        // TODO: Calculate themes and charities supported somewhere
-        //       for news element with ID 9999999
     }
 
     private fun effect(block: suspend () -> Unit) {

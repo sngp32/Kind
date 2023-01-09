@@ -94,8 +94,13 @@ private fun KindNavHost(
             )
         }
         composable(route = MyPage.route) {
-            MyPageScreen(onPortfolioClick = { navController.navigateSingleTopTo(MyPortfolio.route) },
-                onSettingsClick = { navController.navigateSingleTopTo(Settings.route) })
+            MyPageScreen(
+                onPortfolioClick = { navController.navigateSingleTopTo(MyPortfolio.route) },
+                onSettingsClick = { navController.navigateSingleTopTo(Settings.route) },
+                onLogoutClick = {
+                    // Handle this differently
+                    viewModel.authLogout()
+                    navController.navigateSingleTopTo(Login.route)})
         }
         composable(route = Settings.route) {
             SettingsScreen(

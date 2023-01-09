@@ -22,4 +22,6 @@ class KindRepository(
 
     suspend fun allNews(): List<News> = kindSource.loadNews()
 
+    suspend fun logout() = kindSource.logout()
+
 }
