@@ -3,6 +3,7 @@ package com.example.kind.data
 import android.app.Activity
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
@@ -31,6 +32,47 @@ class KindSource(
         }
 
         return newsData
+    }
+
+    suspend fun subscribeToCharity(charityID: Long, subscriptionAmount: Long): KindUserData {
+        val user = auth.currentUser
+
+        if(user != null){
+            var data = db.collection("users").document(user.uid).get().await()
+
+            var time = DateTimeFormatter.ISO_INSTANT.format(Instant.now())
+
+            if(data["subbedCharities"] != null){
+                val subbedCharityData = data["subbedCharities"] as ArrayList<*>
+                for(charity in subbedCharityData){
+                    val charityHashMap = charity as HashMap<*, *>
+
+                    if(charityHashMap["id"] == charityID) {
+                        time = charityHashMap["subscribedSince"] as String?
+
+                        db.collection("users").document(user.uid).update("subbedCharities", FieldValue.arrayRemove(
+                            userCharityData(
+                                charityHashMap["id"] as Long,
+                                charityHashMap["subscribed"] as Boolean,
+                                charityHashMap["subscriptionAmount"] as Long,
+                                charityHashMap["subscribedSince"] as String?
+                            ))
+                        ).await()
+                    }
+                }
+            }
+
+            db.collection("users").document(user.uid).update("subbedCharities", FieldValue.arrayUnion(
+                userCharityData(
+                    charityID,
+                    true,
+                    subscriptionAmount,
+                    time
+                ))
+            ).await()
+            }
+
+        return getUserData()
     }
 
     suspend fun loadCharities(): MutableList<Charity> = withContext(Dispatchers.IO) {
@@ -111,7 +153,7 @@ class KindSource(
                 data["name"].toString(),
                 data["email"].toString(),
                 data["registrationDate"].toString(),
-                data["subbedCharities"] as List<Charity>?,
+                data["subbedCharities"] as List<userCharityData>?,
                 data["totalDonated"] as Long,
                 data["areEmailNotificationEnabled"] as Boolean,
                 data["arePushNotificationEnabled"] as Boolean
@@ -137,3 +179,4 @@ class KindSource(
     }
 
 }
+

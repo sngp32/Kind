@@ -90,7 +90,7 @@ private fun KindNavHost(
         composable(route = SetPortfolio.route) {
             SetPortfolioScreen(
                 charities = charities,
-                onAddCharityClick = { charityId -> viewModel.subscribeToCharity(charityId) }
+                onAddCharityClick = { charityId -> viewModel.subscribeToCharity(charityId, 25) }
             )
         }
         composable(route = MyPage.route) {
