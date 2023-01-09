@@ -24,7 +24,6 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.kind.data.Charity
-import com.example.kind.data.News
 import com.example.kind.ui.theme.KindTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -34,9 +33,7 @@ fun SetPortfolioScreen(
     charities: List<Charity>,
     onAddCharityClick: (Long) -> Unit
 ) {
-    Scaffold(
-        bottomBar = { }
-    ) {
+    Scaffold {
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -106,7 +103,6 @@ private fun CharityElement(
             .height(260.dp),
         shape = RoundedCornerShape(30.dp)
     ) {
-
         Column(
             modifier = Modifier.padding(30.dp),
         ) {
@@ -123,8 +119,6 @@ private fun CharityElement(
         }
     }
 }
-
-
 
 @Composable
 private fun CardHeader(
