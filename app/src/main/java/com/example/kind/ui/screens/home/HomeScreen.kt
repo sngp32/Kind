@@ -36,7 +36,6 @@ fun HomeScreen(
                 .fillMaxSize()
                 .padding(it)
         ) {
-
             LazyColumn(
                 modifier = modifier
                     .fillMaxSize()
@@ -44,8 +43,6 @@ fun HomeScreen(
                     .padding(start = 25.dp, end = 25.dp, top = 15.dp),
                 verticalArrangement = Arrangement.spacedBy(20.dp)
             ) {
-
-                // News gets loaded in reverse order, (by highest id first which is newest)
                 news.asReversed().forEach { newsItem ->
                     item {
                         ListElement(
@@ -71,8 +68,7 @@ private fun ListElement(modifier: Modifier, title: String, text: String) {
         shape = RoundedCornerShape(30.dp)
     ) {
         Column(
-            modifier = modifier.padding(30.dp),
-            verticalArrangement = Arrangement.SpaceBetween
+            modifier = modifier.padding(30.dp), verticalArrangement = Arrangement.SpaceBetween
         ) {
             Row(
                 modifier = modifier.fillMaxWidth(),
@@ -99,14 +95,14 @@ private fun HomeTopAppBar(username: String) {
             .height(200.dp)
     ) {
         Text(
-            text = "Hey " + username + "\nDit abonnement på 100 kr er aktivt",
+            text = "Hey $username\nYour subscription of 100 DKK is active",
             fontSize = 32.sp,
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 30.dp)
         )
         Spacer(modifier = Modifier.height(20.dp))
         Text(
-            text = "Du er blandt top 1% af donorer denne måned. Godt gået!",
+            text = "You are among 1% of donors this month. Great job!",
             fontSize = 22.sp,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(start = 20.dp)
