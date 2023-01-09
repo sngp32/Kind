@@ -20,7 +20,8 @@ import com.example.kind.ui.components.navigation.Signup
 @Composable
 fun LoginScreen(
     onLoginClick: (List<String>) -> Unit,
-    onSignUpClick: () -> Unit
+    onSignUpClick: () -> Unit,
+    onIncorrectLogin: () -> Unit, 
 ) {
     var textEmail = remember { mutableStateOf("") }
     var textPassword = remember { mutableStateOf("") }

@@ -22,11 +22,12 @@ import com.example.kind.data.News
 fun HomeScreen(
     modifier: Modifier = Modifier,
     news: List<News>,
-    userData: KindUserData
+    userData: KindUserData,
+    userTotalSub: Long
 ) {
     Scaffold(
         topBar = {
-            HomeTopAppBar(username = userData.name)
+            HomeTopAppBar(username = userData.name, userTotalSub)
         },
         bottomBar = { }
     ) {
@@ -91,14 +92,14 @@ private fun ListElement(modifier: Modifier, title: String, text: String) {
 }
 
 @Composable
-private fun HomeTopAppBar(username: String) {
+private fun HomeTopAppBar(username: String, totalSub: Long) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .height(200.dp)
     ) {
         Text(
-            text = "Hey " + username + "\nDit abonnement på 100 kr er aktivt",
+            text = "Hey " + username + "\nDit abonnement på " +  totalSub + " kr er aktivt",
             fontSize = 32.sp,
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 30.dp)

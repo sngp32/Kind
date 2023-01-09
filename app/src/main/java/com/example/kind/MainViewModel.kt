@@ -28,8 +28,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private var _isSignedIn = mutableStateOf(false)
     val isSignedIn: State<Boolean> = _isSignedIn
 
+    private var _isIncorrectLogin = mutableStateOf(false)
+    val isIncorrectLogin: State<Boolean> = _isIncorrectLogin
+
     private var _userData = mutableStateOf(KindUserData())
     val userData: State<KindUserData> = _userData
+
+    private var _userTotalSub = mutableStateOf(0.toLong())
+    val userTotalSub: State<Long> = _userTotalSub
 
     fun signIn() {
         _isSignedIn.value = true
@@ -41,6 +47,30 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
         _charities.value = kindRepository.allCharities()
         _news.value = kindRepository.allNews()
+
+        _userTotalSub.value = calcUserTotalSub()
+    }
+
+    suspend fun calcUserTotalSub(): Long{
+        val userData = _userData.value
+        var total: Long = 0
+
+        if(userData.subbedCharities != null){
+            val subbedCharities = userData.subbedCharities as ArrayList<HashMap<*,*>>
+
+            if (subbedCharities != null) {
+                for (charityHashMap in subbedCharities){
+
+                    val subscriptionAmount = charityHashMap["subscriptionAmount"] as Long
+                    if(subscriptionAmount != null){
+                        total += subscriptionAmount
+                    }
+
+                }
+            }
+        }
+
+        return total
     }
 
     fun trySignIn(signInData: List<String>) = effect{
