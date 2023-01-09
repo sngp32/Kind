@@ -21,7 +21,7 @@ fun SignUpScreen(
     ) {
         Column(
             modifier = Modifier
-                .height(600.dp)
+                .fillMaxHeight()
                 .fillMaxWidth(),
             verticalArrangement = Arrangement.Top
         ) {
