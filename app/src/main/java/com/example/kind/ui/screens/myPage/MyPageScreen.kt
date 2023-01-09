@@ -11,6 +11,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.kind.ui.components.navigation.Logout
 import com.example.kind.ui.components.navigation.MyPortfolio
 import com.example.kind.ui.components.navigation.Settings
 
@@ -19,7 +20,8 @@ import com.example.kind.ui.components.navigation.Settings
 @Composable
 fun MyPageScreen(
     onPortfolioClick: () -> Unit = {},
-    onSettingsClick: () -> Unit = {}
+    onSettingsClick: () -> Unit = {},
+    onLogoutClick: () -> Unit = {}
 ) {
     Scaffold(
         topBar = {
@@ -69,6 +71,15 @@ fun MyPageScreen(
             )
 
             Spacer(modifier = Modifier.weight(1.0f))
+
+            // TODO: Setup this entire button
+            val logoutButton = Logout
+            PageButton(
+                str = logoutButton.label,
+                icon = logoutButton.icon,
+                onClick = onLogoutClick
+            )
+
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
