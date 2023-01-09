@@ -2,7 +2,7 @@ package com.example.kind.data
 
 data class KindUserData(
     val name: String = "Invalid Account",
-    val email: String? = null,
+    val email: String = "",
     val registrationDate: String? = null,
     val subbedCharities: List<Charity>? = null,
     val totalDonated: Long = 0,

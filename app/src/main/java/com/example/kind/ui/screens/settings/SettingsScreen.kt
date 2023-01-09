@@ -4,18 +4,25 @@ import android.annotation.SuppressLint
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.kind.data.KindUserData
 import com.example.kind.ui.theme.KindTheme
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun SettingsScreen(modifier: Modifier = Modifier, onBackClick: () -> Unit) {
+fun SettingsScreen(
+    modifier: Modifier = Modifier,
+    onBackClick: () -> Unit,
+    userData: KindUserData
+) {
     Column {
         //TODO perhaps move to component package for general usage
         // or place in higher caller
@@ -27,9 +34,9 @@ fun SettingsScreen(modifier: Modifier = Modifier, onBackClick: () -> Unit) {
             SwitchButton(headlineText = "Push notifications", onSwitchButtonClick = { /* TODO */ })
 
             SectionTextTitle(text = "Account Settings")
-            ClickableListItem(headlineText = "Name", onListItemClick = { /* TODO */ })
-            ClickableListItem(headlineText = "Email", onListItemClick = { /* TODO */ })
-            ClickableListItem(headlineText = "Password", onListItemClick = { /* TODO */ })
+            ClickableListItem(headlineText = "Name", supportingText = userData.name, onListItemClick = { /* TODO */ })
+            ClickableListItem(headlineText = "Email", supportingText = userData.email,onListItemClick = { /* TODO */ })
+            ClickableListItem(headlineText = "Password", "**********", onListItemClick = { /* TODO */ })
 
             SectionTextTitle(text = "Language")
             RadioButton(headlineText = "English", onRadioButtonClick = { /* TODO */ })
@@ -74,12 +81,13 @@ private fun SectionTextTitle(text: String) {
  */
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-private fun ClickableListItem(headlineText: String, onListItemClick: () -> Unit) {
+private fun ClickableListItem(headlineText: String, supportingText: String, onListItemClick: () -> Unit) {
     Box(modifier = Modifier.selectable(
         selected = false,
         onClick = { onListItemClick() }
     )) {
-        ListItem(headlineText = { Text(text = headlineText) })
+        ListItem(headlineText = {
+            Text(text = headlineText)}, supportingText = {Text(text = supportingText)})
     }
 }
 
@@ -119,6 +127,9 @@ private fun SettingsTopAppBar(onBackClick: () -> Unit) {
         colors = TopAppBarDefaults.topAppBarColors(),
     )
 }
+
+
+/*
 
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
@@ -240,3 +251,5 @@ private fun PageSettingsPreviewLight() {
         }
     }
 }
+
+ */
