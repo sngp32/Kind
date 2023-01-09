@@ -59,7 +59,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun subscribeToCharity(charityId: Long) {
         val charity = getCharityById(charityId)
-        charity?.let { kindRepository.subscribeToCharity(it) } //TODO idk if let is appropriate here
+        charity?.let { kindRepository.subscribeToCharity(it, 0) } //TODO idk if let is appropriate here
         println("subscribed to charity")
     }
 
