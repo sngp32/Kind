@@ -57,9 +57,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         _isSignedIn.value = false
     }
 
-    fun subscribeToCharity(charityId: Long) {
-        val charity = getCharityById(charityId)
-        charity?.let { kindRepository.subscribeToCharity(it) } //TODO idk if let is appropriate here
+    fun subscribeToCharity(charityID: Long, subscriptionAmount: Long) = effect {
+        kindRepository.subscribeToCharity(charityID, subscriptionAmount)
         println("subscribed to charity")
     }
 

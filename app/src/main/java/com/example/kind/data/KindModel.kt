@@ -4,7 +4,7 @@ data class KindUserData(
     val name: String = "Invalid Account",
     val email: String = "",
     val registrationDate: String? = null,
-    val subbedCharities: List<Charity>? = null,
+    val subbedCharities: List<userCharityData>? = null,
     val totalDonated: Long = 0,
     val areEmailNotificationEnabled: Boolean = true,
     val arePushNotificationEnabled: Boolean = true,
@@ -15,7 +15,14 @@ data class Charity(
     val name: String = "",
     val description: String = "",
     val isSubscribed: Boolean = false,
-    val subscribeAmount: Int = 0
+    val subscribeAmount: Long = 0
+)
+
+data class userCharityData(
+    val id: Long = -1,
+    val isSubscribed: Boolean = false,
+    val subscriptionAmount: Long = 0,
+    val subscribedSince: String? = ""
 )
 
 data class News(

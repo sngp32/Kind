@@ -8,9 +8,9 @@ class KindRepository(
 ) {
     suspend fun allCharities(): List<Charity> = kindSource.loadCharities()
 
-    fun subscribeToCharity(charity: Charity, subscriptionAmount: Int) {
-        //should request source to subscribe to charity
-    }
+    // TODO: Probably rework this in terms of feedback message
+    suspend fun subscribeToCharity(charityID: Long, subscriptionAmount: Long):
+            KindUserData = kindSource.subscribeToCharity(charityID, subscriptionAmount)
 
     suspend fun signIn(email: String, password: String): String = kindSource.signIn(email, password)
 
