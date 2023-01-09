@@ -101,7 +101,7 @@ private fun HomeTopAppBar() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .height(250.dp)
+            .height(200.dp)
     ) {
         Text(
             text = "Dit abonnement er på plads og du er on track til at donere 100 kr.",
