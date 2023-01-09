@@ -146,7 +146,7 @@ private fun PreviewListElementDark() {
 private fun PreviewHomeTopAppBarLight() {
     KindTheme {
         Box(Modifier.background(MaterialTheme.colorScheme.background)) {
-            HomeTopAppBar(username = "Light Preview")
+            HomeTopAppBar(username = "Light Preview", 500)
         }
     }
 }
@@ -156,7 +156,7 @@ private fun PreviewHomeTopAppBarLight() {
 private fun PreviewHomeTopAppBarDark() {
     KindTheme {
         Box(Modifier.background(MaterialTheme.colorScheme.background)) {
-            HomeTopAppBar(username = "Dark Preview")
+            HomeTopAppBar(username = "Dark Preview", 500)
         }
     }
 }
