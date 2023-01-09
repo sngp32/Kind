@@ -19,7 +19,7 @@ import com.example.kind.ui.components.navigation.Signup
 
 @Composable
 fun LoginScreen(
-    onLoginClick: () -> Unit,
+    onLoginClick: (List<String>) -> Unit,
     onSignUpClick: () -> Unit
 ) {
     var textEmail = remember { mutableStateOf("") }
@@ -61,10 +61,17 @@ fun LoginScreen(
                     label = "Password",
                     onValueChange = { input -> textPassword.value = input })
 
-                Button(onLoginClick, "LOGIN")
+                Button(navigation = {
+                    onLoginClick(
+                        listOf(
+                            textEmail.value,
+                            textPassword.value
+                        )
+                    )
+                }, text = "LOGIN")
                 ClickableText(
                     text = AnnotatedString("Forgot your password?"),
-                    onClick = { }
+                    onClick = {  }
                 )
             }
         }
