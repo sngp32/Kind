@@ -24,7 +24,6 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.kind.data.Charity
-import com.example.kind.data.News
 import com.example.kind.ui.theme.KindTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -34,9 +33,7 @@ fun SetPortfolioScreen(
     charities: List<Charity>,
     onAddCharityClick: (Long) -> Unit
 ) {
-    Scaffold(
-        bottomBar = { }
-    ) {
+    Scaffold {
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -65,7 +62,7 @@ fun SetPortfolioScreen(
                     }
                 }
                 item {
-                    Spacer(modifier = Modifier.height(20.dp))
+                    Spacer(modifier = Modifier.height(5.dp))
                 }
             }
         }
@@ -76,7 +73,7 @@ fun SetPortfolioScreen(
 private fun Header() {
     Column {
         Text(
-            text = "Byg din portfølje",
+            text = "Build your portfolio",
             fontSize = 24.sp,
             color = MaterialTheme.colorScheme.onSurface
         )
@@ -84,7 +81,7 @@ private fun Header() {
         Spacer(modifier = Modifier.height(14.dp))
 
         Text(
-            text = "Vælg så mange temaer som du har lyst til.",
+            text = "Add as many themes as you would like!",
             fontSize = 16.sp,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
@@ -106,7 +103,6 @@ private fun CharityElement(
             .height(260.dp),
         shape = RoundedCornerShape(30.dp)
     ) {
-
         Column(
             modifier = Modifier.padding(30.dp),
         ) {
@@ -124,8 +120,6 @@ private fun CharityElement(
     }
 }
 
-
-
 @Composable
 private fun CardHeader(
     modifier: Modifier,
@@ -133,7 +127,7 @@ private fun CardHeader(
     icon: ImageVector,
 ) {
     val titleSize = 18.sp
-    val iconSize = with(LocalDensity.current) { titleSize.toDp()*2 }
+    val iconSize = with(LocalDensity.current) { titleSize.toDp() * 2 }
     Row(verticalAlignment = Alignment.CenterVertically) {
         CardTitle(title = title, fontSize = titleSize, modifier = modifier)
         Spacer(modifier = Modifier.width(5.dp))

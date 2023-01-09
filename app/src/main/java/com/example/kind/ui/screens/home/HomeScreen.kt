@@ -1,21 +1,22 @@
 package com.example.kind.ui.screens.home
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Accessibility
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.kind.data.KindUserData
 import com.example.kind.data.News
+import com.example.kind.ui.theme.KindTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -36,7 +37,6 @@ fun HomeScreen(
                 .fillMaxSize()
                 .padding(it)
         ) {
-
             LazyColumn(
                 modifier = modifier
                     .fillMaxSize()
@@ -44,8 +44,6 @@ fun HomeScreen(
                     .padding(start = 25.dp, end = 25.dp, top = 15.dp),
                 verticalArrangement = Arrangement.spacedBy(20.dp)
             ) {
-
-                // News gets loaded in reverse order, (by highest id first which is newest)
                 news.asReversed().forEach { newsItem ->
                     item {
                         ListElement(
@@ -71,8 +69,7 @@ private fun ListElement(modifier: Modifier, title: String, text: String) {
         shape = RoundedCornerShape(30.dp)
     ) {
         Column(
-            modifier = modifier.padding(30.dp),
-            verticalArrangement = Arrangement.SpaceBetween
+            modifier = modifier.padding(30.dp), verticalArrangement = Arrangement.SpaceBetween
         ) {
             Row(
                 modifier = modifier.fillMaxWidth(),
@@ -99,14 +96,14 @@ private fun HomeTopAppBar(username: String, totalSub: Long) {
             .height(200.dp)
     ) {
         Text(
-            text = "Hey " + username + "\nDit abonnement på " +  totalSub + " kr er aktivt",
+            text = "Hey $username\nYour subscription of $totalSub DKK is active",
             fontSize = 32.sp,
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 30.dp)
         )
         Spacer(modifier = Modifier.height(20.dp))
         Text(
-            text = "Du er blandt top 1% af donorer denne måned. Godt gået!",
+            text = "You are among 1% of donors this month. Great job!",
             fontSize = 22.sp,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(start = 20.dp)
@@ -114,6 +111,52 @@ private fun HomeTopAppBar(username: String, totalSub: Long) {
     }
 }
 
+@Preview
+@Composable
+private fun PreviewListElementLight() {
+    KindTheme {
+        ListElement(
+            modifier = Modifier,
+            title = "Preview List Element Light",
+            text = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia," +
+                    "molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum" +
+                    "numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium" +
+                    "optio, eaque rerum! Provident similique accusantium nemo autem."
+        )
+    }
+}
 
+@Preview(uiMode = UI_MODE_NIGHT_YES)
+@Composable
+private fun PreviewListElementDark() {
+    KindTheme {
+        ListElement(
+            modifier = Modifier,
+            title = "Preview List Element Light",
+            text = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia," +
+                    "molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum" +
+                    "numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium" +
+                    "optio, eaque rerum! Provident similique accusantium nemo autem."
+        )
+    }
+}
 
+@Preview
+@Composable
+private fun PreviewHomeTopAppBarLight() {
+    KindTheme {
+        Box(Modifier.background(MaterialTheme.colorScheme.background)) {
+            HomeTopAppBar(username = "Light Preview")
+        }
+    }
+}
 
+@Preview(uiMode = UI_MODE_NIGHT_YES)
+@Composable
+private fun PreviewHomeTopAppBarDark() {
+    KindTheme {
+        Box(Modifier.background(MaterialTheme.colorScheme.background)) {
+            HomeTopAppBar(username = "Dark Preview")
+        }
+    }
+}
