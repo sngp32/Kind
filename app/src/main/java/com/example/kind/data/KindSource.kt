@@ -64,21 +64,10 @@ class KindSource(
         return@withContext charityData
     }
 
-
-    data class newUserData(
-        val name: String? = null,
-        val email: String? = null,
-        val registrationDate: String? = null,
-        val subbedCharities: List<String>? = null,
-        val totalDonations: Int = 0,
-        val emailNotifications: Boolean = true,
-        val phoneNotifications: Boolean = true,
-    )
-
     private fun addNewUserData(name: String, email: String) {
         val db = Firebase.firestore
 
-        val userData = newUserData(
+        val userData = KindUserData(
             name,
             email,
             DateTimeFormatter.ISO_INSTANT.format(Instant.now()),

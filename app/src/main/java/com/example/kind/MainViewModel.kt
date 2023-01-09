@@ -15,6 +15,7 @@ import kotlinx.coroutines.launch
 /**
  *
  */
+
 class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val kindSource: KindSource = KindSource()
     private val kindRepository: KindRepository = KindRepository()
@@ -70,7 +71,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun load() = effect {
         _charities.value = kindRepository.allCharities()
 
-        trySignIn("tester@gmail.com", "123456")
+        trySignIn("jackig5000@gmail.com", "123456")
     }
 
     private fun effect(block: suspend () -> Unit) {

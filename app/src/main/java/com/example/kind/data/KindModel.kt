@@ -1,11 +1,13 @@
 package com.example.kind.data
 
-data class KindModel(
+data class KindUserData(
     val name: String? = null,
     val email: String? = null,
-    val charities: List<Charity>? = null,
-    val isEmailNotificationEnabled: Boolean = false,
-    val isPushNotificationEnabled: Boolean = false
+    val registrationDate: String? = null,
+    val subbedCharities: List<Charity>? = null,
+    val totalDonated: Int = 0,
+    val areEmailNotificationEnabled: Boolean = true,
+    val arePushNotificationEnabled: Boolean = true,
 )
 
 data class Charity(
