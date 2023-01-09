@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.kind.data.Charity
 import com.example.kind.data.KindRepository
 import com.example.kind.data.KindSource
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -26,6 +27,25 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun signIn() {
         _isSignedIn.value = true
+        // TODO:
+        // UI stuff here or?
+    }
+
+    suspend fun getUserData(){
+
+    }
+
+    fun trySignIn(email: String, password: String) = effect{
+        val result = kindRepository.signIn(email, password)
+
+        if(result.equals("SUCCESS")){
+            signIn()
+            getUserData()
+        }
+    }
+
+    fun trySignUp(name: String, email: String, password: String) = effect{
+
     }
 
     fun signOut() {
@@ -49,6 +69,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun load() = effect {
         _charities.value = kindRepository.allCharities()
+
+        trySignIn("tester@gmail.com", "123456")
     }
 
     private fun effect(block: suspend () -> Unit) {

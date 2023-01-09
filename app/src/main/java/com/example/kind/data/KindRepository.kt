@@ -1,5 +1,7 @@
 package com.example.kind.data
 
+import com.google.firebase.auth.FirebaseUser
+
 
 class KindRepository(
     private val kindSource: KindSource = KindSource(),
@@ -9,4 +11,6 @@ class KindRepository(
     fun subscribeToCharity(charity: Charity) {
         //should request source to subscribe to charity
     }
+
+    suspend fun signIn(email: String, password: String): String { return kindSource.signIn(email, password)}
 }

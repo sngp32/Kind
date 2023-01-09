@@ -12,6 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import java.io.IOException
 import java.nio.file.WatchEvent.Kind
 import java.time.Instant
 import java.time.format.DateTimeFormatter
@@ -115,28 +116,15 @@ class KindSource(
             }
     }
 
-    fun signIn(email: String, password: String) {
+    suspend fun signIn(email: String, password: String): String {
         auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithEmail:success")
-                    val user = auth.currentUser
 
-                    // Update UI State
-                    // updateUI(user)
-                } else {
-
-                    // Debug message
-                    Log.w(TAG, "signInWithEmail:failure", task.exception)
-                    /*
-                    // Add ui fail
-                     */
-
-                    // Update UI State
-                    // updateUI(null)
-                }
-            }
+        if(auth.currentUser != null){
+            return "SUCCESS"
+        }
+        else{
+            return "LOGINFAILED"
+        }
     }
 
     fun sendEmailVerifification() {
