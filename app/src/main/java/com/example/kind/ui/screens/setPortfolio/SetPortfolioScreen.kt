@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.kind.data.Charity
+import com.example.kind.data.News
 import com.example.kind.ui.theme.KindTheme
 
 @OptIn(ExperimentalMaterial3Api::class)

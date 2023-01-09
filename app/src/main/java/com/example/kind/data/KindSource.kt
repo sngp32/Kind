@@ -15,10 +15,26 @@ class KindSource(
     private val db: FirebaseFirestore = firebaseDB
 ) : Activity() {
 
-    private lateinit var charityData: MutableList<Charity>
+    suspend fun loadNews(): MutableList<News> {
+        val newsData: MutableList<News> = mutableListOf()
+        val data = db.collection("news").get().await()
+
+        for (document in data) {
+            val newsItem = News(
+                document.id.toLong(),
+                document.data["Headline"].toString(),
+                document.data["Description"].toString(),
+                document.data["date"].toString()
+            )
+            newsData.add(newsItem)
+            Log.d(TAG, "${document.id} => ${document.data}")
+        }
+
+        return newsData
+    }
 
     suspend fun loadCharities(): MutableList<Charity> = withContext(Dispatchers.IO) {
-        charityData = mutableListOf()
+        val charityData: MutableList<Charity> = mutableListOf()
 
         val data = db.collection("CharityTypes").get().await()
 

@@ -17,3 +17,10 @@ data class Charity(
     val isSubscribed: Boolean = false,
     val subscribeAmount: Int = 0
 )
+
+data class News(
+    val id: Long = -1,
+    val headline: String = "",
+    val description: String = "",
+    val date: String = "",
+)

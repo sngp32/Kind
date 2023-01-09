@@ -19,4 +19,7 @@ class KindRepository(
     suspend fun getUserData(): KindUserData = kindSource.getUserData()
 
     suspend fun persistenceLoginCheck(): Boolean = kindSource.persistenceLoginCheck()
+
+    suspend fun allNews(): List<News> = kindSource.loadNews()
+
 }

@@ -4,6 +4,8 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Accessibility
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -12,10 +14,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.kind.data.News
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
+fun HomeScreen(
+    modifier: Modifier = Modifier,
+    news: List<News>
+) {
     Scaffold(
         topBar = {
             HomeTopAppBar()
@@ -44,19 +50,15 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                         text = "Hver måned støtter du 2 temaer og 6 velgørenhedsorganisationer"
                     )
                 }
-                item {
-                    ListElement(
-                        modifier,
-                        title = "CHARITY UPDATE",
-                        text = "Mødrehjælpen har i december måned..."
-                    )
-                }
-                item {
-                    ListElement(
-                        modifier,
-                        title = "CHARITY UPDATE",
-                        text = "Knæk cancer fonden har i November måned..."
-                    )
+                // News gets loaded in reverse order, (by highest id first which is newest)
+                news.asReversed().forEach { newsItem ->
+                    item {
+                        ListElement(
+                            modifier,
+                            title = newsItem.headline,
+                            text = newsItem.description
+                        )
+                    }
                 }
             }
         }

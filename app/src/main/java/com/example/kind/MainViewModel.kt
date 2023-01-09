@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.kind.data.Charity
 import com.example.kind.data.KindRepository
 import com.example.kind.data.KindUserData
+import com.example.kind.data.News
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -20,6 +21,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _charities = mutableStateOf(emptyList<Charity>())
     val charities: State<List<Charity>> = _charities
+
+    private val _news = mutableStateOf(emptyList<News>())
+    val news: State<List<News>> = _news
 
     private var _isSignedIn = mutableStateOf(false)
     val isSignedIn: State<Boolean> = _isSignedIn
@@ -79,8 +83,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun load() = effect {
         persistenceLogin()
 
-        // TODO: Don't load before user is logged in. It needs a valid auth
+        // TODO: Don't load before user is logged in. It needs a valid auth. Can be changed if we
+        // TODO: want no valid auth
         _charities.value = kindRepository.allCharities()
+        _news.value = kindRepository.allNews()
 
 
         //trySignUp("Pissed","testerboy17@gmail.com", "123456")
