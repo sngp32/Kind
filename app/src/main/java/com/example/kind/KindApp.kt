@@ -65,6 +65,8 @@ private fun KindNavHost(
 ) {
     val charities by viewModel.charities
     val news by viewModel.news
+    val userData by viewModel.userData
+
     val startDestination: String = if (viewModel.isSignedIn.value) {
         Home.route
     } else {
@@ -83,7 +85,7 @@ private fun KindNavHost(
             }, onSignUpClick = { navController.navigateSingleTopTo(Signup.route) })
         }
         composable(route = Home.route) {
-            HomeScreen(news = news)
+            HomeScreen(news = news, userData = userData)
         }
         composable(route = SetPortfolio.route) {
             SetPortfolioScreen(

@@ -14,17 +14,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.kind.data.KindUserData
 import com.example.kind.data.News
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
-    news: List<News>
+    news: List<News>,
+    userData: KindUserData
 ) {
     Scaffold(
         topBar = {
-            HomeTopAppBar()
+            HomeTopAppBar(username = userData.name)
         },
         bottomBar = { }
     ) {
@@ -42,14 +44,6 @@ fun HomeScreen(
                 verticalArrangement = Arrangement.spacedBy(20.dp)
             ) {
 
-                //Hardcoded, since we do not have data for these charities yet
-                item {
-                    ListElement(
-                        modifier,
-                        title = "Din støtte",
-                        text = "Hver måned støtter du 2 temaer og 6 velgørenhedsorganisationer"
-                    )
-                }
                 // News gets loaded in reverse order, (by highest id first which is newest)
                 news.asReversed().forEach { newsItem ->
                     item {
@@ -97,14 +91,14 @@ private fun ListElement(modifier: Modifier, title: String, text: String) {
 }
 
 @Composable
-private fun HomeTopAppBar() {
+private fun HomeTopAppBar(username: String) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .height(200.dp)
     ) {
         Text(
-            text = "Dit abonnement er på plads og du er on track til at donere 100 kr.",
+            text = "Hey " + username + "\nDit abonnement på 100 kr er aktivt",
             fontSize = 32.sp,
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 30.dp)
