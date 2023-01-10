@@ -27,10 +27,7 @@ fun HomeScreen(
     userTotalSub: Long
 ) {
     Scaffold(
-        topBar = {
-            HomeTopAppBar(username = userData.name, userTotalSub)
-        },
-        bottomBar = { }
+        topBar = { HomeTopAppBar(username = userData.name, userTotalSub) }
     ) {
         Box(
             modifier = Modifier

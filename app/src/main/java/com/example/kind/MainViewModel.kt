@@ -42,7 +42,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         // TODO: UI stuff here or?
     }
 
-    suspend fun getUserData(){
+    suspend fun getUserData() {
         _userData.value = kindRepository.getUserData()
 
         _charities.value = kindRepository.allCharities()
@@ -51,18 +51,18 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         _userTotalSub.value = calcUserTotalSub()
     }
 
-    suspend fun calcUserTotalSub(): Long{
+    fun calcUserTotalSub(): Long {
         val userData = _userData.value
         var total: Long = 0
 
-        if(userData.subbedCharities != null){
-            val subbedCharities = userData.subbedCharities as ArrayList<HashMap<*,*>>
+        if (userData.subbedCharities != null) {
+            val subbedCharities = userData.subbedCharities as ArrayList<HashMap<*, *>>
 
             if (subbedCharities != null) {
-                for (charityHashMap in subbedCharities){
+                for (charityHashMap in subbedCharities) {
 
                     val subscriptionAmount = charityHashMap["subscriptionAmount"] as Long
-                    if(subscriptionAmount != null){
+                    if (subscriptionAmount != null) {
                         total += subscriptionAmount
                     }
 
@@ -73,16 +73,16 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         return total
     }
 
-    fun trySignIn(signInData: List<String>) = effect{
+    fun trySignIn(signInData: List<String>) = effect {
         val result = kindRepository.signIn(signInData[0], signInData[1])
 
-        if(result.equals("SUCCESS")){
+        if (result.equals("SUCCESS")) {
             signIn()
             getUserData()
         }
     }
 
-    fun trySignUp(signUpData: List<String>) = effect{
+    fun trySignUp(signUpData: List<String>) = effect {
         kindRepository.signUp(signUpData[0], signUpData[1], signUpData[2])
     }
 
@@ -109,8 +109,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         println(data)
     }
 
-    fun persistenceLogin() = effect{
-        if(kindRepository.persistenceLoginCheck()){
+    fun persistenceLogin() = effect {
+        if (kindRepository.persistenceLoginCheck()) {
             signIn()
             getUserData()
         }

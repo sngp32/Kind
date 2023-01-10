@@ -22,7 +22,6 @@ import com.example.kind.ui.screens.myPage.MyPageScreen
 import com.example.kind.ui.screens.setPortfolio.SetPortfolioScreen
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.kind.ui.screens.signUp.SignUpScreen
-import kotlin.math.sign
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
