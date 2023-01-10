@@ -1,18 +1,17 @@
 package com.example.kind.ui.screens.signUp
 
-import android.annotation.SuppressLint
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.kind.ui.components.navigation.Login
+import com.example.kind.ui.components.navigation.Signup
 import com.example.kind.ui.theme.KindTheme
+import com.example.kind.ui.utils.BackgroundThemeCombinedPreviews
 
 @Composable
 fun SignUpScreen(
@@ -24,130 +23,204 @@ fun SignUpScreen(
             .fillMaxWidth()
             .fillMaxHeight()
     ) {
+        SignUpHeader()
+
+        Spacer(modifier = Modifier.height(90.dp))
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 50.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            var inputName = remember { mutableStateOf("") }
+            var inputEmail = remember { mutableStateOf("") }
+            var inputPassword = remember { mutableStateOf("") }
+
+            SignUpInputFields(
+                inputName = inputName.value,
+                inputEmail = inputEmail.value,
+                inputPassword = inputPassword.value,
+                { input -> inputName.value = input },
+                { input -> inputEmail.value = input },
+                { input -> inputPassword.value = input }
+            )
+
+            Spacer(Modifier.height(5.dp))
+
+            SignUpButton(
+                onSignUpClick = onSignUpClick,
+                inputName = inputName.value,
+                inputEmail = inputEmail.value,
+                inputPassword = inputPassword.value,
+                modifier = Modifier.fillMaxWidth()
+            )
+
+        }
         Column(
             modifier = Modifier
                 .fillMaxHeight()
-                .fillMaxWidth(),
-            verticalArrangement = Arrangement.Top
+                .fillMaxWidth()
+                .padding(horizontal = 50.dp)
+                .padding(bottom = 20.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Bottom
         ) {
             Text(
-                text = "SIGN UP",
-                fontSize = 48.sp,
-                color = MaterialTheme.colorScheme.onSurface,
-                modifier = Modifier.padding(start = 20.dp, top = 50.dp)
+                text = "Already have an account?",
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
-            Text(
-                text = "Start your journey of giving",
-                fontSize = 28.sp,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.padding(start = 20.dp)
+            LoginButton(
+                onClick = onLoginClick,
+                modifier = Modifier.fillMaxWidth()
             )
-            Spacer(modifier = Modifier.height(90.dp))
-
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                var textName = remember { mutableStateOf("") }
-                var textEmail = remember { mutableStateOf("") }
-                var textPassword = remember { mutableStateOf("") }
-
-                InputField(inputText = textName, fieldText = "Name")
-                Spacer(modifier = Modifier.height(10.dp))
-                InputField(inputText = textEmail, fieldText = "E-mail")
-                Spacer(modifier = Modifier.height(10.dp))
-                InputField(inputText = textPassword, fieldText = "Password")
-                Spacer(modifier = Modifier.height(10.dp))
-                PrimaryButton(
-                    navigation = {
-                        onSignUpClick(
-                            listOf(
-                                textName.value,
-                                textEmail.value,
-                                textPassword.value
-                            )
-                        )
-                    },
-                    text = "SIGNUP", colors = ButtonDefaults.buttonColors()
-                )
-                Spacer(Modifier.weight(1f))
-                OutlinedButton(
-                    onClick = onLoginClick,
-                    modifier = Modifier.width(300.dp)
-                ) {
-                    Text("LOGIN")
-                }
-                Spacer(modifier = Modifier.height(10.dp))
-            }
-
         }
     }
 }
 
+@Composable
+private fun SignUpHeader() {
+    Column(
+        verticalArrangement = Arrangement.Top,
+        modifier = Modifier.padding(start = 20.dp, top = 50.dp)
+    ) {
+        Text(
+            text = "SIGN UP",
+            fontSize = 48.sp,
+            fontWeight = FontWeight.SemiBold,
+            color = MaterialTheme.colorScheme.onSurface,
+        )
+        Text(
+            text = "Start your journey of giving",
+            fontSize = 28.sp,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+    }
+}
+
+@Composable
+private fun SignUpInputFields(
+    inputName: String,
+    inputEmail: String,
+    inputPassword: String,
+    onNameInput: (String) -> Unit,
+    onEmailInput: (String) -> Unit,
+    onPasswordInput: (String) -> Unit
+) {
+    InputField(
+        value = inputName,
+        label = "Name",
+        onValueChange = onNameInput
+    )
+
+    Spacer(modifier = Modifier.height(10.dp))
+
+    InputField(
+        value = inputEmail,
+        label = "E-mail",
+        onValueChange = onEmailInput
+    )
+
+    Spacer(modifier = Modifier.height(10.dp))
+
+    InputField(
+        value = inputPassword,
+        label = "Password",
+        onValueChange = onPasswordInput
+    )
+}
+
+/**
+ * Stateless text field for input with [value] as the input and [label] to be displayed
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun InputField(inputText: MutableState<String>, fieldText: String) {
+private fun InputField(
+    value: String,
+    label: String,
+    onValueChange: (String) -> Unit
+) {
     OutlinedTextField(
-        value = inputText.value,
-        onValueChange = { input -> inputText.value = input },
-        label = { Text(text = fieldText) },
-        modifier = Modifier.width(300.dp),
+        value = value,
+        onValueChange = onValueChange,
+        label = { Text(text = label) },
+        modifier = Modifier.fillMaxWidth()
     )
 }
 
 @Composable
-private fun PrimaryButton(navigation: () -> Unit, text: String, colors: ButtonColors) {
+private fun SignUpButton(
+    onSignUpClick: (List<String>) -> Unit,
+    inputName: String,
+    inputEmail: String,
+    inputPassword: String,
+    modifier: Modifier = Modifier
+) {
     Button(
-        onClick = navigation,
-        colors = colors,
-        modifier = Modifier.width(300.dp)
+        onClick = {
+            onSignUpClick(
+                listOf(
+                    inputName,
+                    inputEmail,
+                    inputPassword
+                )
+            )
+        },
+        modifier = modifier
     ) {
-        Text(text = text, color = Color.White)
+        Text(text = Signup.label)
     }
 }
 
-@SuppressLint("UnrememberedMutableState")
-@Preview
 @Composable
-private fun PreviewInputFieldLight() {
-    KindTheme {
-        Box(Modifier.background(MaterialTheme.colorScheme.background)) {
-            InputField(inputText = mutableStateOf(""), fieldText = "Preview Input Field Light")
-        }
+private fun LoginButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    OutlinedButton(onClick = onClick, modifier = modifier) {
+        Text(text = Login.label)
     }
 }
 
-@SuppressLint("UnrememberedMutableState")
-@Preview(uiMode = UI_MODE_NIGHT_YES)
+@BackgroundThemeCombinedPreviews
 @Composable
-private fun PreviewInputFieldDark() {
+private fun PreviewLoginScreen() {
     KindTheme {
-        Box(Modifier.background(MaterialTheme.colorScheme.background)) {
-            InputField(inputText = mutableStateOf(""), fieldText = "Preview Input Field Dark")
-        }
-    }
-}
-
-@Preview
-@Composable
-private fun PreviewButtonLight() {
-    KindTheme {
-        PrimaryButton(
-            navigation = { /*TODO*/ },
-            text = "Preview Button Light",
-            colors = ButtonDefaults.buttonColors()
+        SignUpScreen(
+            onLoginClick = { },
+            onSignUpClick = { },
         )
     }
 }
 
-@Preview(uiMode = UI_MODE_NIGHT_YES)
+@BackgroundThemeCombinedPreviews
 @Composable
-private fun PreviewButtonDark() {
+private fun PreviewSignUpHeader() {
     KindTheme {
-        PrimaryButton(
-            navigation = { /*TODO*/ },
-            text = "Preview Button Dark",
-            colors = ButtonDefaults.buttonColors()
-        )
+        SignUpHeader()
+    }
+}
+
+@BackgroundThemeCombinedPreviews
+@Composable
+private fun PreviewInputField() {
+    KindTheme {
+        InputField(value = "", label = "Preview Input Field", onValueChange = { })
+    }
+}
+
+@BackgroundThemeCombinedPreviews
+@Composable
+private fun PreviewSignUpButton() {
+    KindTheme {
+        SignUpButton(onSignUpClick = { }, inputName = "", inputEmail = "", inputPassword = "")
+    }
+}
+
+@BackgroundThemeCombinedPreviews
+@Composable
+private fun PreviewLoginButton() {
+    KindTheme {
+        LoginButton(onClick = { })
     }
 }
