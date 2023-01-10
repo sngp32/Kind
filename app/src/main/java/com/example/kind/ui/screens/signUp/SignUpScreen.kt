@@ -1,6 +1,9 @@
 package com.example.kind.ui.screens.signUp
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Login
+import androidx.compose.material.icons.filled.PersonAdd
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -168,6 +171,8 @@ private fun SignUpButton(
         },
         modifier = modifier
     ) {
+        Icon(Icons.Filled.PersonAdd, contentDescription = Signup.label)
+        Spacer(modifier = Modifier.width(8.dp))
         Text(text = Signup.label)
     }
 }
@@ -178,6 +183,8 @@ private fun LoginButton(
     modifier: Modifier = Modifier
 ) {
     OutlinedButton(onClick = onClick, modifier = modifier) {
+        Icon(Icons.Filled.Login, contentDescription = Login.label)
+        Spacer(modifier = Modifier.width(8.dp))
         Text(text = Login.label)
     }
 }
