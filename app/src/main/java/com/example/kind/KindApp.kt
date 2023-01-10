@@ -86,7 +86,8 @@ private fun KindNavHost(
             LoginScreen(
                 onLoginClick = { signInData -> viewModel.trySignIn(signInData) },
                 onSignUpClick = { navController.navigateSingleTopTo(Signup.route)},
-                onIncorrectLogin = {}
+                onIncorrectLogin = { },
+                onResetPasswordClick = { }
 
             )
         }
