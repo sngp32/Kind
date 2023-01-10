@@ -61,8 +61,7 @@ fun SignUpScreen(
             modifier = Modifier
                 .fillMaxHeight()
                 .fillMaxWidth()
-                .padding(horizontal = 50.dp)
-                .padding(bottom = 20.dp),
+                .padding(horizontal = 50.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Bottom
         ) {
@@ -74,6 +73,7 @@ fun SignUpScreen(
                 onClick = onLoginClick,
                 modifier = Modifier.fillMaxWidth()
             )
+            Spacer(modifier = Modifier.height(20.dp))
         }
     }
 }
