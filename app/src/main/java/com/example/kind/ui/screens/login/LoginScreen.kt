@@ -22,8 +22,6 @@ fun LoginScreen(
     onIncorrectLogin: () -> Unit,
     onResetPasswordClick: () -> Unit
 ) {
-    var inputEmail = remember { mutableStateOf("") }
-    var inputPassword = remember { mutableStateOf("") }
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -39,12 +37,16 @@ fun LoginScreen(
                 .padding(horizontal = 50.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            var inputEmail = remember { mutableStateOf("") }
+            var inputPassword = remember { mutableStateOf("") }
+
             LoginInputFields(
                 inputEmail.value,
                 inputPassword.value,
                 { input -> inputEmail.value = input },
                 { input -> inputPassword.value = input }
             )
+
             Spacer(Modifier.height(5.dp))
 
             Row {
@@ -72,6 +74,64 @@ fun LoginScreen(
             )
         }
     }
+}
+
+@Composable
+private fun LoginHeader() {
+    Column(
+        verticalArrangement = Arrangement.Top,
+        modifier = Modifier.padding(start = 20.dp, top = 50.dp)
+    ) {
+        Text(
+            text = "LOGIN",
+            fontSize = 48.sp,
+            fontWeight = FontWeight.SemiBold,
+            color = MaterialTheme.colorScheme.onSurface,
+        )
+        Text(
+            text = "Start your journey of giving",
+            fontSize = 28.sp,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+    }
+}
+
+@Composable
+private fun LoginInputFields(
+    inputEmail: String,
+    inputPassword: String,
+    onEmailInput: (String) -> Unit,
+    onPasswordInput: (String) -> Unit
+) {
+    InputField(
+        value = inputEmail,
+        label = "E-mail",
+        onValueChange = onEmailInput
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    InputField(
+        value = inputPassword,
+        label = "Password",
+        onValueChange = onPasswordInput
+    )
+}
+
+/**
+ * Stateless text field for input with [value] as the input and [label] to be displayed
+ */
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun InputField(
+    value: String,
+    label: String,
+    onValueChange: (String) -> Unit
+) {
+    OutlinedTextField(
+        value = value,
+        onValueChange = onValueChange,
+        label = { Text(text = label) },
+        modifier = Modifier.fillMaxWidth()
+    )
 }
 
 @Composable
@@ -109,64 +169,6 @@ private fun LoginButton(
     }
 }
 
-@Composable
-private fun LoginInputFields(
-    inputEmail: String,
-    inputPassword: String,
-    onEmailInput: (String) -> Unit,
-    onPasswordInput: (String) -> Unit
-) {
-    InputField(
-        value = inputEmail,
-        label = "E-mail",
-        onValueChange = onEmailInput
-    )
-    Spacer(modifier = Modifier.height(10.dp))
-    InputField(
-        value = inputPassword,
-        label = "Password",
-        onValueChange = onPasswordInput
-    )
-}
-
-@Composable
-private fun LoginHeader() {
-    Column(
-        verticalArrangement = Arrangement.Top,
-        modifier = Modifier.padding(start = 20.dp, top = 50.dp)
-    ) {
-        Text(
-            text = "LOGIN",
-            fontSize = 48.sp,
-            fontWeight = FontWeight.SemiBold,
-            color = MaterialTheme.colorScheme.onSurface,
-        )
-        Text(
-            text = "Start your journey of giving",
-            fontSize = 28.sp,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-        )
-    }
-}
-
-/**
- * Stateless text field for input with [value] as the input and [label] to be displayed
- */
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun InputField(
-    value: String,
-    label: String,
-    onValueChange: (String) -> Unit
-) {
-    OutlinedTextField(
-        value = value,
-        onValueChange = onValueChange,
-        label = { Text(text = label) },
-        modifier = Modifier.fillMaxWidth()
-    )
-}
-
 @BackgroundThemeCombinedPreviews
 @Composable
 private fun PreviewLoginScreen() {
@@ -182,19 +184,18 @@ private fun PreviewLoginScreen() {
 
 @BackgroundThemeCombinedPreviews
 @Composable
-private fun PreviewInputFieldLight() {
+private fun PreviewLoginHeader() {
     KindTheme {
-        InputField(value = "", label = "Preview Input Field", onValueChange = { })
+        LoginHeader()
     }
 }
 
 @BackgroundThemeCombinedPreviews
 @Composable
-private fun PreviewLoginHeader() {
+private fun PreviewInputField() {
     KindTheme {
-        LoginHeader()
+        InputField(value = "", label = "Preview Input Field", onValueChange = { })
     }
-
 }
 
 @BackgroundThemeCombinedPreviews
@@ -215,7 +216,7 @@ private fun PreviewLoginButton() {
 
 @BackgroundThemeCombinedPreviews
 @Composable
-private fun Preview() {
+private fun PreviewSignUpButton() {
     KindTheme {
         SignUpButton(onClick = { }, modifier = Modifier)
     }
