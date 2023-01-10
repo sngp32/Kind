@@ -1,6 +1,5 @@
 package com.example.kind.ui.screens.home
 
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -11,12 +10,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.kind.data.KindUserData
 import com.example.kind.data.News
 import com.example.kind.ui.theme.KindTheme
+import com.example.kind.ui.utils.BackgroundThemeCombinedPreviews
+import com.example.kind.ui.utils.ThemePreviews
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -111,13 +111,13 @@ private fun HomeTopAppBar(username: String, totalSub: Long) {
     }
 }
 
-@Preview
+@ThemePreviews
 @Composable
-private fun PreviewListElementLight() {
+private fun PreviewListElement() {
     KindTheme {
         ListElement(
             modifier = Modifier,
-            title = "Preview List Element Light",
+            title = "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
             text = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia," +
                     "molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum" +
                     "numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium" +
@@ -126,37 +126,10 @@ private fun PreviewListElementLight() {
     }
 }
 
-@Preview(uiMode = UI_MODE_NIGHT_YES)
-@Composable
-private fun PreviewListElementDark() {
-    KindTheme {
-        ListElement(
-            modifier = Modifier,
-            title = "Preview List Element Light",
-            text = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia," +
-                    "molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum" +
-                    "numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium" +
-                    "optio, eaque rerum! Provident similique accusantium nemo autem."
-        )
-    }
-}
-
-@Preview
+@BackgroundThemeCombinedPreviews
 @Composable
 private fun PreviewHomeTopAppBarLight() {
     KindTheme {
-        Box(Modifier.background(MaterialTheme.colorScheme.background)) {
-            HomeTopAppBar(username = "Light Preview", 500)
-        }
-    }
-}
-
-@Preview(uiMode = UI_MODE_NIGHT_YES)
-@Composable
-private fun PreviewHomeTopAppBarDark() {
-    KindTheme {
-        Box(Modifier.background(MaterialTheme.colorScheme.background)) {
-            HomeTopAppBar(username = "Dark Preview", 500)
-        }
+        HomeTopAppBar(username = "USERNAME", 500)
     }
 }
