@@ -1,13 +1,12 @@
 package com.example.kind.ui.components
 
-import android.content.res.Configuration
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.tooling.preview.Preview
 import com.example.kind.ui.components.navigation.Home
 import com.example.kind.ui.components.navigation.KindDestination
 import com.example.kind.ui.components.navigation.kindBottomBarScreens
 import com.example.kind.ui.theme.KindTheme
+import com.example.kind.ui.utils.ThemePreviews
 
 /**
  * The app bottom navigation bar which is only visible when logged in
@@ -37,22 +36,9 @@ fun AppNavBar(
     }
 }
 
-@Preview
+@ThemePreviews
 @Composable
-fun PreviewAppNavBarLight() {
-    KindTheme {
-        AppNavBar(
-            allScreens = kindBottomBarScreens,
-            onTabSelected = { },
-            currentScreen = Home,
-            isSignedIn = true
-        )
-    }
-}
-
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-fun PreviewAppNavBarDark() {
+private fun PreviewAppNavBarLight() {
     KindTheme {
         AppNavBar(
             allScreens = kindBottomBarScreens,
