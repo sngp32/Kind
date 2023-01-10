@@ -1,6 +1,10 @@
 package com.example.kind.ui.screens.login
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.LockReset
+import androidx.compose.material.icons.filled.Login
+import androidx.compose.material.icons.filled.PersonAdd
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -137,6 +141,8 @@ private fun InputField(
 @Composable
 fun ResetPasswordButton(onResetPasswordClick: () -> Unit) {
     TextButton(onClick = onResetPasswordClick) {
+        Icon(Icons.Filled.LockReset, contentDescription = "Reset password")
+        Spacer(modifier = Modifier.width(8.dp))
         Text(text = "Reset password")
     }
 }
@@ -147,6 +153,8 @@ private fun SignUpButton(
     modifier: Modifier
 ) {
     OutlinedButton(onClick = onClick, modifier) {
+        Icon(Icons.Filled.PersonAdd, contentDescription = Signup.label)
+        Spacer(modifier = Modifier.width(8.dp))
         Text(text = Signup.label)
     }
 }
@@ -157,14 +165,16 @@ private fun LoginButton(
     inputEmail: String,
     inputPassword: String
 ) {
-    Button(onClick = {
-        onLoginClick(
-            listOf(
-                inputEmail,
-                inputPassword
-            )
-        )
-    }) {
+    Button(
+        onClick = {
+            onLoginClick(listOf(
+                    inputEmail,
+                    inputPassword
+                ))
+        }
+    ) {
+        Icon(Icons.Filled.Login, contentDescription = Login.label)
+        Spacer(modifier = Modifier.width(8.dp))
         Text(text = Login.label)
     }
 }
