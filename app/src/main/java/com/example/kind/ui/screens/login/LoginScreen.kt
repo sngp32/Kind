@@ -56,7 +56,13 @@ fun LoginScreen(
             Row {
                 ResetPasswordButton(onResetPasswordClick)
                 Spacer(modifier = Modifier.weight(1f))
-                LoginButton(onLoginClick, inputEmail.value, inputPassword.value)
+                LoginButton(onLoginClick = {
+                    onLoginClick(
+                        listOf(
+                            inputEmail.value, inputPassword.value
+                        )
+                    )
+                })
             }
         }
         Column(
@@ -161,17 +167,10 @@ private fun SignUpButton(
 
 @Composable
 private fun LoginButton(
-    onLoginClick: (List<String>) -> Unit,
-    inputEmail: String,
-    inputPassword: String
+    onLoginClick: () -> Unit,
 ) {
     Button(
-        onClick = {
-            onLoginClick(listOf(
-                    inputEmail,
-                    inputPassword
-                ))
-        }
+        onClick = onLoginClick
     ) {
         Icon(Icons.Filled.Login, contentDescription = Login.label)
         Spacer(modifier = Modifier.width(8.dp))
@@ -220,7 +219,7 @@ private fun PreviewResetPasswordButton() {
 @Composable
 private fun PreviewLoginButton() {
     KindTheme {
-        LoginButton(onLoginClick = { }, inputEmail = "", inputPassword = "")
+        LoginButton(onLoginClick = { })
     }
 }
 
