@@ -12,6 +12,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.kind.ui.components.navigation.Login
 import com.example.kind.ui.components.navigation.Signup
+import com.example.kind.ui.theme.KindTheme
+import com.example.kind.ui.utils.BackgroundThemeCombinedPreviews
 
 @Composable
 fun LoginScreen(
@@ -165,42 +167,56 @@ private fun InputField(
     )
 }
 
-/**
- * Stateless button with [text] to be displayed and [navigation] for rerouting
- */
+@BackgroundThemeCombinedPreviews
 @Composable
-private fun Button(navigation: () -> Unit, text: String) {
-    Button(
-        onClick = navigation,
-        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF454545)),
-        modifier = Modifier.width(300.dp)
-    ) {
-        Text(text = text, color = Color.White)
+private fun PreviewLoginScreen() {
+    KindTheme {
+        LoginScreen(
+            onLoginClick = { },
+            onSignUpClick = { },
+            onIncorrectLogin = { },
+            onResetPasswordClick = { }
+        )
     }
 }
 
-@SuppressLint("UnrememberedMutableState")
-@Preview
+@BackgroundThemeCombinedPreviews
 @Composable
 private fun PreviewInputFieldLight() {
-    InputField(value = "", label = "Preview Input Field", onValueChange = { })
+    KindTheme {
+        InputField(value = "", label = "Preview Input Field", onValueChange = { })
+    }
 }
 
-@SuppressLint("UnrememberedMutableState")
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@BackgroundThemeCombinedPreviews
 @Composable
-private fun PreviewInputFieldDark() {
-    InputField(value = "", label = "Preview Input Field", onValueChange = { })
+private fun PreviewLoginHeader() {
+    KindTheme {
+        LoginHeader()
+    }
+
 }
 
-@Preview
+@BackgroundThemeCombinedPreviews
 @Composable
-private fun PreviewButtonLight() {
-    Button(navigation = { }, text = "Preview Button")
+private fun PreviewResetPasswordButton() {
+    KindTheme {
+        ResetPasswordButton {}
+    }
 }
 
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@BackgroundThemeCombinedPreviews
 @Composable
-private fun PreviewButtonDark() {
-    Button(navigation = { }, text = "Preview Button")
+private fun PreviewLoginButton() {
+    KindTheme {
+        LoginButton(onLoginClick = { }, inputEmail = "", inputPassword = "")
+    }
+}
+
+@BackgroundThemeCombinedPreviews
+@Composable
+private fun Preview() {
+    KindTheme {
+        SignUpButton(onClick = { }, modifier = Modifier)
+    }
 }
