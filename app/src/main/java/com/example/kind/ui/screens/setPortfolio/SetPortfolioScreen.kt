@@ -5,18 +5,20 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Accessibility
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -54,9 +56,8 @@ fun SetPortfolioScreen(
                     item {
                         CharityElement(
                             modifier,
-                            title = charity.name,
-                            description = charity.description,
                             icon = Icons.Filled.Accessibility,
+                            charity = charity,
                             onAddCharityClick = { onAddCharityClick(charity.id) }
                         )
                     }
@@ -92,9 +93,8 @@ private fun Header() {
 @Composable
 private fun CharityElement(
     modifier: Modifier = Modifier,
-    title: String,
-    description: String,
     icon: ImageVector,
+    charity: Charity,
     onAddCharityClick: () -> Unit
 ) {
     Card(
@@ -109,13 +109,13 @@ private fun CharityElement(
 
             CardHeader(
                 modifier = Modifier.weight(1f),
-                title = title,
+                title = charity.name,
                 icon = icon,
             )
             Spacer(modifier = Modifier.height(5.dp))
-            CardDescription(description)
+            CardDescription(charity.description)
             Spacer(modifier = Modifier.weight(1f))
-            CardButtons(modifier, onAddCharityClick)
+            CardButtons(modifier, charity, onAddCharityClick)
         }
     }
 }
@@ -173,14 +173,19 @@ private fun CardDescription(text: String) {
 @Composable
 private fun CardButtons(
     modifier: Modifier,
+    charity: Charity,
     onAddCharityClick: () -> Unit
 ) {
+
+    val showDialog = remember { mutableStateOf(false) }
+
     Row(
         modifier = modifier
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Button(onClick = onAddCharityClick) {
+
+        Button(onClick = {showDialog.value = true }) {
             Text(text = "Add theme")
         }
 
@@ -190,6 +195,84 @@ private fun CardButtons(
             Text(text = "Read more")
         }
     }
+
+    if (showDialog.value) {
+        addThemeDialog(showDialog, charity, onAddCharityClick)
+    }
+
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun addThemeDialog(
+    showDialog: MutableState<Boolean>,
+    charity: Charity,
+    onAddCharityClick: () -> Unit
+) {
+
+    var number by remember {
+        mutableStateOf(0)
+    }
+
+    val checkbox = remember { mutableStateOf(false) }
+
+    AlertDialog(
+        onDismissRequest = {
+            showDialog.value = false
+        },
+        title = {
+            Text(text = charity.name)
+        },
+        text = {
+            Column {
+                Spacer(modifier = Modifier.height(8.dp))
+                TextField(
+                    value = number.toString(),
+                    onValueChange = {
+                        if (it.isNotBlank()) {
+                            number = it.toIntOrNull() ?: 0
+                        }
+                    },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    label = {
+                        Text("Enter amount")
+                    }
+                )
+                Spacer(modifier = Modifier.height(10.dp))
+
+                Row (){
+
+                    Checkbox(
+                        checked = checkbox.value,
+                        onCheckedChange = {
+                            checkbox.value = it }
+
+                    )
+                    Text( modifier = Modifier.padding(vertical = 14.dp), text = "Monthly Subscription")
+
+                }
+            }
+        },
+
+        confirmButton = {
+            Button(
+
+                onClick = {
+                    showDialog.value = false
+                    onAddCharityClick
+                }) {
+                Text("Add Theme")
+            }
+        },
+        dismissButton = {
+            Button(
+                onClick = {
+                    showDialog.value = false
+                }) {
+                Text("Cancel")
+            }
+        }
+    )
 }
 
 @Preview
@@ -211,7 +294,7 @@ private fun PreviewHeaderDark() {
         }
     }
 }
-
+/*
 @Preview
 @Composable
 private fun PreviewCharityCardLight() {
@@ -242,3 +325,5 @@ private fun PreviewCharityCardDark() {
         ) { }
     }
 }
+
+ */
