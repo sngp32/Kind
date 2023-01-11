@@ -11,4 +11,10 @@
     <string name="noaccount_field">Don\'t have an account?</string>
     <string name="login_button">Login</string>
     <string name="signup_button">Sign Up</string>
+    <string name="home_greeting">Hey %1$s\nYour subscription of %2$d DKK is active</string>
+    <string name="home_info">You are among %1$s of donors this month. Great job!</string>
+    <string name="setportfolio_title">Build your portfolio</string>
+    <string name="setportfolio_info">Add as many themes as you would like!</string>
+    <string name="add_theme">Add theme</string>
+    <string name="read_more">Read more</string>
 </resources>

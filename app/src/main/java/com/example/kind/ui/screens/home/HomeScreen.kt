@@ -8,11 +8,12 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.kind.R
 import com.example.kind.data.KindUserData
 import com.example.kind.data.News
 import com.example.kind.ui.theme.KindTheme
@@ -95,14 +96,14 @@ private fun HomeTopAppBar(username: String, totalSub: Long) {
             .background(color = MaterialTheme.colorScheme.secondaryContainer)
     ) {
         Text(
-            text = "Hey $username\nYour subscription of $totalSub DKK is active",
+            text = stringResource(R.string.home_greeting, username, totalSub),
             fontSize = 32.sp,
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 30.dp)
         )
         Spacer(modifier = Modifier.height(20.dp))
         Text(
-            text = "You are among 1% of donors this month. Great job!",
+            text = stringResource(R.string.home_info, "1%"), //TODO get 1% from somewhere
             fontSize = 22.sp,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(start = 20.dp)
