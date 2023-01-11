@@ -8,6 +8,8 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.blur
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -60,7 +62,8 @@ private fun ListElement(modifier: Modifier, title: String, text: String) {
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 15.dp)
-            .clickable { },
+            .clickable { }
+            .shadow(3.dp, shape = RoundedCornerShape(30.dp)),
         shape = RoundedCornerShape(30.dp)
     ) {
         Column(
@@ -89,6 +92,7 @@ private fun HomeTopAppBar(username: String, totalSub: Long) {
         modifier = Modifier
             .fillMaxWidth()
             .height(200.dp)
+            .background(color = MaterialTheme.colorScheme.secondaryContainer)
     ) {
         Text(
             text = "Hey $username\nYour subscription of $totalSub DKK is active",
