@@ -11,11 +11,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.kind.ui.components.navigation.Login
-import com.example.kind.ui.components.navigation.Signup
+import com.example.kind.R
 import com.example.kind.ui.theme.KindTheme
 import com.example.kind.ui.utils.BackgroundThemeCombinedPreviews
 
@@ -75,7 +75,7 @@ fun LoginScreen(
             verticalArrangement = Arrangement.Bottom
         ) {
             Text(
-                text = "Don't have an account?",
+                text = stringResource(R.string.noaccount_field),
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
             SignUpButton(
@@ -93,13 +93,13 @@ private fun LoginHeader() {
         modifier = Modifier.padding(start = 20.dp, top = 50.dp)
     ) {
         Text(
-            text = "LOGIN",
+            text = stringResource(R.string.login_title),
             fontSize = 48.sp,
             fontWeight = FontWeight.SemiBold,
             color = MaterialTheme.colorScheme.onSurface,
         )
         Text(
-            text = "Start your journey of giving",
+            text = stringResource(R.string.greeting),
             fontSize = 28.sp,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
@@ -115,13 +115,13 @@ private fun LoginInputFields(
 ) {
     InputField(
         value = inputEmail,
-        label = "E-mail",
+        label = stringResource(R.string.email_field),
         onValueChange = onEmailInput
     )
     Spacer(modifier = Modifier.height(10.dp))
     InputField(
         value = inputPassword,
-        label = "Password",
+        label = stringResource(R.string.password_field),
         onValueChange = onPasswordInput
     )
 }
@@ -147,9 +147,9 @@ private fun InputField(
 @Composable
 fun ResetPasswordButton(onResetPasswordClick: () -> Unit) {
     TextButton(onClick = onResetPasswordClick) {
-        Icon(Icons.Filled.LockReset, contentDescription = "Reset password")
+        Icon(Icons.Filled.LockReset, contentDescription = stringResource(R.string.resetpassword_button))
         Spacer(modifier = Modifier.width(8.dp))
-        Text(text = "Reset password")
+        Text(text = stringResource(R.string.resetpassword_button))
     }
 }
 
@@ -159,9 +159,9 @@ private fun SignUpButton(
     modifier: Modifier
 ) {
     OutlinedButton(onClick = onClick, modifier) {
-        Icon(Icons.Filled.PersonAdd, contentDescription = Signup.label)
+        Icon(Icons.Filled.PersonAdd, contentDescription = stringResource(R.string.signup_button))
         Spacer(modifier = Modifier.width(8.dp))
-        Text(text = Signup.label)
+        Text(text = stringResource(R.string.signup_button))
     }
 }
 
@@ -172,9 +172,9 @@ private fun LoginButton(
     Button(
         onClick = onLoginClick
     ) {
-        Icon(Icons.Filled.Login, contentDescription = Login.label)
+        Icon(Icons.Filled.Login, contentDescription = stringResource(R.string.login_button))
         Spacer(modifier = Modifier.width(8.dp))
-        Text(text = Login.label)
+        Text(text = stringResource(R.string.login_button))
     }
 }
 

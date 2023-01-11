@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Kind</string>
+    <string name="login_title">LOGIN</string>
+    <string name="greeting">Start your journey of giving</string>
+    <string name="email_field">E-mail</string>'
+    <string name="password_field">Password</string>
+    <string name="resetpassword_button">Reset password</string>
+    <string name="noaccount_field">Don\'t have an account?</string>
+    <string name="login_button">Login</string>
+    <string name="signup_button">Sign Up</string>
 </resources>
