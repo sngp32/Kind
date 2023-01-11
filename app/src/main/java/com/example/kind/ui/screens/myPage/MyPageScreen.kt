@@ -9,8 +9,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.kind.R
 import com.example.kind.ui.components.navigation.Logout
 import com.example.kind.ui.components.navigation.MyPortfolio
 import com.example.kind.ui.components.navigation.Settings
@@ -31,7 +33,7 @@ fun MyPageScreen(
                     .clip(RoundedCornerShape(bottomStart = 10.dp, bottomEnd = 10.dp))
             ) {
                 Text(
-                    text = "My page",
+                    text = stringResource(R.string.my_page),
                     fontSize = 32.sp,
                     color = MaterialTheme.colorScheme.onBackground,
                     modifier = Modifier
@@ -55,7 +57,7 @@ fun MyPageScreen(
             // to avoid dependency on KindDestinations
             val myPortfolioButton = MyPortfolio
             PageButton(
-                str = myPortfolioButton.label,
+                str = stringResource(R.string.my_portfolio),
                 icon = myPortfolioButton.icon,
                 onClick = onPortfolioClick
             )
@@ -66,7 +68,7 @@ fun MyPageScreen(
             // to avoid dependency on KindDestinations
             val settingsButton = Settings
             PageButton(
-                str = settingsButton.label,
+                str = stringResource(R.string.settings),
                 icon = settingsButton.icon,
                 onClick = onSettingsClick
             )
@@ -76,7 +78,7 @@ fun MyPageScreen(
             // TODO: Setup this entire button
             val logoutButton = Logout
             PageButton(
-                str = logoutButton.label,
+                str = stringResource(R.string.logout_button),
                 icon = logoutButton.icon,
                 onClick = onLogoutClick
             )
