@@ -13,11 +13,13 @@ import androidx.compose.ui.tooling.preview.Preview
     name = "dark theme",
     group = "themes",
     uiMode = UI_MODE_NIGHT_YES,
+    locale = "en-rEN"
 )
 @Preview(
     name = "light theme",
     group = "themes",
     uiMode = UI_MODE_NIGHT_NO,
+    locale = "en-rEN"
 )
 annotation class ThemePreviews
 
@@ -26,14 +28,16 @@ annotation class ThemePreviews
     group = "themes",
     uiMode = UI_MODE_NIGHT_YES,
     showBackground = true,
-    backgroundColor = 0xFF1A1C19
+    backgroundColor = 0xFF1A1C19,
+    locale = "en-rEN"
 )
 @Preview(
     name = "light theme",
     group = "themes",
     uiMode = UI_MODE_NIGHT_NO,
     showBackground = true,
-    backgroundColor = 0xFFFCFDF6
+    backgroundColor = 0xFFFCFDF6,
+    locale = "en-rEN"
 )
 annotation class BackgroundThemeCombinedPreviews
 
