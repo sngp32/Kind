@@ -13,7 +13,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
@@ -42,7 +41,6 @@ fun SetPortfolioScreen(
             LazyColumn(
                 modifier = modifier
                     .fillMaxSize()
-                    .background(color = Color(0xffebebeb))
                     .padding(start = 25.dp, end = 25.dp, top = 30.dp),
                 verticalArrangement = Arrangement.spacedBy(20.dp)
             ) {
