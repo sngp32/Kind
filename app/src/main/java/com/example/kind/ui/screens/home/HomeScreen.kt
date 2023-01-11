@@ -8,7 +8,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -37,7 +36,6 @@ fun HomeScreen(
             LazyColumn(
                 modifier = modifier
                     .fillMaxSize()
-                    .background(color = Color(0xffebebeb))
                     .padding(start = 25.dp, end = 25.dp, top = 15.dp),
                 verticalArrangement = Arrangement.spacedBy(20.dp)
             ) {
