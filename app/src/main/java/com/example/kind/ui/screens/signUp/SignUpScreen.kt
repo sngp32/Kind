@@ -8,11 +8,11 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.kind.ui.components.navigation.Login
-import com.example.kind.ui.components.navigation.Signup
+import com.example.kind.R
 import com.example.kind.ui.theme.KindTheme
 import com.example.kind.ui.utils.BackgroundThemeCombinedPreviews
 
@@ -69,7 +69,7 @@ fun SignUpScreen(
             verticalArrangement = Arrangement.Bottom
         ) {
             Text(
-                text = "Already have an account?",
+                text = stringResource(R.string.haveaccount_field),
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
             LoginButton(
@@ -88,13 +88,13 @@ private fun SignUpHeader() {
         modifier = Modifier.padding(start = 20.dp, top = 50.dp)
     ) {
         Text(
-            text = "SIGN UP",
+            text = stringResource(R.string.signup_title),
             fontSize = 48.sp,
             fontWeight = FontWeight.SemiBold,
             color = MaterialTheme.colorScheme.onSurface,
         )
         Text(
-            text = "Start your journey of giving",
+            text = stringResource(R.string.greeting),
             fontSize = 28.sp,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
@@ -112,7 +112,7 @@ private fun SignUpInputFields(
 ) {
     InputField(
         value = inputName,
-        label = "Name",
+        label = stringResource(R.string.name_field),
         onValueChange = onNameInput
     )
 
@@ -120,7 +120,7 @@ private fun SignUpInputFields(
 
     InputField(
         value = inputEmail,
-        label = "E-mail",
+        label = stringResource(R.string.email_field),
         onValueChange = onEmailInput
     )
 
@@ -128,7 +128,7 @@ private fun SignUpInputFields(
 
     InputField(
         value = inputPassword,
-        label = "Password",
+        label = stringResource(R.string.password_field),
         onValueChange = onPasswordInput
     )
 }
@@ -171,9 +171,9 @@ private fun SignUpButton(
         },
         modifier = modifier
     ) {
-        Icon(Icons.Filled.PersonAdd, contentDescription = Signup.label)
+        Icon(Icons.Filled.PersonAdd, contentDescription = stringResource(R.string.signup_button))
         Spacer(modifier = Modifier.width(8.dp))
-        Text(text = Signup.label)
+        Text(text = stringResource(R.string.signup_button))
     }
 }
 
@@ -183,9 +183,9 @@ private fun LoginButton(
     modifier: Modifier = Modifier
 ) {
     OutlinedButton(onClick = onClick, modifier = modifier) {
-        Icon(Icons.Filled.Login, contentDescription = Login.label)
+        Icon(Icons.Filled.Login, contentDescription = stringResource(R.string.login_button))
         Spacer(modifier = Modifier.width(8.dp))
-        Text(text = Login.label)
+        Text(text = stringResource(R.string.login_button))
     }
 }
 
