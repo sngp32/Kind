@@ -62,6 +62,12 @@ object Logout : KindDestination {
     override val label = "Logout"
 }
 
+object ReadMore : KindDestination {
+    override val icon = Icons.Rounded.Settings
+    override val route = "readMore"
+    override val label = "Read More"
+}
+
 /**
  * Screens to be displayed in the bottom navigation bar
  */

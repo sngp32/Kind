@@ -15,7 +15,8 @@ data class Charity(
     val name: String = "",
     val description: String = "",
     val isSubscribed: Boolean = false,
-    val subscribeAmount: Long = 0
+    val subscribeAmount: Long = 0,
+    val readMore: String = ""
 )
 
 data class userCharityData(

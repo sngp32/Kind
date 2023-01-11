@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Accessibility
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material3.*
@@ -30,8 +31,9 @@ import com.example.kind.ui.theme.KindTheme
 fun SetPortfolioScreen(
     modifier: Modifier = Modifier,
     charities: List<Charity>,
-    onAddCharityClick: (Long) -> Unit
-) {
+    onAddCharityClick: (Long) -> Unit,
+    onReadMoreClick: (Long) -> Unit
+    ) {
     Scaffold {
         Box(
             modifier = Modifier
@@ -55,7 +57,8 @@ fun SetPortfolioScreen(
                             title = charity.name,
                             description = charity.description,
                             icon = Icons.Filled.Accessibility,
-                            onAddCharityClick = { onAddCharityClick(charity.id) }
+                            onAddCharityClick = { onAddCharityClick(charity.id) },
+                            onReadMoreClick = { onReadMoreClick(charity.id) }
                         )
                     }
                 }
@@ -93,8 +96,9 @@ private fun CharityElement(
     title: String,
     description: String,
     icon: ImageVector,
-    onAddCharityClick: () -> Unit
-) {
+    onAddCharityClick: () -> Unit,
+    onReadMoreClick: () -> Unit
+    ) {
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -113,7 +117,7 @@ private fun CharityElement(
             Spacer(modifier = Modifier.height(5.dp))
             CardDescription(description)
             Spacer(modifier = Modifier.weight(1f))
-            CardButtons(modifier, onAddCharityClick)
+            CardButtons(modifier, onAddCharityClick, onReadMoreClick)
         }
     }
 }
@@ -171,7 +175,8 @@ private fun CardDescription(text: String) {
 @Composable
 private fun CardButtons(
     modifier: Modifier,
-    onAddCharityClick: () -> Unit
+    onAddCharityClick: () -> Unit,
+    onReadMoreClick: () -> Unit
 ) {
     Row(
         modifier = modifier
@@ -184,7 +189,7 @@ private fun CardButtons(
 
         Spacer(modifier = modifier.weight(1f))
 
-        OutlinedButton(onClick = { /*TODO*/ }) {
+        OutlinedButton(onClick = onReadMoreClick ) {
             Text(text = "Read more")
         }
     }
@@ -220,7 +225,8 @@ private fun PreviewCharityCardLight() {
                     "molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum" +
                     "numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium" +
                     "optio, eaque rerum!",
-            icon = Icons.Filled.LightMode
+            icon = Icons.Filled.LightMode,
+            onAddCharityClick = {}
         ) { }
     }
 
@@ -236,7 +242,8 @@ private fun PreviewCharityCardDark() {
                     "molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum" +
                     "numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium" +
                     "optio, eaque rerum!",
-            icon = Icons.Filled.DarkMode
+            icon = Icons.Filled.DarkMode,
+            onAddCharityClick = {}
         ) { }
     }
 }

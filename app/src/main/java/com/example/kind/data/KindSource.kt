@@ -86,9 +86,10 @@ class KindSource(
 
         for (document in data) {
             val newCharity = Charity(
-                document.id.toLong(),
-                document.data["Name"].toString(),
-                document.data["Description"].toString()
+                id = document.id.toLong(),
+                name = document.data["Name"].toString(),
+                description = document.data["Description"].toString(),
+                readMore = document.data["ReadMore"].toString()
             )
             charityData.add(newCharity)
             Log.d(TAG, "${document.id} => ${document.data}")

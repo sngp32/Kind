@@ -37,6 +37,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private var _userTotalSub = mutableStateOf(0.toLong())
     val userTotalSub: State<Long> = _userTotalSub
 
+    private var _selectedCharity = mutableStateOf(0.toLong())
+    val selectedCharity: State<Long> = _selectedCharity
+
     fun signIn() {
         _isSignedIn.value = true
         // TODO: UI stuff here or?
@@ -122,5 +125,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private fun effect(block: suspend () -> Unit) {
         viewModelScope.launch(Dispatchers.IO) { block() }
+    }
+
+    fun setSelectedCharity(selectedCharity: Long) {
+        _selectedCharity.value = selectedCharity
     }
 }
