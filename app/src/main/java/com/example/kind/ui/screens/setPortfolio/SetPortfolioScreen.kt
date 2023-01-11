@@ -14,9 +14,10 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
@@ -25,6 +26,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.kind.R
 import com.example.kind.data.Charity
 import com.example.kind.ui.theme.KindTheme
 
@@ -33,8 +35,9 @@ import com.example.kind.ui.theme.KindTheme
 fun SetPortfolioScreen(
     modifier: Modifier = Modifier,
     charities: List<Charity>,
-    onAddCharityClick: (Long) -> Unit
-) {
+    onAddCharityClick: (Long) -> Unit,
+    onReadMoreClick: (Long) -> Unit
+    ) {
     Scaffold {
         Box(
             modifier = Modifier
@@ -44,7 +47,6 @@ fun SetPortfolioScreen(
             LazyColumn(
                 modifier = modifier
                     .fillMaxSize()
-                    .background(color = Color(0xffebebeb))
                     .padding(start = 25.dp, end = 25.dp, top = 30.dp),
                 verticalArrangement = Arrangement.spacedBy(20.dp)
             ) {
@@ -58,7 +60,8 @@ fun SetPortfolioScreen(
                             modifier,
                             icon = Icons.Filled.Accessibility,
                             charity = charity,
-                            onAddCharityClick = { onAddCharityClick(charity.id) }
+                            onAddCharityClick = { onAddCharityClick(charity.id) },
+                            onReadMoreClick = { onReadMoreClick(charity.id) }
                         )
                     }
                 }
@@ -74,7 +77,7 @@ fun SetPortfolioScreen(
 private fun Header() {
     Column {
         Text(
-            text = "Build your portfolio",
+            text = stringResource(R.string.setportfolio_title),
             fontSize = 24.sp,
             color = MaterialTheme.colorScheme.onSurface
         )
@@ -82,7 +85,7 @@ private fun Header() {
         Spacer(modifier = Modifier.height(14.dp))
 
         Text(
-            text = "Add as many themes as you would like!",
+            text = stringResource(R.string.setportfolio_info),
             fontSize = 16.sp,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
@@ -95,12 +98,15 @@ private fun CharityElement(
     modifier: Modifier = Modifier,
     icon: ImageVector,
     charity: Charity,
-    onAddCharityClick: () -> Unit
+    onAddCharityClick: () -> Unit,
+    onReadMoreClick: () -> Unit
 ) {
+
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .height(260.dp),
+            .height(260.dp)
+            .shadow(3.dp, shape = RoundedCornerShape(30.dp)),
         shape = RoundedCornerShape(30.dp)
     ) {
         Column(
@@ -115,7 +121,7 @@ private fun CharityElement(
             Spacer(modifier = Modifier.height(5.dp))
             CardDescription(charity.description)
             Spacer(modifier = Modifier.weight(1f))
-            CardButtons(modifier, charity, onAddCharityClick)
+            CardButtons(modifier, charity, onAddCharityClick, onReadMoreClick)
         }
     }
 }
@@ -174,7 +180,8 @@ private fun CardDescription(text: String) {
 private fun CardButtons(
     modifier: Modifier,
     charity: Charity,
-    onAddCharityClick: () -> Unit
+    onAddCharityClick: () -> Unit,
+    onReadMoreClick: () -> Unit
 ) {
 
     val showDialog = remember { mutableStateOf(false) }
@@ -186,13 +193,13 @@ private fun CardButtons(
     ) {
 
         Button(onClick = {showDialog.value = true }) {
-            Text(text = "Add theme")
+            Text(text = stringResource(R.string.add_theme))
         }
 
         Spacer(modifier = modifier.weight(1f))
 
-        OutlinedButton(onClick = { /*TODO*/ }) {
-            Text(text = "Read more")
+        OutlinedButton(onClick = onReadMoreClick) {
+            Text(text = stringResource(R.string.read_more))
         }
     }
 

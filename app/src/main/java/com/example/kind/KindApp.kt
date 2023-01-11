@@ -21,8 +21,8 @@ import com.example.kind.ui.screens.settings.SettingsScreen
 import com.example.kind.ui.screens.myPage.MyPageScreen
 import com.example.kind.ui.screens.setPortfolio.SetPortfolioScreen
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.kind.ui.screens.setPortfolio.ReadMoreScreen
 import com.example.kind.ui.screens.signUp.SignUpScreen
-import kotlin.math.sign
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -86,7 +86,8 @@ private fun KindNavHost(
             LoginScreen(
                 onLoginClick = { signInData -> viewModel.trySignIn(signInData) },
                 onSignUpClick = { navController.navigateSingleTopTo(Signup.route)},
-                onIncorrectLogin = {}
+                onIncorrectLogin = { },
+                onResetPasswordClick = { }
 
             )
         }
@@ -96,7 +97,10 @@ private fun KindNavHost(
         composable(route = SetPortfolio.route) {
             SetPortfolioScreen(
                 charities = charities,
-                onAddCharityClick = { charityId -> viewModel.subscribeToCharity(charityId, 25) }
+                onAddCharityClick = { charityId -> viewModel.subscribeToCharity(charityId, 25) },
+                onReadMoreClick = {
+                    charityId ->  viewModel.setSelectedCharity(charityId)
+                    navController.navigateSingleTopTo(ReadMore.route) }
             )
         }
         composable(route = MyPage.route) {
@@ -122,6 +126,11 @@ private fun KindNavHost(
                 onSignUpClick = { signUpData -> viewModel.trySignUp(signUpData) },
                 onLoginClick = { navController.navigateSingleTopTo(Login.route) }
             )
+        }
+        composable(route = ReadMore.route) {
+            ReadMoreScreen(
+                onBackClick = { navController.popBackStack() },
+                charity = charities[viewModel.selectedCharity.value.toInt()-1] )
         }
     }
 }

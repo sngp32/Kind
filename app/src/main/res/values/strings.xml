@@ -1,3 +1,31 @@
 <resources>
     <string name="app_name">Kind</string>
+    <string name="login_title">LOGIN</string>
+    <string name="signup_title">SIGN UP</string>
+    <string name="greeting">Start your journey of giving</string>
+    <string name="name_field">Name</string>
+    <string name="email_field">E-mail</string>'
+    <string name="password_field">Password</string>
+    <string name="resetpassword_button">Reset password</string>
+    <string name="haveaccount_field">Already have an account?</string>
+    <string name="noaccount_field">Don\'t have an account?</string>
+    <string name="login_button">Login</string>
+    <string name="signup_button">Sign Up</string>
+    <string name="home_greeting">Hey %1$s\nYour subscription of %2$d DKK is active</string>
+    <string name="home_info">You are among %1$s of donors this month. Great job!</string>
+    <string name="setportfolio_title">Build your portfolio</string>
+    <string name="setportfolio_info">Add as many themes as you would like!</string>
+    <string name="add_theme">Add theme</string>
+    <string name="read_more">Read more</string>
+    <string name="my_page">My page</string>
+    <string name="my_portfolio">My Portfolio</string>
+    <string name="settings">Settings</string>
+    <string name="logout_button">Logout</string>
+    <string name="notifications">Notifications</string>
+    <string name="email_notifications">E-Mail notifications</string>
+    <string name="push_notifications">Push Notifications</string>
+    <string name="account_settings">Account Settings</string>
+    <string name="language">Language</string>
+    <string name="english">English</string>
+    <string name="danish">Danish</string>
 </resources>

@@ -23,13 +23,13 @@ object Home : KindDestination {
 object Login : KindDestination {
     override val icon = Icons.Rounded.Login
     override val route = "login"
-    override val label = "LOGIN"
+    override val label = "Login"
 }
 
 object Signup : KindDestination {
     override val icon = Icons.Rounded.NoAccounts
     override val route = "signup"
-    override val label = "SIGNUP"
+    override val label = "Sign Up"
 }
 
 object SetPortfolio : KindDestination {
@@ -60,6 +60,12 @@ object Logout : KindDestination {
     override val icon = Icons.Rounded.PersonOff
     override val route = "login"
     override val label = "Logout"
+}
+
+object ReadMore : KindDestination {
+    override val icon = Icons.Rounded.Settings
+    override val route = "readMore"
+    override val label = "Read More"
 }
 
 /**

@@ -1,94 +1,129 @@
 package com.example.kind.ui.screens.login
 
-import android.annotation.SuppressLint
-import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.text.ClickableText
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.LockReset
+import androidx.compose.material.icons.filled.Login
+import androidx.compose.material.icons.filled.PersonAdd
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.kind.ui.components.navigation.Signup
+import com.example.kind.R
+import com.example.kind.ui.theme.KindTheme
+import com.example.kind.ui.utils.BackgroundThemeCombinedPreviews
 
 @Composable
 fun LoginScreen(
     onLoginClick: (List<String>) -> Unit,
     onSignUpClick: () -> Unit,
-    onIncorrectLogin: () -> Unit, 
+    onIncorrectLogin: () -> Unit,
+    onResetPasswordClick: () -> Unit
 ) {
-    var textEmail = remember { mutableStateOf("") }
-    var textPassword = remember { mutableStateOf("") }
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
     ) {
+        LoginHeader()
+
+        Spacer(modifier = Modifier.height(90.dp))
+
         Column(
             modifier = Modifier
-                .height(500.dp)
-                .fillMaxWidth(),
-            verticalArrangement = Arrangement.Top
+                .fillMaxWidth()
+                .padding(horizontal = 50.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(
-                text = "LOGIN",
-                fontSize = 48.sp,
-                modifier = Modifier.padding(start = 20.dp, top = 50.dp)
-            )
-            Text(
-                text = "Start your journey of giving",
-                fontSize = 28.sp,
-                color = Color.White,
-                modifier = Modifier.padding(start = 20.dp)
-            )
-            Spacer(modifier = Modifier.height(90.dp))
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                InputField(
-                    value = textEmail.value,
-                    label = "E-mail",
-                    onValueChange = { input -> textEmail.value = input })
-                Spacer(modifier = Modifier.height(10.dp))
-                InputField(
-                    value = textPassword.value,
-                    label = "Password",
-                    onValueChange = { input -> textPassword.value = input })
+            var inputEmail = remember { mutableStateOf("") }
+            var inputPassword = remember { mutableStateOf("") }
 
-                Button(navigation = {
+            LoginInputFields(
+                inputEmail.value,
+                inputPassword.value,
+                { input -> inputEmail.value = input },
+                { input -> inputPassword.value = input }
+            )
+
+            Spacer(Modifier.height(5.dp))
+
+            Row {
+                ResetPasswordButton(onResetPasswordClick)
+                Spacer(modifier = Modifier.weight(1f))
+                LoginButton(onLoginClick = {
                     onLoginClick(
                         listOf(
-                            textEmail.value,
-                            textPassword.value
+                            inputEmail.value, inputPassword.value
                         )
                     )
-                }, text = "LOGIN")
-                ClickableText(
-                    text = AnnotatedString("Forgot your password?"),
-                    onClick = {  }
-                )
+                })
             }
         }
         Column(
             modifier = Modifier
                 .fillMaxHeight()
                 .fillMaxWidth()
+                .padding(horizontal = 50.dp)
                 .padding(bottom = 20.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Bottom
         ) {
-            Text(text = "Don't have an account?")
-            val signUpButton = Signup
-            Button(navigation = onSignUpClick, text = signUpButton.label)
+            Text(
+                text = stringResource(R.string.noaccount_field),
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            SignUpButton(
+                onClick = onSignUpClick,
+                modifier = Modifier.width(300.dp)
+            )
         }
     }
+}
+
+@Composable
+private fun LoginHeader() {
+    Column(
+        verticalArrangement = Arrangement.Top,
+        modifier = Modifier.padding(start = 20.dp, top = 50.dp)
+    ) {
+        Text(
+            text = stringResource(R.string.login_title),
+            fontSize = 48.sp,
+            fontWeight = FontWeight.SemiBold,
+            color = MaterialTheme.colorScheme.onSurface,
+        )
+        Text(
+            text = stringResource(R.string.greeting),
+            fontSize = 28.sp,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+    }
+}
+
+@Composable
+private fun LoginInputFields(
+    inputEmail: String,
+    inputPassword: String,
+    onEmailInput: (String) -> Unit,
+    onPasswordInput: (String) -> Unit
+) {
+    InputField(
+        value = inputEmail,
+        label = stringResource(R.string.email_field),
+        onValueChange = onEmailInput
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    InputField(
+        value = inputPassword,
+        label = stringResource(R.string.password_field),
+        onValueChange = onPasswordInput
+    )
 }
 
 /**
@@ -105,49 +140,93 @@ private fun InputField(
         value = value,
         onValueChange = onValueChange,
         label = { Text(text = label) },
-        modifier = Modifier.width(300.dp),
-        colors = TextFieldDefaults.textFieldColors(
-            containerColor = Color.White
-        )
+        modifier = Modifier.fillMaxWidth()
     )
 }
 
-/**
- * Stateless button with [text] to be displayed and [navigation] for rerouting
- */
 @Composable
-private fun Button(navigation: () -> Unit, text: String) {
-    Button(
-        onClick = navigation,
-        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF454545)),
-        modifier = Modifier.width(300.dp)
-    ) {
-        Text(text = text, color = Color.White)
+fun ResetPasswordButton(onResetPasswordClick: () -> Unit) {
+    TextButton(onClick = onResetPasswordClick) {
+        Icon(Icons.Filled.LockReset, contentDescription = stringResource(R.string.resetpassword_button))
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(text = stringResource(R.string.resetpassword_button))
     }
 }
 
-@SuppressLint("UnrememberedMutableState")
-@Preview
 @Composable
-private fun PreviewInputFieldLight() {
-    InputField(value = "", label = "Preview Input Field", onValueChange = { })
+private fun SignUpButton(
+    onClick: () -> Unit,
+    modifier: Modifier
+) {
+    OutlinedButton(onClick = onClick, modifier) {
+        Icon(Icons.Filled.PersonAdd, contentDescription = stringResource(R.string.signup_button))
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(text = stringResource(R.string.signup_button))
+    }
 }
 
-@SuppressLint("UnrememberedMutableState")
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-private fun PreviewInputFieldDark() {
-    InputField(value = "", label = "Preview Input Field", onValueChange = { })
+private fun LoginButton(
+    onLoginClick: () -> Unit,
+) {
+    Button(
+        onClick = onLoginClick
+    ) {
+        Icon(Icons.Filled.Login, contentDescription = stringResource(R.string.login_button))
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(text = stringResource(R.string.login_button))
+    }
 }
 
-@Preview
+@BackgroundThemeCombinedPreviews
 @Composable
-private fun PreviewButtonLight() {
-    Button(navigation = { }, text = "Preview Button")
+private fun PreviewLoginScreen() {
+    KindTheme {
+        LoginScreen(
+            onLoginClick = { },
+            onSignUpClick = { },
+            onIncorrectLogin = { },
+            onResetPasswordClick = { }
+        )
+    }
 }
 
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@BackgroundThemeCombinedPreviews
 @Composable
-private fun PreviewButtonDark() {
-    Button(navigation = { }, text = "Preview Button")
+private fun PreviewLoginHeader() {
+    KindTheme {
+        LoginHeader()
+    }
+}
+
+@BackgroundThemeCombinedPreviews
+@Composable
+private fun PreviewInputField() {
+    KindTheme {
+        InputField(value = "", label = "Preview Input Field", onValueChange = { })
+    }
+}
+
+@BackgroundThemeCombinedPreviews
+@Composable
+private fun PreviewResetPasswordButton() {
+    KindTheme {
+        ResetPasswordButton {}
+    }
+}
+
+@BackgroundThemeCombinedPreviews
+@Composable
+private fun PreviewLoginButton() {
+    KindTheme {
+        LoginButton(onLoginClick = { })
+    }
+}
+
+@BackgroundThemeCombinedPreviews
+@Composable
+private fun PreviewSignUpButton() {
+    KindTheme {
+        SignUpButton(onClick = { }, modifier = Modifier)
+    }
 }

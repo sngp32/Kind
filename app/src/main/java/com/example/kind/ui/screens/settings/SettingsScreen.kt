@@ -1,12 +1,8 @@
 package com.example.kind.ui.screens.settings
 
 import android.annotation.SuppressLint
-import android.content.res.Configuration
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.magnifier
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.verticalScroll
@@ -15,15 +11,13 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.res.stringResource
+import com.example.kind.R
 import com.example.kind.data.KindUserData
-import com.example.kind.ui.theme.KindTheme
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun SettingsScreen(
-    modifier: Modifier = Modifier,
     onBackClick: () -> Unit,
     userData: KindUserData
 ) {
@@ -33,18 +27,18 @@ fun SettingsScreen(
         SettingsTopAppBar(onBackClick)
 
         Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
-            SectionTextTitle(text = "Notifications")
-            SwitchButton(headlineText = "Email notifications", state = userData.areEmailNotificationEnabled, onSwitchButtonClick = { /* TODO */ })
-            SwitchButton(headlineText = "Push notifications", state= userData.arePushNotificationEnabled, onSwitchButtonClick = { /* TODO */ })
+            SectionTextTitle(text = stringResource(R.string.notifications))
+            SwitchButton(headlineText = stringResource(R.string.email_notifications), state = userData.areEmailNotificationEnabled, onSwitchButtonClick = { /* TODO */ })
+            SwitchButton(headlineText = stringResource(R.string.push_notifications), state= userData.arePushNotificationEnabled, onSwitchButtonClick = { /* TODO */ })
 
-            SectionTextTitle(text = "Account Settings")
-            ClickableListItem(headlineText = "Name", supportingText = userData.name, onListItemClick = { /* TODO */ })
-            ClickableListItem(headlineText = "Email", supportingText = userData.email,onListItemClick = { /* TODO */ })
-            ClickableListItem(headlineText = "Password", "**********", onListItemClick = { /* TODO */ })
+            SectionTextTitle(text = stringResource(R.string.account_settings))
+            ClickableListItem(headlineText = stringResource(R.string.name_field), supportingText = userData.name, onListItemClick = { /* TODO */ })
+            ClickableListItem(headlineText = stringResource(R.string.email_field), supportingText = userData.email,onListItemClick = { /* TODO */ })
+            ClickableListItem(headlineText = stringResource(R.string.password_field), "**********", onListItemClick = { /* TODO */ })
 
-            SectionTextTitle(text = "Language")
-            RadioButton(headlineText = "English", onRadioButtonClick = { /* TODO */ })
-            RadioButton(headlineText = "Danish", onRadioButtonClick = { /* TODO */ })
+            SectionTextTitle(text = stringResource(R.string.language))
+            RadioButton(headlineText = stringResource(R.string.english), onRadioButtonClick = { /* TODO */ })
+            RadioButton(headlineText = stringResource(R.string.danish), onRadioButtonClick = { /* TODO */ })
         }
     }
 }
@@ -122,7 +116,7 @@ private fun SwitchButton(headlineText: String, state: Boolean, onSwitchButtonCli
 private fun SettingsTopAppBar(onBackClick: () -> Unit) {
     TopAppBar(
         //TODO Move title out of function so it becomes stateless
-        title = { Text(text = "Settings") },
+        title = { Text(text = stringResource(R.string.settings)) },
         navigationIcon = {
             IconButton(onClick = onBackClick) {
                 Icon(Icons.Filled.ArrowBack, contentDescription = null)
