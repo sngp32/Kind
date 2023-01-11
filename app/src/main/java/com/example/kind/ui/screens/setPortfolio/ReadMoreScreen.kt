@@ -1,6 +1,9 @@
 package com.example.kind.ui.screens.setPortfolio
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -18,7 +21,7 @@ fun ReadMoreScreen(onBackClick: () -> Unit, charity: Charity) {
     Scaffold(
         topBar = { topBar(onBackClick) },
         content = { padding ->
-            Column(modifier = Modifier.padding(padding)) {
+            Column(modifier = Modifier.fillMaxHeight().padding(padding).background(color = MaterialTheme.colorScheme.surfaceVariant)) {
                 Column(modifier = Modifier.padding(20.dp)) {
                     Text(
                         text = charity.name,
